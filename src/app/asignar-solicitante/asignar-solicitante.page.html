@@ -1,0 +1,168 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Asignar Solicitante
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <h1 style="text-align: center;">Asignar Solicitante</h1>
+    <form [formGroup]="form">
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col size="10">
+                    <ion-searchbar #searchBar placeholder="Busqueda de Solicitante(nombres, apellidos, numero telefonico)" (ionClear)="resetPaciente()"></ion-searchbar>
+                </ion-col>
+                <ion-col size="2">
+                    <ion-button (click)="buscarPaciente()" expand='block'>
+                        <ion-icon slot="icon-only" name="search"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-list *ngIf="resultados.length > 0" style="height: 100px; overflow-y:auto">
+                        <ion-item *ngFor="let resultado of resultados" (click)="elegirPaciente(resultado)">
+                            <ion-label>{{resultado.primerNombre}} {{resultado.segundoNombre}} {{resultado.primerApellido}} {{resultado.segundoApellido}}</ion-label>
+                            <ion-icon slot="end" name="arrow-forward"></ion-icon>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-label position="floating">
+                            <ion-icon *ngIf="!form.controls.primerNombre.valid" color="danger" slot="start" name="medical"></ion-icon>
+                            Primer Nombre:
+                        </ion-label><br>
+                        <ion-input formControlName="primerNombre" type="text" placeholder="Primer Nombre" class="borde">
+                        </ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-label position="floating">Segundo Nombre</ion-label><br>
+                        <ion-input formControlName="segundoNombre" type="text" placeholder="  Segundo Nombre (opcional)" class="borde"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-label position="floating">
+                            <ion-icon *ngIf="!form.controls.primerApellido.valid" color="danger" slot="start" name="medical">
+                            </ion-icon>
+                            Primer Apellido
+                        </ion-label><br>
+                        <ion-input formControlName="primerApellido" type="text" placeholder="  Primer Apellido" class="borde">
+                        </ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-label position="floating">Segundo Apellido</ion-label><br>
+                        <ion-input formControlName="segundoApellido" type="text" placeholder="  Segundo Apellido (opcional)" class="borde"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-label position="floating">
+                            <ion-icon *ngIf="!form.controls.telefonoCelular.valid" color="danger" slot="start" name="medical">
+                            </ion-icon>
+                            Tel&eacute;fono
+                        </ion-label>
+                        <ion-input formControlName="telefonoCelular" inputmode="tel" placeholder="+502 Celular" class="borde">
+                        </ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-label position="floating">Tel&eacute;fono Casa</ion-label>
+                        <ion-input formControlName="telefonoCasa" inputmode="tel" placeholder="  Casa (opcional)" class="borde">
+                        </ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6">
+                </ion-col>
+                <ion-col size="6" class="ion-padding">
+                    <ion-row>
+                        <ion-col size="6">
+                        </ion-col>
+                        <ion-col size="6">
+                            <ion-button color="primary" shape="round" expand="block" expand="full" (click)="resetPaciente()" class="borde-botones">
+                                Cambiar paciente
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" class="ion-padding">
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-label>
+                                Doctor
+                                <ion-icon *ngIf="!form.controls.doctores.valid" color="danger" slot="start" name="medical"></ion-icon>
+                            </ion-label>
+                            <div style="height: 150px; overflow-y: auto">
+                                <ion-item *ngFor="let doctor of doctores">
+                                    <ion-label *ngIf="doctor.checked">{{doctor.nombre}}</ion-label>
+                                </ion-item>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col size="6" class="ion-padding">
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-label>
+                                servicio
+                                <ion-icon *ngIf="!form.controls.servicio.valid" color="danger" slot="start" name="medical"></ion-icon>
+                            </ion-label>
+                            <div style="height: 150px; overflow-y: auto">
+                                <ion-list>
+                                    <ion-radio-group formControlName="servicio">
+                                        <ion-list-header>Servicios</ion-list-header>
+                                        <ion-item *ngFor="let servicio of servicios">
+                                            <ion-label>{{servicio.nombre}}</ion-label>
+                                            <ion-radio [value]="servicio.id"></ion-radio>
+                                        </ion-item>
+                                    </ion-radio-group>
+                                </ion-list>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-item>
+                        <ion-textarea formControlName="anotaciones" placeholder="Anotaciones adicionales para cita" auto-grow=true style="text-transform: uppercase;border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 5px; padding-left: 5px;"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="12" class="ion-padding">
+                    <ion-row>
+                        <ion-col size="6">
+                            <ion-button color="primary" shape="round" expand="block" (click)="guardar()" [disabled]="!form.valid" class="borde-botones">
+                                Asignar
+                            </ion-button>
+                        </ion-col>
+                        <ion-col size="6">
+                            <ion-button color="primary" shape="round" expand="block" color="danger" expand="full" (click)="regresar()" class="borde-botones">
+                                Cancelar
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>

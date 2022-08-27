@@ -1,0 +1,54 @@
+<ion-grid>
+    <ion-row>
+        <ion-col size="12">
+            <ion-chip color="primary" mode="ios" [outline]="mostrarEmergencias" *ngIf="citaSinAgenda!=null && citaSinAgenda.length > 0">
+                <ion-label (click)="mostrarCitasEmergencia()">{{citaSinAgenda.length}} Pacientes sin Cita</ion-label>
+            </ion-chip>
+        </ion-col>
+        <ion-col size="12" style="background-color: black; color: white;" class="alinear">
+            <ion-row class="header-listado lista-titulos">
+                <ion-col size="1" class="titulo" id="bordes">Hora</ion-col>
+                <ion-col class="titulo" id="bordes">Doctor</ion-col>
+                <ion-col class="titulo" id="bordes">Paciente</ion-col>
+                <ion-col class="titulo" id="bordes">Servicio</ion-col>
+                <ion-col class="titulo" id="bordes">Anotaciones</ion-col>
+                <ion-col class="titulo" id="bordes">Ubicacion</ion-col>
+                <ion-col class="titulo" id="bordes"></ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+
+
+<ion-grid style="height: 40%; overflow-y:auto">
+    <ion-row *ngFor="let cita of listaCitas" [ngClass]="'row-'+cita.estado.toLowerCase()">
+        <ion-col size="12" style="padding: 0px;" *ngIf="!cita.emergencia || (cita.emergencia && mostrarEmergencias)">
+            <ion-row>
+                <ion-col size="1" class="titulo" id="bordes" [ngClass]="cita.emergencia ? 'emergencia' : ''">{{cita.id}}</ion-col>
+                <ion-col class="titulo" id="bordes">{{cita.doctor.nombre}}</ion-col>
+                <ion-col class="titulo" id="bordes">{{cita.paciente.nombre}}</ion-col>
+                <ion-col class="titulo" id="bordes" class="ion-text-center">{{cita.servicio.nombre}}</ion-col>
+                <ion-col class="titulo" id="bordes" class="ion-text-center truncate">{{cita.anotaciones}}</ion-col>
+                <ion-col class="titulo" id="bordes" class="ion-text-center">{{cita.ubicacion.nombre}}</ion-col>
+                <ion-col class="" class="ion-text-center" style="background-color:white; padding: 0px;">
+                    <ion-button size="small" *ngIf="cita.estado == 'LIBRE'" (click)="asignar(cita)" class="alineacion">
+                        Asignar
+                    </ion-button>
+                    <ion-button size="small" *ngIf="cita.estado == 'ATENDIDA'" (click)="editar(cita)" class="alineacion">
+                        Editar
+                    </ion-button>
+                    <ion-button size="small" *ngIf="cita.estado == 'OCUPADO'" (click)="confirmar(cita)" style="font-size: 11px" class="alineacion">
+                        Confirmar
+                    </ion-button>
+                    <ion-button size="small" *ngIf="cita.estado == 'CONFIRMADA'" (click)="atender(cita)" class="alineacion">
+                        Atender
+                    </ion-button>
+                    <ion-button color="danger" size="small" *ngIf="cita.estado == 'OCUPADO' || cita.estado == 'CONFIRMADA'" (click)="cancelar(cita)" class="alineacion">
+                        Cancelar
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-grid>

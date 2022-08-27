@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"> 
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Usuarios
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fondoColor background">
+  <ion-refresher slot="fixed" (ionRefresh)="actualizar($event)">
+    <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <br><br><br><br>
+  <ion-row>
+    <ion-col size="6" size-sm="6">
+      <ion-item>
+        <ion-label position="floating">Nombres</ion-label>
+        <ion-input id="idRegister" type="text" hidden></ion-input>
+        <ion-input id="idRev" type="text" hidden></ion-input>
+        <ion-input id="firstNames"></ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="6" size-sm="6">
+      <ion-item>
+        <ion-label position="floating">Apellidos</ion-label>
+        <ion-input id="secondNames" type="text"></ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="6" size-sm="6">
+      <ion-item>
+        <ion-label position="floating">Nombre de usuario</ion-label>
+        <ion-input id="userName" type="text"></ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="6" size-sm="6">
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input id="password" type="password"></ion-input>
+      </ion-item>
+    </ion-col>
+
+    <ion-col size="6" size-sm="6">
+      <ion-item>
+        <ion-label position="floating">Rol</ion-label>
+                <ion-select id="selectRole">
+                    <ion-select-option value="Empleado">Empleado</ion-select-option>
+                    <ion-select-option value="Administrador">Administrador</ion-select-option>
+                    <ion-select-option value="Cliente">Cliente</ion-select-option>
+                  </ion-select>
+        </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <div style="text-align: center;">
+    <ion-button id="btnGuardar" color="success">Guardar</ion-button>
+    <ion-button id="btnEliminar" color="danger">Eliminar</ion-button>
+  </div>
+
+  
+  <div style="margin-top: 3%; margin-bottom: 3%;">
+    <table class="tablePacientes" style="background-color: white;">
+        <thead>
+            <tr class="minHeight" style="background-color: black; color: white;">
+                <th>Nombre completo</th>
+                <th>Nombre de usuarios</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody id="tbody" style="text-align: center;"></tbody>
+    </table>
+</div>
+
+</ion-content>
