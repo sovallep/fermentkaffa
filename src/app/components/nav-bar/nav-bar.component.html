@@ -1,0 +1,16 @@
+<ion-grid fixed>
+    <ion-row *ngIf="detallePaciente !== null && detallePaciente !== undefined">
+        <ion-col size="9" class="ion-padding">
+            <ion-text color="success">
+                <h2>Paciente: {{detallePaciente}}</h2>
+            </ion-text>
+            <br>
+            <h3 *ngIf="datosAseguradora !== null">Aseguradora: {{datosAseguradora}}</h3>
+        </ion-col>
+        <ion-col size="3">
+            <ion-text color="success">
+                <h3>Fecha Cita:{{fechaCita}}</h3>
+            </ion-text>
+        </ion-col>
+    </ion-row>
+</ion-grid>

@@ -1,0 +1,181 @@
+{
+	"action.created" : "<strong>Felicidades</strong> el registro se ha almacenado exitosamente.",
+	"action.deleted" : "<strong>Felicidades</strong> el registro se ha eliminado exitosamente.",
+	"action.updated" : "<strong>Felicidades</strong> el registro se ha actualizado exitosamente.",
+	"action.copy" : "<strong>Felicidades</strong> el registro se ha copiado exitosamente.",
+
+
+	"global.add" : "Agregar",
+	"global.assign" : "Asignar",
+	"global.actions" : "Acciones",
+	"global.back" : "Regresar",
+	"global.cancel" : "Cancelar",
+	"global.view" : "Consultar",
+	"global.edit" : "Editar",
+	"global.delete" : "Eliminar",
+	"global.list" : "Lista",
+	"global.login" : "Ingresar",
+	"global.forgot" : "\u00bfOlvido su contrase\u00f1a\u003f",
+	"global.logout" : "Salir",
+	"global.register" : "Registrar",
+	"global.new" : "Nuevo",
+	"global.no" : "No",
+	"global.save" : "Guardar",
+	"global.update" : "Actualizar",
+	"global.view" : "Consultar",
+	"global.yes" : "Si",
+	"global.donwload" : "Descargar",
+	"global.print" : "Imprimir",
+	"global.home" : "Inicio",
+	"global.welcome" : "Bienvenido",
+	"global.empty" : "Ninguno",
+	"global.calendar" : "Calendario",
+	"global.generate" : "Generar",
+	"global.name" : "Nombre",
+	"global.state" : "Estado",
+	"global.all" : "Todos",
+	"global.description" : "Descripci&oacute;n",
+	"global.codigo" : "Codigo",
+	"global.type" : "Tipo",
+	"globa.date" : "Fecha",
+
+
+	"global.list.next" : "Siguiente",
+	"global.list.previous" : "Anterior",
+	"global.list.infoEmpty" : "No se han encontrado registros.",
+	"global.list.info" : "Mostrando del _START_ al _END_ de _TOTAL_ registros.",
+	"global.list.errorMessage" : "Vaya ha ocurrido un error, por favor contacta con el administrador.",
+	"global.list.deleteMessage" : "OK para eliminar el registro.",
+
+
+	"global.validator.required" : "Requerido.",
+	"global.validator.email" : "Correo Inv&acute;lido.",
+
+
+	"module.system" : "Sistema",
+
+
+	"system.configuration.title" : "Configuracion",
+	"system.configuration.plural" : "Configuraciones",
+	"system.configuration.id" : "ID",
+	"system.configuration.type" : "Tipo",
+	"system.configuration.description" : "Descripci&oacute;n",
+	"system.configuration.data.name" : "Nombre",
+	"system.configuration.data.value" : "Valor",
+	"system.configuration.validator.remote.type" : "El tipo de configuraci&oacute;n ya existe.",
+
+
+	"TypeConfiguration.BASE_URLS" : "Base Urls",
+	"TypeConfiguration.BASE_PATHS" : "Base Paths",
+
+
+	"module.security" : "Seguridad",
+
+
+	"security.requestAuthority.title" : "Request Authority",
+	"security.requestAuthority.plural" : "Requests Authorities",
+	"security.requestAuthority.id" : "ID",
+	"security.requestAuthority.requestUrl" : "Request URL",
+	"security.requestAuthority.description" : "Descripci&oacute;n",
+	"security.requestAuthority.active" : "Activo",
+	"security.requestAuthority.validator.remote.requestUrl" : "Request URL ya existe.",
+
+
+	"security.rol.title" : "Rol",
+	"security.rol.plural" : "Roles",
+	"security.rol.id" : "ID",
+	"security.rol.name" : "Nombre",
+	"security.rol.description" : "Descripci&oacute;n",
+	"security.rol.active" : "Activo",
+	"security.rol.validator.remote.name" : "El nombre del rol ya existe.",
+
+
+	"security.user.title" : "Usuario",
+	"security.user.plural" : "Usuarios",
+	"security.user.id" : "ID",
+	"security.user.userName" : "Nombre",
+	"security.user.password" : "Contrase&ntilde;a",
+	"security.user.passwordConfirm" : "Confirmar Contrase&ntilde;a",
+	"security.user.userName" : "Nombre de Usuario",
+	"security.user.names" : "Nombres",
+	"security.user.surnames" : "Apellidos",
+	"security.user.active" : "Activo",
+	"security.user.validator.remote.userName" : "El nombre de usuario ya existe.",
+	"security.user.validator.equalTo.password" : "Las contrase&ntilde;as no coiciden.",
+	"security.login.email" : "Correo electr\u00f3nico",
+	"security.login.password" : "Contrase\u00f1a",
+	"security.login.login" : "Ingresar",
+
+
+	"security.register.title" : "Registro",
+	"security.register.plural" : "Registros",
+	"security.register.toRegister" : "Registrar",
+	"security.register.mail.dear" : "Estimado(a)",
+	"security.register.mail.accoutCreated" : "Su cuenta ha sido creada exitosamente.",
+	"security.register.mail.confirmLink" : "Por favor siga el siguiente enlace para activar su cuenta:",
+	"security.register.mail.active" : "Activar",
+	"security.register.message.insertInformation" : "Por favor ingrese su informaci&oacute;n",
+	"security.register.meesage.regiter" : "Se ha enviado un correo para activar tu cuenta.",
+	"security.register.meesage.confirm" : "<strong>Felicidades</strong> su cuenta ha sido activada exitosamente.",
+
+
+	"catalogs.general.id" : "ID",
+	"catalogs.general.name" : "Nombre",
+	"catalogs.sucursal.address" : "Direcci&oacute;n",
+	"catalogs.sucursal.nit" : "NIT",
+	"catalogs.sucursal.type" : "Tipo",
+	"catalogs.sucursal.phone1" : "Telefono 1",
+	"catalogs.sucursal.phone2" : "Telefono 2",
+	"catalogs.sucursal.parent" : "Padre",
+	"catalogs.general.description" : "Descripci&oacute;n",
+	"catalogs.general.active" : "Activo",
+	"catalogs.sucursal.name" : "Nombre",
+	"catalogs.sucursal.title" : "Sucursal",
+	"catalogs.sucursal.plural" : "Sucursales",
+
+	"catalogs.banco.id" : "ID",
+	"catalogs.banco.title" : "Banco",
+	"catalogs.banco.no_cuenta" : "No. Cuenta",
+
+	"catalogs.servicios.title" : "Servicio",
+	"catalogs.servicios.plural" : "Servicios",
+	"catalogs.servicios.price" : "Precio",
+	"catalogs.servicios.padre" : "Padre",
+
+
+	"catalogs.doctor.name" : "Nombre",
+	"catalogs.doctor.name_1" : "Nombre 1",
+	"catalogs.doctor.name_2" : "Nombre 2",
+	"catalogs.doctor.last_name" : "Apellido",
+	"catalogs.doctor.last_name1" : "Apellido 1",
+	"catalogs.doctor.last_name2" : "Apellido 2",
+	"catalogs.doctor.married_last_name" : "Apellido Casada",
+	"catalogs.doctor.title" : "Doctor",
+	"catalogs.doctor.plural" : "Doctores",
+
+	"catalogs.doctor.schedule" : "Horario",
+
+	"catalogs.especialidad.title" : "Especialidad",
+	"catalogs.especialidad.plural" : "Especialidades",
+
+	"catalogs.enfermedad.title" : "Enfermedad",
+
+	"catalogs.alergia.title" : "Alergia",
+
+
+	"catalogs.cirugia.title" : "Cirugia",
+	"catalogs.cirugia.DateSurgery" : "Fecha cirugia",
+
+	"catalogs.almacen.title" : "Almacen",
+	"catalogs.especialidad.plural" : "Almacences",
+
+	"catalogs.formulario.title" : "Formulario",
+	"catalogs.formulario.plural" : "Formularios",
+
+
+	"admin.cambio_horario.title" : "Cambio de Horario",
+	"admin.cambio_horario.plural" : "Cambios de Horario",
+	"admin.cambio_horario.begin_date" : "Fecha de Inicio",
+	"admin.cambio_horario.hour" : "Hora",
+	"admin.cambio_horario.end_date" : "Fecha Fin"
+}

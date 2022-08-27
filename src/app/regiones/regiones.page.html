@@ -1,0 +1,75 @@
+<ion-content>
+    <ion-header style="--ion-background-color: rgba(255, 255, 255, 0.13); border: 2px solid rgba(255, 255, 255, 0.1);box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+        <ion-toolbar style="color:white;">
+            <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>
+                Regiones
+            </ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <div class="content">
+        <div class="listRegions">
+
+            <!-- list regiones -->
+            <ion-card>
+                <ion-card-header style="text-align:center">
+                    <h1>Regiones:</h1>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>Antigua</ion-label>
+                            <ion-button slot="end" color="success">
+                                <ion-icon name="create"></ion-icon>
+                            </ion-button>
+                            <ion-button slot="end" color="danger">
+                                <ion-icon name="trash"></ion-icon>
+                            </ion-button>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Acatenango</ion-label>
+                            <ion-button slot="end" color="success">
+                                <ion-icon name="create"></ion-icon>
+                            </ion-button>
+                            <ion-button slot="end" color="danger">
+                                <ion-icon name="trash"></ion-icon>
+                            </ion-button>
+                        </ion-item>
+                    </ion-list>
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        <!-- form add regiones -->
+        <div [hidden]="this.formRegionActive == false " [formGroup]="formRegion" class="form">
+            <h3>Nueva Region</h3>
+            <ion-input formControlName="nombre" type="text" placeholder="NOMBRE"></ion-input>
+            <ion-input formControlName="finca" type="text" placeholder="FINCA"></ion-input>
+            <ion-input formControlName="altura" type="number" placeholder="ALTURA EN METROS"></ion-input>
+            <ion-input formControlName="departamento" type="text" (change)="cambioDepartamento()" placeholder="DEPARTAMENTO"></ion-input>
+            <ion-input [hidden]="this.formRegion.value.departamento == '' " formControlName="municipio" type="text" placeholder="MUNICIPIO"></ion-input>
+            <ion-grid>
+                <ion-row>
+                    <ion-col md="6" style="text-align: center">
+                        <ion-button color="primary" (click)="guardar()" type="submit" [disabled]="!formRegion.valid">Guardar</ion-button>
+                    </ion-col>
+                    <ion-col md="6" style="text-align: center">
+                        <ion-button color="danger" (click)="AgregarRegion(false)">Cancelar</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <!-- boton add regiones -->
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-row>
+                <ion-fab-button color="primary">
+                    <ion-icon name="add-outline" (click)="AgregarRegion(true)"></ion-icon>
+                </ion-fab-button>
+            </ion-row>
+        </ion-fab>
+
+    </div>
+</ion-content>

@@ -1,0 +1,14 @@
+node_modules
+.vscode
+platforms
+plugins
+resources/android
+resources/ios
+www
+node_modules
+platforms/android/cordova
+platforms/android/cordovaLib
+e2e
+.gradle
+platforms/android
+platforms/androidapp/src/main

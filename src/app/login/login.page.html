@@ -1,0 +1,33 @@
+<ion-content>
+    <div class="content">
+
+        <!-- form login -->
+        <form [formGroup]="loginFormGroup">
+            <h3>Ferment Kaffa</h3>
+            <h2 style="text-align:center">Login</h2>
+            <label for="username">Usuario:</label>
+            <input type="text" formControlName="user" placeholder="Email or Phone" id="username">
+
+            <label for="password">Contrase&ntilde;a:</label>
+            <input type="password" formControlName="password" placeholder="Password" id="password">
+            <div class="botones">
+                <ion-button expand="block" round [disabled]="loginFormGroup.invalid" (click)="validate()">Entrar</ion-button>
+            </div>
+            <ion-row *ngIf="errorMessage != undefined">
+                <ion-col size="12" text-center>
+                    <p style="color: rgb(246, 153, 153); text-align: center;">{{ errorMessage }}</p>
+                </ion-col>
+            </ion-row>
+        </form>
+
+        <!-- boton de ayuda -->
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-row>
+                <ion-button color="success" href="https://wa.me/+50256231473/" style="font-size: small; align-self: center;">¿Necesitas ayuda? ...</ion-button>
+                <ion-fab-button color="success" href="https://wa.me/+50256231473/">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                </ion-fab-button>
+            </ion-row>
+        </ion-fab>
+    </div>
+</ion-content>

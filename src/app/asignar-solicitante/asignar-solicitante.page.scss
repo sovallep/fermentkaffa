@@ -1,0 +1,24 @@
+.borde{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    border-color: #949494;
+}
+
+.borde-botones{
+    --border-radius: 8px;
+}
+
+#cuadro{
+    display: -webkit-box;
+    background: #e2e2e2;
+    padding: 15px;
+}
+
+.titulo{
+    padding: 0px 10% 0px 50%;
+}
+
+.color{
+    color: #ffffff;
+}

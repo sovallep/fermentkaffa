@@ -1,0 +1,77 @@
+.row-ocupado {
+    background-color: #c20e1a;
+    border-style: none;
+    border-color: white;
+    font-weight: bold;
+    color: white;
+}
+
+.row-confirmada {
+    background-color: #c20e1a;
+    border-style: none;
+    border-color: white;
+    font-weight: bold;
+    color: white;
+}
+
+.row-libre {
+    background-color: #a2c037;
+    border-style: solid;
+    border-color: white;
+    font-weight: bold;
+    color: white;
+}
+
+.row-asistido {
+    background-color: #2e348e;
+    border-style: solid;
+    border-color: white;
+    font-weight: bold;
+    color: white;
+}
+
+.row-atendida {
+    background-color: #15AD9D;
+    border-style: solid;
+    border-color: white;
+    font-weight: bold;
+    color: white;
+}
+
+.emergencia {
+    color: #cec8c9;
+}
+
+// lesteryc
+@media (max-width: 1024px) {
+    .lista-titulos {
+        background: #e6e6e6;
+    }
+    .titulo {
+        padding: 15px;
+        text-align: center;
+        // border-style: solid;
+        // border-width: 0.1px;
+        // border-color: rgb(255, 255, 255);
+    }
+    #bordes {
+        border-style: solid;
+        border-width: 0px 0px 0px 1px;
+        border-color: rgb(255, 255, 255);
+    }
+    .alineacion {
+        position: relative;
+        top: 14px;
+    }
+    .alinear {
+        position: relative;
+        top: 15px;
+    }
+}
+
+.truncate {
+    width: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
