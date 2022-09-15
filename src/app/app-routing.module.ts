@@ -21,6 +21,10 @@ const routes: Routes = [
   },  {
     path: 'regiones',
     loadChildren: () => import('./regiones/regiones.module').then( m => m.RegionesPageModule)
+  },
+  {
+    path: 'tipo-ferementacion',
+    loadChildren: () => import('./tipo-ferementacion/tipo-ferementacion.module').then( m => m.TipoFerementacionPageModule)
   }
 
 ];

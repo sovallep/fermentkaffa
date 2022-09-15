@@ -11,65 +11,111 @@
     </ion-header>
     <div class="content">
         <div class="listRegions">
+            <!-- boton add fermentaciones -->
+            <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isDisplay">
+                <ion-row>
+                    <ion-fab-button color="primary">
+                        <ion-icon name="add-outline" (click)="addProduct()"></ion-icon>
+                    </ion-fab-button>
+                </ion-row>
+            </ion-fab>
 
-            <!-- list regiones -->
-            <ion-card>
+            <!-- boton regresar listado de fermentaciones -->
+            <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isDisplay">
+                <ion-row>
+                    <ion-fab-button color="danger">
+                        <ion-icon name="arrow-back" (click)="back()"></ion-icon>
+                    </ion-fab-button>
+                </ion-row>
+            </ion-fab>
+
+            <ion-card *ngIf="isDisplay">
                 <ion-card-header style="text-align:center">
                     <h1>Regiones:</h1>
                 </ion-card-header>
                 <ion-card-content>
+                    <ion-item style=" text-align: center;">
+                        <ion-col size="2">
+                            Número
+                        </ion-col>
+                        <ion-col size="5">
+                            Nombre
+                        </ion-col>
+                        <ion-col size="5">
+                            Acciones
+                        </ion-col>
+                    </ion-item>
                     <ion-list>
-                        <ion-item>
-                            <ion-label>Antigua</ion-label>
-                            <ion-button slot="end" color="success">
-                                <ion-icon name="create"></ion-icon>
-                            </ion-button>
-                            <ion-button slot="end" color="danger">
-                                <ion-icon name="trash"></ion-icon>
-                            </ion-button>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Acatenango</ion-label>
-                            <ion-button slot="end" color="success">
-                                <ion-icon name="create"></ion-icon>
-                            </ion-button>
-                            <ion-button slot="end" color="danger">
-                                <ion-icon name="trash"></ion-icon>
-                            </ion-button>
+                        <ion-item style=" text-align: center;" *ngFor="let item of regiones;let i = index;">
+                            <ion-col size="2">
+                                {{item.id}}
+                            </ion-col>
+                            <ion-col size="5">
+                                {{item.attributes.nombre}}
+                            </ion-col>
+                            <ion-col size="5">
+                                <ion-button color="warning" (click)="edit(i)">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </ion-button>
+                                <ion-button color="danger" (click)="remove(i)">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </ion-button>
+                            </ion-col>
                         </ion-item>
                     </ion-list>
                 </ion-card-content>
             </ion-card>
+            <ion-card *ngIf="!isDisplay">
+                <ion-item>
+                    <h1> Guardar Tipo Ferementacion:</h1>
+                </ion-item>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size-md="12" size-sm="12" size-lg="3" size-xs="12">
+                                <ion-item>
+                                    <ion-label position="floating">User Name</ion-label>
+                                    <!-- <ion-input [(ngModel)]="user.username"></ion-input> -->
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size-md="12" size-sm="12" size-lg="3" size-xs="12">
+                                <ion-item>
+                                    <ion-label position="floating">Email</ion-label>
+                                    <!-- <ion-input [(ngModel)]="user.email"></ion-input> -->
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size-md="12" size-sm="12" size-lg="3" size-xs="12">
+                                <ion-item>
+                                    <div>
+                                        <div>
+                                            <ion-label>Gender</ion-label>
+                                        </div>
+                                        <div>
+                                            <!-- <ion-radio-group [(ngModel)]="user.gender"> -->
+                                            <div class="gender-val">
+                                                <ion-item>
+                                                    <ion-label>Male</ion-label>
+                                                    <ion-radio value="male" name="gender"></ion-radio>
+                                                </ion-item>
+                                            </div>
+                                            <div class="gender-val">
+                                                <ion-item>
+                                                    <ion-label>Female</ion-label>
+                                                    <ion-radio value="female" name="gender"></ion-radio>
+                                                </ion-item>
+                                            </div>
+                                            <!-- </ion-radio-group> -->
+                                        </div>
+                                    </div>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button expand="block" (click)="onSubmit()">Submit</ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
         </div>
-
-        <!-- form add regiones -->
-        <div [hidden]="this.formRegionActive == false " [formGroup]="formRegion" class="form">
-            <h3>Nueva Region</h3>
-            <ion-input formControlName="nombre" type="text" placeholder="NOMBRE"></ion-input>
-            <ion-input formControlName="finca" type="text" placeholder="FINCA"></ion-input>
-            <ion-input formControlName="altura" type="number" placeholder="ALTURA EN METROS"></ion-input>
-            <ion-input formControlName="departamento" type="text" (change)="cambioDepartamento()" placeholder="DEPARTAMENTO"></ion-input>
-            <ion-input [hidden]="this.formRegion.value.departamento == '' " formControlName="municipio" type="text" placeholder="MUNICIPIO"></ion-input>
-            <ion-grid>
-                <ion-row>
-                    <ion-col md="6" style="text-align: center">
-                        <ion-button color="primary" (click)="guardar()" type="submit" [disabled]="!formRegion.valid">Guardar</ion-button>
-                    </ion-col>
-                    <ion-col md="6" style="text-align: center">
-                        <ion-button color="danger" (click)="AgregarRegion(false)">Cancelar</ion-button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
-
-        <!-- boton add regiones -->
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-            <ion-row>
-                <ion-fab-button color="primary">
-                    <ion-icon name="add-outline" (click)="AgregarRegion(true)"></ion-icon>
-                </ion-fab-button>
-            </ion-row>
-        </ion-fab>
-
     </div>
 </ion-content>

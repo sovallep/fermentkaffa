@@ -4,6 +4,7 @@ import { NetworkService, ConnectionStatus } from './network.service';
 import PouchDB from 'pouchdb';
 import { Injectable } from '@angular/core';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { LoginPage } from '../login/login.page';
 
 
 @Injectable({
@@ -17,6 +18,16 @@ export class RestApiService {
     private httpClient: HttpClient,
     private toastController: ToastController
   ) { }
+
+  getListado(item) {
+    const listado = this.httpClient.get('http://localhost:1337/api/' + item);
+    return listado;
+  }
+
+  deleteListadoItem(item, id) {
+    const listado = this.httpClient.delete('http://localhost:1337/api/' + item + '/' + id);
+    return listado;
+  }
 
   testConexion() {
     const db = new PouchDB('http://root:root@127.0.0.1:5984/agenda');
@@ -368,7 +379,7 @@ export class RestApiService {
     });
   }
 
-  eliminarSucursal(idDoc, resolve){
+  eliminarSucursal(idDoc, resolve) {
     const db = new PouchDB('http://root:root@127.0.0.1:5984/agenda');
     const dataBase = db;
     db.get(idDoc).then(function (doc) {
@@ -449,7 +460,7 @@ export class RestApiService {
   }
 
   citasPorPaciente(id: string) {
-    const db = new PouchDB('http://root:root@127.0.0.1:5984/citas'); 
+    const db = new PouchDB('http://root:root@127.0.0.1:5984/citas');
     return new Promise((resolve, reject) => {
       db.query('busquedas/porPaciente', {
         include_docs: false,
@@ -466,7 +477,7 @@ export class RestApiService {
           const resultado = [];
           citas.rows.forEach(element => {
             console.log(element);
-              resultado.push(element.doc);
+            resultado.push(element.doc);
           });
           resolve(resultado);
         }).catch(() => {
@@ -544,7 +555,7 @@ export class RestApiService {
         include_docs: true,
       }).then((vista) => {
         const rows = vista.rows.filter((row: any) => {
-            return row;
+          return row;
         });
         console.log(rows);
         resolve(rows);
@@ -576,7 +587,7 @@ export class RestApiService {
       });
     });
   }
-  
+
   eliminarUsuario(idDoc, resolve) {
     const db = new PouchDB('http://root:root@127.0.0.1:5984/usuarios');
     const dataBase = db;
@@ -633,7 +644,7 @@ export class RestApiService {
         include_docs: true,
       }).then((vista) => {
         const rows = vista.rows.filter((row: any) => {
-            return row;
+          return row;
         });
         console.log(rows);
         resolve(rows);

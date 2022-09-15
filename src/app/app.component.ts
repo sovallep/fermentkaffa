@@ -23,8 +23,14 @@ export class AppComponent {
       title: 'Regiones',
       url: '/regiones',
       icon: 'location-outline'
+    },
+    {
+      title: 'Tipo Fermentacion',
+      url: '/tipo-ferementacion',
+      icon: 'thermometer-outline'
     }
-   ];
+
+  ];
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
