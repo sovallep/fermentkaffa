@@ -29,7 +29,7 @@ export class TipoFerementacionPage implements OnInit {
 
   async log() {
     const loading = await this.loadingController.create({
-      message: 'Actualizando catálogos',
+      message: 'Cargando Datos...',
       spinner: 'crescent'
     });
     await loading.present().then(() => {
@@ -68,16 +68,10 @@ export class TipoFerementacionPage implements OnInit {
   onSubmit() {
     // editar uno existente
     if (this.userId != null && this.userId > 0) {
-      this.user[this.userId] = JSON.parse(JSON.stringify(this.userItem))
-      this.userItem = [];
-      this.userId = 0;
-      this.post = {
-        nombre: "",
-        descripcion: ""
-      }
-      this.isDisplay = true
-    } else { // crear un nuevo 
-      console.log('llego');
+      console.log('entro editar');
+      this.update();
+     } else { // crear un nuevo 
+      console.log('entro nuevo item');
       this.save();
     }
   }
@@ -99,6 +93,37 @@ export class TipoFerementacionPage implements OnInit {
           this.isDisplay = true
           this.log();
           loading.dismiss();
+        }
+      });
+    }).catch((err) => {
+      console.log(err);
+      loading.dismiss();
+    })
+  }
+
+  async update() {
+    const loading = await this.loadingController.create({
+      message: 'Guardando...',
+      spinner: 'crescent'
+    });
+    let temp = {
+      id: this.user[this.userId].id,
+      nombre: this.post.nombre,
+      descripcion: this.post.descripcion
+    }
+    await loading.present().then(() => {
+      this.restApiService.putEditItem('tipos-fermentacion', temp, this.user[this.userId].id).subscribe((res: any) => {
+        console.log(res);
+        if (res.data.id) {
+          this.userItem = [];
+          this.userId = 0;
+          this.post = {
+            nombre: "",
+            descripcion: ""
+          }
+          this.isDisplay = true    
+          loading.dismiss();
+          this.log();
         }
       });
     }).catch((err) => {

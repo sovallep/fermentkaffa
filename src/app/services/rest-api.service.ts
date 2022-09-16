@@ -37,6 +37,12 @@ export class RestApiService {
     });
   }
 
+  putEditItem(item: string, data: object, id: number) {
+    return this.httpClient.put<Post[]>('http://localhost:1337/api/' + item + '/' + id, {
+      data
+    });
+  }
+
   testConexion() {
     const db = new PouchDB('http://root:root@127.0.0.1:5984/agenda');
     db.allDocs({
