@@ -8,6 +8,10 @@ export interface Post {
   nombre: string;
   descripcion: string;
 }
+export interface PostCaf {
+  id?: string;
+  especie: string;
+}
 
 export interface PostReg {
   id?: string;

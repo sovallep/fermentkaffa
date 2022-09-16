@@ -10,7 +10,7 @@ import { NavController, Platform } from '@ionic/angular';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
+      title: 'Inicio',
       url: '/home',
       icon: 'home'
     },
@@ -20,7 +20,12 @@ export class AppComponent {
       icon: 'location-outline'
     },
     {
-      title: 'Tipo Fermentacion',
+      title: 'Tipo Café',
+      url: '/tipo-cafe',
+      icon: 'cafe-outline'
+    },
+    {
+      title: 'Tipo Fermentación',
       url: '/tipo-ferementacion',
       icon: 'thermometer-outline'
     }

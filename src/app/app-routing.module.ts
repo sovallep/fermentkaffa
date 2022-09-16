@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'tipo-ferementacion',
     loadChildren: () => import('./tipo-ferementacion/tipo-ferementacion.module').then( m => m.TipoFerementacionPageModule)
+  },  {
+    path: 'tipo-cafe',
+    loadChildren: () => import('./tipo-cafe/tipo-cafe.module').then( m => m.TipoCafePageModule)
   }
+
 
 ];
 
