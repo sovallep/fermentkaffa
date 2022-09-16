@@ -9,6 +9,15 @@ export interface Post {
   descripcion: string;
 }
 
+export interface PostReg {
+  id?: string;
+  nombre: string;
+  finca: string;
+  departamento: string;
+  municipio: string;
+  altura: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
