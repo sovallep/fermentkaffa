@@ -16,9 +16,6 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'agenda',
-    loadChildren: () => import('./agenda/agenda.module').then(m => m.AgendaPageModule)
-  },  {
     path: 'regiones',
     loadChildren: () => import('./regiones/regiones.module').then( m => m.RegionesPageModule)
   },

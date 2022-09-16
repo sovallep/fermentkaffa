@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { RestApiService } from '../services/rest-api.service';
+import { Post, RestApiService } from '../services/rest-api.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +10,10 @@ import Swal from 'sweetalert2';
 })
 export class TipoFerementacionPage implements OnInit {
 
-
+  post: Post = {
+    nombre: "",
+    descripcion: "",
+  };
   user = [];
   isDisplay = true;
   userItem: [];
@@ -46,24 +49,62 @@ export class TipoFerementacionPage implements OnInit {
 
   addProduct() {
     this.userItem = [];
+    this.post = {
+      nombre: "",
+      descripcion: ""
+    }
     this.isDisplay = false;
   }
 
   back() {
     this.userItem = [];
+    this.post = {
+      nombre: "",
+      descripcion: ""
+    }
     this.isDisplay = true
   }
 
   onSubmit() {
     // editar uno existente
-    if (this.userItem != null && this.userItem != undefined) {
+    if (this.userId != null && this.userId > 0) {
       this.user[this.userId] = JSON.parse(JSON.stringify(this.userItem))
       this.userItem = [];
+      this.userId = 0;
+      this.post = {
+        nombre: "",
+        descripcion: ""
+      }
+      this.isDisplay = true
     } else { // crear un nuevo 
-      this.userItem = [];
+      console.log('llego');
+      this.save();
     }
-    this.log();
-    this.isDisplay = true
+  }
+
+  async save() {
+    const loading = await this.loadingController.create({
+      message: 'Guardando...',
+      spinner: 'crescent'
+    });
+    await loading.present().then(() => {
+      this.restApiService.postAddItem('tipos-fermentacion', this.post).subscribe((res: any) => {
+        console.log(res);
+        if (res.data.id) {
+          this.userItem = [];
+          this.post = {
+            nombre: "",
+            descripcion: ""
+          }
+          this.isDisplay = true
+          this.log();
+          loading.dismiss();
+        }
+      });
+    }).catch((err) => {
+      console.log(err);
+      loading.dismiss();
+    })
   }
 
   async remove(id, index) {
@@ -97,6 +138,10 @@ export class TipoFerementacionPage implements OnInit {
 
   edit(item, id) {
     this.userItem = item;
+    this.post = {
+      nombre: item.attributes.nombre,
+      descripcion: item.attributes.descripcion
+    }
     this.userId = id;
     this.isDisplay = false
   }

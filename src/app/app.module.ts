@@ -20,8 +20,6 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { File } from '@ionic-native/file/ngx/';
-import { AnioMesModalPageModule } from './anio-mes-modal/anio-mes-modal.module';
-import { CitaDisponiblePageModule } from './cita-disponible/cita-disponible.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,8 +32,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     NgxDatatableModule,
     ReactiveFormsModule,
-    AnioMesModalPageModule,
-    CitaDisponiblePageModule,
     NgxMaskModule.forRoot(),
     TranslateModule.forRoot({
       loader: {

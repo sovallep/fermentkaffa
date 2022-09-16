@@ -15,11 +15,6 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Agenda',
-      url: '/agenda',
-      icon: 'calendar'
-    },
-    {
       title: 'Regiones',
       url: '/regiones',
       icon: 'location-outline'
