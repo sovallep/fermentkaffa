@@ -27,31 +27,31 @@ export interface PostReg {
 })
 export class RestApiService {
   public pdb;
-
+  url = 'http://localhost:1337/api/';
   constructor(
     private networkService: NetworkService,
     private httpClient: HttpClient,
   ) { }
 
   getListado(item) {
-    const listado = this.httpClient.get('http://localhost:1337/api/' + item);
+    const listado = this.httpClient.get(this.url + item);
     return listado;
   }
 
   deleteListadoItem(item, id) {
-    const listado = this.httpClient.delete('http://localhost:1337/api/' + item + '/' + id);
+    const listado = this.httpClient.delete(this.url + item + '/' + id);
     return listado;
   }
 
 
   postAddItem(item: string, data: object) {
-    return this.httpClient.post<Post[]>('http://localhost:1337/api/' + item, {
+    return this.httpClient.post<Post[]>(this.url + item, {
       data
     });
   }
 
   putEditItem(item: string, data: object, id: number) {
-    return this.httpClient.put<Post[]>('http://localhost:1337/api/' + item + '/' + id, {
+    return this.httpClient.put<Post[]>(this.url + item + '/' + id, {
       data
     });
   }

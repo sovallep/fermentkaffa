@@ -25,6 +25,10 @@ const routes: Routes = [
   },  {
     path: 'tipo-cafe',
     loadChildren: () => import('./tipo-cafe/tipo-cafe.module').then( m => m.TipoCafePageModule)
+  },
+  {
+    path: 'tipo-nanolote',
+    loadChildren: () => import('./tipo-nanolote/tipo-nanolote.module').then( m => m.TipoNanolotePageModule)
   }
 
 

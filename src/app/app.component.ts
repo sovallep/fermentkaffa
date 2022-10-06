@@ -25,6 +25,11 @@ export class AppComponent {
       icon: 'cafe-outline'
     },
     {
+      title: 'Nano-lote',
+      url: '/tipo-nanolote',
+      icon: 'cube'
+    },
+    {
       title: 'Tipo Fermentación',
       url: '/tipo-ferementacion',
       icon: 'thermometer-outline'
