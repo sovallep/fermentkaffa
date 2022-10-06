@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { NetworkService } from './network.service';
 import PouchDB from 'pouchdb';
 import { Injectable } from '@angular/core';
-
+import { httpConstants } from '../app-constants';
+import { getTestBed } from '@angular/core/testing';
 export interface Post {
   id?: string;
   nombre: string;
@@ -22,12 +23,21 @@ export interface PostReg {
   altura: number;
 }
 
+
+export interface PostLotes {
+  id?: string;
+  nombre: string;
+  descripcion: string;
+ }
+
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
   public pdb;
-  url = 'http://localhost:1337/api/';
+  url = httpConstants.test.api;
+  // url = httpConstants.development.api;
+
   constructor(
     private networkService: NetworkService,
     private httpClient: HttpClient,
@@ -53,19 +63,6 @@ export class RestApiService {
   putEditItem(item: string, data: object, id: number) {
     return this.httpClient.put<Post[]>(this.url + item + '/' + id, {
       data
-    });
-  }
-
-  testConexion() {
-    const db = new PouchDB('http://root:root@127.0.0.1:5984/agenda');
-    db.allDocs({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      include_docs: true,
-      attachments: true
-    }).then(function (result) {
-      console.log('result: ', result);
-    }).catch(function (err) {
-      console.log(err);
     });
   }
 

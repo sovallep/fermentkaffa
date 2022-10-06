@@ -14,7 +14,6 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.restApiService.testConexion();
   }
 
   body = document.querySelector("body");
@@ -33,22 +32,6 @@ export class HomePage implements OnInit {
   this.modal.classList.remove("is-open");
   this.body.style.overflow = "initial";
 };
-
-// window.addEventListener("scroll", () => {
-  // if (window.scrollY > window.innerHeight / 3 && !this.isOpened) {
-  //   this.isOpened = true;
-  //   this.scrollDown.style.display = "none";
-  //   this.openModal();
-  // }
-// });
-
-// modalButton.addEventListener("click", openModal);
-// closeButton.addEventListener("click", closeModal);
-
-// document.onkeydown = evt => {
-//   evt = evt || window.event;
-//   evt.keyCode === 27 ? closeModal() : false;
-// };
 
 }
 
