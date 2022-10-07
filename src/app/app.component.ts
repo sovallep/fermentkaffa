@@ -27,14 +27,23 @@ export class AppComponent {
     {
       title: 'Nano-lote',
       url: '/tipo-nanolote',
-      icon: 'cube'
+      icon: 'leaf'
     },
     {
       title: 'Tipo Fermentación',
       url: '/tipo-ferementacion',
       icon: 'thermometer-outline'
+    },
+    {
+      title: 'Fermentaciónes',
+      url: '/fermentaciones',
+      icon: 'flask'
+    },
+    {
+      title: 'Revisión-Fermentación',
+      url: '/revision-feremntaciones',
+      icon: 'stopwatch'
     }
-
   ];
   constructor(
     private platform: Platform,

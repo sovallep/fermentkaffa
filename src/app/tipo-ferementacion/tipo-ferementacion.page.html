@@ -5,13 +5,13 @@
                 <ion-menu-button></ion-menu-button>
             </ion-buttons>
             <ion-title>
-                Tipos de Ferementaciones
+                Tipos de Fermentaciones
             </ion-title>
         </ion-toolbar>
     </ion-header>
     <div class="content">
 
-        <!-- boton add fermentaciones -->
+        <!-- boton add -->
         <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isDisplay">
             <ion-row>
                 <ion-fab-button color="primary">
@@ -20,7 +20,7 @@
             </ion-row>
         </ion-fab>
 
-        <!-- boton regresar listado de fermentaciones -->
+        <!-- boton regresar -->
         <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isDisplay">
             <ion-row>
                 <ion-fab-button color="danger">
@@ -31,7 +31,8 @@
 
         <ion-card *ngIf="isDisplay">
             <ion-card-header style="text-align:center">
-                <h1>Tipos de Fermentaciones:</h1>
+                <ion-icon size="large" name="thermometer-outline"></ion-icon>
+                <h1>Listado de Tipos de Fermentaciones:</h1>
             </ion-card-header>
             <ion-card-content>
                 <ion-item style=" text-align: center;">
@@ -73,7 +74,7 @@
         </ion-card>
         <ion-card *ngIf="!isDisplay">
             <ion-item>
-                <h1> Guardar Tipo Ferementacion:</h1>
+                <h1> Guardar Tipo Fermentación:</h1>
             </ion-item>
             <ion-card-content>
                 <ion-grid>

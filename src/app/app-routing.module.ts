@@ -29,6 +29,14 @@ const routes: Routes = [
   {
     path: 'tipo-nanolote',
     loadChildren: () => import('./tipo-nanolote/tipo-nanolote.module').then( m => m.TipoNanolotePageModule)
+  },
+  {
+    path: 'fermentaciones',
+    loadChildren: () => import('./fermentaciones/fermentaciones.module').then( m => m.FermentacionesPageModule)
+  },
+  {
+    path: 'revision-feremntaciones',
+    loadChildren: () => import('./revision-feremntaciones/revision-feremntaciones.module').then( m => m.RevisionFeremntacionesPageModule)
   }
 
 

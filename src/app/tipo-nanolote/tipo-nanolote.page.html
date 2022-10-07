@@ -11,7 +11,7 @@
     </ion-header>
     <div class="content">
 
-        <!-- boton add fermentaciones -->
+        <!-- boton add -->
         <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isDisplay">
             <ion-row>
                 <ion-fab-button color="primary">
@@ -20,7 +20,7 @@
             </ion-row>
         </ion-fab>
 
-        <!-- boton regresar listado de fermentaciones -->
+        <!-- boton regresar -->
         <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isDisplay">
             <ion-row>
                 <ion-fab-button color="danger">
@@ -31,7 +31,8 @@
 
         <ion-card *ngIf="isDisplay">
             <ion-card-header style="text-align:center">
-                <h1>Tipos de Nano-lote:</h1>
+                <ion-icon size="large" name="leaf"></ion-icon>
+                <h1>Listado de Nano-lotes:</h1>
             </ion-card-header>
             <ion-card-content>
                 <ion-item style=" text-align: center;">
