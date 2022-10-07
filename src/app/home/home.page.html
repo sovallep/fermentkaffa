@@ -1,13 +1,73 @@
-<ion-header style="--ion-background-color: rgba(255, 255, 255, 0.13); border: 2px solid rgba(255, 255, 255, 0.1);
-box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
-    <ion-toolbar style="color:white;">
-        <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>
-            Inicio
-        </ion-title>
-    </ion-toolbar>
-</ion-header>
-<ion-content [fullscreen]="true" style="text-align: center;">
+<ion-content>
+    <ion-header style="--ion-background-color: rgba(255, 255, 255, 0.13); border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+        <ion-toolbar style="color:white;">
+            <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>
+                Inicio
+            </ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <div class="content">
+        <ion-row>
+            <ion-col size="12" size-sm="12" size-lg="3" size-xs="6">
+                <ion-card color="success">
+                    <ion-card-header>
+                        <ion-icon size="large" name="location-outline"></ion-icon>
+                        <ion-card-subtitle>Regiones Registradas</ion-card-subtitle>
+                        <ion-card-title>2</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-progress-bar value=".10" buffer=".01" color="light"></ion-progress-bar>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card color="danger">
+                    <ion-card-header>
+                        <ion-icon size="large" name="cafe-outline"></ion-icon>
+                        <ion-card-subtitle>Tipos de Café Registrados</ion-card-subtitle>
+                        <ion-card-title>8</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-progress-bar value=".05" buffer=".01" color="warning"></ion-progress-bar>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card color="warning">
+                    <ion-card-header>
+                        <ion-icon size="large" name="thermometer-outline"></ion-icon>
+                        <ion-card-subtitle>Tipos de Fermentaciones Registradas</ion-card-subtitle>
+                        <ion-card-title>5</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-progress-bar value=".05" buffer=".01" color="success"></ion-progress-bar>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card color="primary">
+                    <ion-card-header>
+                        <ion-icon size="large" name="cube"></ion-icon>
+                        <ion-card-subtitle>Nano-lotes Registrados</ion-card-subtitle>
+                        <ion-card-title>15</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-progress-bar value=".15" buffer=".01" color="light"></ion-progress-bar>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            <ion-col size="12" size-sm="12" size-lg="9" size-xs="6">
+                <ion-card>
+                    <ion-card-header>
+                        <center>
+                            <ion-img style="max-width: 310px; max-height: 310px;" src="assets/img/raccoon.gif"></ion-img>
+                        </center>
+                        <ion-card-subtitle>Bienvenido</ion-card-subtitle>
+                        <ion-card-title>Cromosoma44</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <div class="ga-chart" title="Tráfico por Medios" data-type="donut" data-dimensions="ga:medium" data-metrics="ga:sessions" data-start-date="30daysAgo" data-end-date="yesterday" data-filter="" data-segment="" data-colors=""></div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </div>
 </ion-content>

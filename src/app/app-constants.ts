@@ -10,7 +10,7 @@ export const httpConstants = {
         DELETE: 'DELETE'
     },
     test: {
-        api: 'http://backfermentkaffa.saraovalle.com/api/',
+        api: 'http://localhost:1337/api/',
     },
     development: {
         api: 'http://backfermentkaffa.saraovalle.com/api/',
