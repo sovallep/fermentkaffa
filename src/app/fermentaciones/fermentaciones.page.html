@@ -91,6 +91,46 @@
                                 <ion-input [(ngModel)]="post.descripcion"></ion-input>
                             </ion-item>
                         </ion-col>
+                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                            <ion-item>
+                                <ion-label position="floating">Total en Libras del Lote</ion-label>
+                                <ion-input [(ngModel)]="post.peso_libras_nanolote" type="number" step="0.01"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                            <ion-item>
+                                <ion-label position="floating">Fecha de Registro</ion-label>
+                                <ion-input [(ngModel)]="post.fecha_registro" type="date"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                            <ion-item>
+                                <ion-label>Nano-lote</ion-label>
+                                <ion-select [(ngModel)]="post.id_nano_lote">
+                                    <ion-select-option *ngFor="let item of nanolote" [value]="item.id">{{item.attributes.nombre}}</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                            <ion-item>
+                                <ion-label>Tipo de fermentación</ion-label>
+                                <ion-select [(ngModel)]="post.id_tipo_fermentacion">
+                                    <ion-select-option *ngFor="let item of fermentacion" [value]="item.id">{{item.attributes.nombre}}</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                            <ion-item>
+                                <ion-label position="floating">PH Inicial</ion-label>
+                                <ion-input [(ngModel)]="post.ph_inicial" type="number" step="0.01"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                            <ion-item>
+                                <ion-label position="floating">Nivel de Azucar Inicial</ion-label>
+                                <ion-input [(ngModel)]="post.nivel_azucar_inicial" type="number" step="0.01"></ion-input>
+                            </ion-item>
+                        </ion-col>
                         <ion-col size="12">
                             <ion-button expand="block" (click)="onSubmit()">Guardar</ion-button>
                         </ion-col>

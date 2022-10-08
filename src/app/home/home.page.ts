@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
 import { LoadingController } from '@ionic/angular';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,15 @@ import { LoadingController } from '@ionic/angular';
 
 export class HomePage implements OnInit {
   tabla = "regiones";
-  regiones=[];
-  cafe=[];
-  tfermentaciones=[];
-  nanolotes=[];
+  regiones = [];
+  cafe = [];
+  tfermentaciones = [];
+  nanolotes = [];
+
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
 
   constructor(
     private restApiService: RestApiService,
@@ -21,9 +27,9 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-  this.log();
+    this.log();
   }
-  
+
   async log() {
     const loading = await this.loadingController.create({
       message: 'Cargando Datos...',
@@ -79,22 +85,30 @@ export class HomePage implements OnInit {
     })
   }
 
+  verimg() {
+    Swal.fire({
+      width: 400,
+      imageUrl: 'assets/img/logo2.jpeg',
+      showConfirmButton: true
+    });
+  }
+
   body = document.querySelector("body");
-   modal = document.querySelector(".modal");
-   modalButton = document.querySelector(".modal-button");
-   closeButton = document.querySelector(".close-button");
-   scrollDown = document.querySelector(".scroll-down");
- isOpened = false;
+  modal = document.querySelector(".modal");
+  modalButton = document.querySelector(".modal-button");
+  closeButton = document.querySelector(".close-button");
+  scrollDown = document.querySelector(".scroll-down");
+  isOpened = false;
 
- openModal = () => {
-  this.modal.classList.add("is-open");
-  this.body.style.overflow = "hidden";
-};
+  openModal = () => {
+    this.modal.classList.add("is-open");
+    this.body.style.overflow = "hidden";
+  };
 
- closeModal = () => {
-  this.modal.classList.remove("is-open");
-  this.body.style.overflow = "initial";
-};
+  closeModal = () => {
+    this.modal.classList.remove("is-open");
+    this.body.style.overflow = "initial";
+  };
 
 }
 

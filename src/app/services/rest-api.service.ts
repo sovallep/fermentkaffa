@@ -28,7 +28,22 @@ export interface PostLotes {
   id?: string;
   nombre: string;
   descripcion: string;
- }
+  id_region: number;
+  id_tipo_cafe: number;
+}
+
+export interface PostFermentacion {
+  id?: string;
+  nombre: string;
+  descripcion: string;
+  id_tipo_fermentacion: number;
+  id_nano_lote: number;
+  fecha_registro: Date;
+  peso_libras_nanolote: number;
+  ph_inicial: number;
+  nivel_azucar_inicial: number;
+}
+
 
 @Injectable({
   providedIn: 'root'

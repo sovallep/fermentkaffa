@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { Post, RestApiService } from '../services/rest-api.service';
+import { RestApiService, PostFermentacion } from '../services/rest-api.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,11 +9,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./fermentaciones.page.scss'],
 })
 export class FermentacionesPage implements OnInit {
-  tabla = "fermentacion";
+  tabla = "fermentaciones";
+  nanolote = [];
+  fermentacion = [];
 
-  post: Post = {
+  post: PostFermentacion = {
     nombre: "",
     descripcion: "",
+    id_nano_lote: 0,
+    id_tipo_fermentacion: 0,
+    fecha_registro: null,
+    peso_libras_nanolote: 0.00,
+    ph_inicial: 0.00,
+    nivel_azucar_inicial: 0.00
   };
   user = [];
   isDisplay = true;
@@ -31,7 +39,13 @@ export class FermentacionesPage implements OnInit {
   cleanPost() {
     this.post = {
       nombre: "",
-      descripcion: ""
+      descripcion: "",
+      id_nano_lote: 0,
+      id_tipo_fermentacion: 0,
+      fecha_registro: null,
+      peso_libras_nanolote: 0.00,
+      ph_inicial: 0.00,
+      nivel_azucar_inicial: 0.00
     };
   }
 
@@ -45,6 +59,28 @@ export class FermentacionesPage implements OnInit {
         if (res) {
           this.user = res.data;
           console.log(this.user);
+          loading.dismiss();
+        }
+      });
+    }).catch((err) => {
+      console.log(err);
+      loading.dismiss();
+    })
+    await loading.present().then(() => {
+      this.restApiService.getListado('tipos-fermentacion').subscribe((res: any) => {
+        if (res) {
+          this.fermentacion = res.data;
+          loading.dismiss();
+        }
+      });
+    }).catch((err) => {
+      console.log(err);
+      loading.dismiss();
+    })
+    await loading.present().then(() => {
+      this.restApiService.getListado('nano-lotes').subscribe((res: any) => {
+        if (res) {
+          this.nanolote = res.data;
           loading.dismiss();
         }
       });
@@ -108,7 +144,13 @@ export class FermentacionesPage implements OnInit {
     let temp = {
       id: this.user[this.userId].id,
       nombre: this.post.nombre,
-      descripcion: this.post.descripcion
+      descripcion: this.post.descripcion,
+      id_nano_lote: this.post.id_nano_lote,
+      id_tipo_fermentacion: this.post.id_tipo_fermentacion,
+      peso_libras_nanolote: this.post.peso_libras_nanolote,
+      fecha_registro: this.post.fecha_registro,
+      ph_inicial: this.post.ph_inicial,
+      nivel_azucar_inicial: this.post.nivel_azucar_inicial,
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
@@ -138,7 +180,7 @@ export class FermentacionesPage implements OnInit {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const loading = await this.loadingController.create({
-          message: 'Eliminando Tipo de fermeentacion id: ' + id,
+          message: 'Eliminando Tipo de fermentacion id: ' + id,
           spinner: 'crescent'
         });
         await loading.present().then(() => {
@@ -161,7 +203,13 @@ export class FermentacionesPage implements OnInit {
     this.userItem = item;
     this.post = {
       nombre: item.attributes.nombre,
-      descripcion: item.attributes.descripcion
+      descripcion: item.attributes.descripcion,
+      id_nano_lote: item.attributes.id_nano_lote,
+      id_tipo_fermentacion: item.attributes.id_tipo_fermentacion,
+      fecha_registro: item.attributes.fecha_registro,
+      peso_libras_nanolote: item.attributes.peso_libras_nanolote,
+      ph_inicial: item.attributes.ph_inicial,
+      nivel_azucar_inicial: item.attributes.nivel_azucar_inicial
     }
     this.userId = id;
     this.isDisplay = false

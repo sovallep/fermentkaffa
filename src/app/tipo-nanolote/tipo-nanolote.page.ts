@@ -15,8 +15,12 @@ export class TipoNanolotePage implements OnInit {
   post: PostLotes = {
     nombre: "",
     descripcion: "",
+    id_region: 0,
+    id_tipo_cafe: 0,
   };
 
+  regiones = [];
+  cafe = [];
   user = [];
   isDisplay = true;
   userItem: [];
@@ -35,6 +39,8 @@ export class TipoNanolotePage implements OnInit {
     this.post = {
       nombre: "",
       descripcion: "",
+      id_region: 0,
+      id_tipo_cafe: 0,
     };
   }
 
@@ -55,6 +61,29 @@ export class TipoNanolotePage implements OnInit {
       console.log(err);
       loading.dismiss();
     })
+    await loading.present().then(() => {
+      this.restApiService.getListado('regiones').subscribe((res: any) => {
+        if (res) {
+          this.regiones = res.data;
+          loading.dismiss();
+        }
+      });
+    }).catch((err) => {
+      console.log(err);
+      loading.dismiss();
+    })
+    await loading.present().then(() => {
+      this.restApiService.getListado('tipo-cafes').subscribe((res: any) => {
+        if (res) {
+          this.cafe = res.data;
+          loading.dismiss();
+        }
+      });
+    }).catch((err) => {
+      console.log(err);
+      loading.dismiss();
+    })
+
   }
 
 
@@ -113,6 +142,8 @@ export class TipoNanolotePage implements OnInit {
       id: this.user[this.userId].id,
       nombre: this.post.nombre,
       descripcion: this.post.descripcion,
+      id_region: this.post.id_region,
+      id_tipo_cafe: this.post.id_tipo_cafe
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
@@ -166,6 +197,8 @@ export class TipoNanolotePage implements OnInit {
     this.post = {
       nombre: item.attributes.nombre,
       descripcion: item.attributes.descripcion,
+      id_region: item.attributes.id_region,
+      id_tipo_cafe: item.attributes.id_tipo_cafe,
     }
     this.userId = id;
     this.isDisplay = false

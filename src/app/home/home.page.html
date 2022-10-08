@@ -14,16 +14,6 @@
     <div class="content">
         <ion-row>
             <ion-col size="12" size-sm="12" size-lg="3" size-xs="6">
-                <ion-card color="success">
-                    <ion-card-header>
-                        <ion-icon size="large" name="location-outline"></ion-icon>
-                        <ion-card-subtitle>Regiones Registradas</ion-card-subtitle>
-                        <ion-card-title>{{regiones.length}}</ion-card-title>
-                    </ion-card-header>
-                    <ion-card-content>
-                        <ion-progress-bar value="{{regiones.length*0.01}}" color="light"></ion-progress-bar>
-                    </ion-card-content>
-                </ion-card>
                 <ion-card color="danger">
                     <ion-card-header>
                         <ion-icon size="large" name="cafe-outline"></ion-icon>
@@ -44,6 +34,16 @@
                         <ion-progress-bar value="{{tfermentaciones.length*0.01}}" color="success"></ion-progress-bar>
                     </ion-card-content>
                 </ion-card>
+                <ion-card color="success">
+                    <ion-card-header>
+                        <ion-icon size="large" name="location-outline"></ion-icon>
+                        <ion-card-subtitle>Regiones Registradas</ion-card-subtitle>
+                        <ion-card-title>{{regiones.length}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-progress-bar value="{{regiones.length*0.01}}" color="primary"></ion-progress-bar>
+                    </ion-card-content>
+                </ion-card>
                 <ion-card color="primary">
                     <ion-card-header>
                         <ion-icon size="large" name="leaf"></ion-icon>
@@ -59,24 +59,20 @@
                 <ion-card>
                     <ion-card-header class="ion-no-padding">
                         <center>
-                            <ion-img style="max-width: 310px; max-height: 310px;" src="assets/img/logo.png"></ion-img>
+                            <ion-img (click)="verimg()" style="max-width: 310px; max-height: 310px;" src="assets/img/logo.png"></ion-img>
                         </center>
                         <ion-card-subtitle>Bienvenido</ion-card-subtitle>
                     </ion-card-header>
-                    <ion-card-content>
-                        <div class="ga-chart" title="Tráfico por Medios" data-type="donut" data-dimensions="ga:medium" data-metrics="ga:sessions" data-start-date="30daysAgo" data-end-date="yesterday" data-filter="" data-segment="" data-colors=""></div>
-                    </ion-card-content>
+                    <ion-card-content></ion-card-content>
                 </ion-card>
                 <ion-row>
                     <ion-col size="12" size-sm="12" size-lg="6" size-xs="12">
                         <ion-card>
                             <ion-card-header>
-                                <ion-card-header class="ion-no-padding">
-                                    <button ion-item>
+                                <button ion-item [routerDirection]="'root'" [routerLink]="['/fermentaciones']">
                                         <ion-img style="filter: brightness(0.8);" src="assets/img/boton1_rectangulo.jpg"></ion-img>
                                         <ion-card-subtitle style=" position: absolute; top: 30%; width: 100%; color: #fff;">Nueva Fermentación</ion-card-subtitle>
                                 </button>
-                                </ion-card-header>
                             </ion-card-header>
                         </ion-card>
                     </ion-col>
@@ -84,7 +80,7 @@
                         <ion-card>
                             <ion-card-header>
                                 <ion-card-header class="ion-no-padding">
-                                    <button ion-item>
+                                    <button ion-item [routerDirection]="'root'" [routerLink]="['/fermentaciones']">
                                         <ion-img style="filter: brightness(0.8);" src="assets/img/boton2_rectangulo.jpg"></ion-img>
                                         <ion-card-subtitle style=" position: absolute; top: 30%; width: 100%; color: #fff;">Fermentaciónes</ion-card-subtitle>
                                 </button>
@@ -96,4 +92,30 @@
             </ion-col>
         </ion-row>
     </div>
+    <!-- <ion-slides pager="true" [options]="slideOpts" #slides>
+        <ion-slide>
+            <ion-card>
+                <ion-card-header>
+                    <ion-img style="filter: brightness(0.8);" src="assets/img/boton1_rectangulo.jpg"></ion-img>
+                </ion-card-header>
+            </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+            <ion-card>
+                <ion-card-header>
+                    <ion-img style="filter: brightness(0.8);" src="assets/img/boton2_rectangulo.jpg"></ion-img>
+                </ion-card-header>
+            </ion-card>
+        </ion-slide>
+
+        <ion-slide>
+            <ion-card>
+                <ion-card-header>
+                    <ion-img style="filter: brightness(0.8);" src="assets/img/boton1_rectangulo.jpg"></ion-img>
+                </ion-card-header>
+            </ion-card>
+        </ion-slide>
+    </ion-slides> -->
+
 </ion-content>
