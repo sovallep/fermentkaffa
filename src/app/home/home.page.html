@@ -13,7 +13,7 @@
 
     <div class="content">
         <ion-row>
-            <ion-col size="12" size-sm="12" size-lg="3" size-xs="6">
+            <ion-col size="12" size-sm="3" size-lg="3" size-xs="6">
                 <ion-card color="danger">
                     <ion-card-header>
                         <ion-icon size="large" name="cafe-outline"></ion-icon>
@@ -24,6 +24,8 @@
                         <ion-progress-bar value="{{cafe.length*0.01}}" color="warning"></ion-progress-bar>
                     </ion-card-content>
                 </ion-card>
+            </ion-col>
+            <ion-col size="12" size-sm="3" size-lg="3" size-xs="6">
                 <ion-card color="warning">
                     <ion-card-header>
                         <ion-icon size="large" name="thermometer-outline"></ion-icon>
@@ -34,6 +36,8 @@
                         <ion-progress-bar value="{{tfermentaciones.length*0.01}}" color="success"></ion-progress-bar>
                     </ion-card-content>
                 </ion-card>
+            </ion-col>
+            <ion-col size="12" size-sm="3" size-lg="3" size-xs="6">
                 <ion-card color="success">
                     <ion-card-header>
                         <ion-icon size="large" name="location-outline"></ion-icon>
@@ -44,6 +48,8 @@
                         <ion-progress-bar value="{{regiones.length*0.01}}" color="primary"></ion-progress-bar>
                     </ion-card-content>
                 </ion-card>
+            </ion-col>
+            <ion-col size="12" size-sm="3" size-lg="3" size-xs="6">
                 <ion-card color="primary">
                     <ion-card-header>
                         <ion-icon size="large" name="leaf"></ion-icon>
@@ -55,16 +61,8 @@
                     </ion-card-content>
                 </ion-card>
             </ion-col>
-            <ion-col size="12" size-sm="12" size-lg="9" size-xs="6">
-                <ion-card>
-                    <ion-card-header class="ion-no-padding">
-                        <center>
-                            <ion-img (click)="verimg()" style="max-width: 310px; max-height: 310px;" src="assets/img/logo.png"></ion-img>
-                        </center>
-                        <ion-card-subtitle>Bienvenido</ion-card-subtitle>
-                    </ion-card-header>
-                    <ion-card-content></ion-card-content>
-                </ion-card>
+
+            <!-- <ion-col size="12" size-sm="12" size-lg="9" size-xs="6">
                 <ion-row>
                     <ion-col size="12" size-sm="12" size-lg="6" size-xs="12">
                         <ion-card>
@@ -89,6 +87,29 @@
                         </ion-card>
                     </ion-col>
                 </ion-row>
+            </ion-col> -->
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" size-sm="12" size-lg="12" size-xs="12">
+                <ion-card>
+                    <ion-card-header class="ion-no-padding">
+                        <center>
+                            <ion-img (click)="verimg()" style="max-width: 310px; max-height: 310px;" src="assets/img/logo.png"></ion-img>
+                        </center>
+                        <ion-card-subtitle>Bienvenido</ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-card-content></ion-card-content>
+                </ion-card>
+            </ion-col>
+            <ion-col size="12" size-sm="12" size-lg="12" size-xs="12">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Historial de Fermentaciónes</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <div style="width: 100%;" id="histrialFermentaciones"></div>
+                    </ion-card-content>
+                </ion-card>
             </ion-col>
         </ion-row>
     </div>

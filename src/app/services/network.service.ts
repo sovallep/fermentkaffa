@@ -53,7 +53,7 @@ export class NetworkService {
   }
   async presentAlert() {
     this.alert = await this.alertController.create({
-      header: 'clinica',
+      header: 'fermentkaffa',
       subHeader: 'Atención',
       message: 'Necesita una conexión a internet para continuar',
       backdropDismiss: false,

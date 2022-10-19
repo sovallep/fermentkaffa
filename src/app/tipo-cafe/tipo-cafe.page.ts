@@ -16,6 +16,7 @@ export class TipoCafePage implements OnInit {
     especie: "",
   };
 
+  pdf = '';
   user = [];
   isDisplay = true;
   userItem: [];

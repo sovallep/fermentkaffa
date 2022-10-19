@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
 import { LoadingController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 
+declare var google;
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -10,10 +11,12 @@ import Swal from 'sweetalert2';
 })
 
 export class HomePage implements OnInit {
+
   tabla = "regiones";
   regiones = [];
   cafe = [];
   tfermentaciones = [];
+  fermentaciones = [];
   nanolotes = [];
 
   slideOpts = {
@@ -30,6 +33,27 @@ export class HomePage implements OnInit {
     this.log();
   }
 
+  drawChart() {
+    var container = document.getElementById('histrialFermentaciones');
+    var chart = new google.visualization.Timeline(container);
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn({ type: 'string', id: 'Position' });
+    dataTable.addColumn({ type: 'string', id: 'Name' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    this.fermentaciones.forEach(item => {
+      this.tfermentaciones.forEach(tf => {
+        if (item.attributes.id_tipo_fermentacion === tf.id) {
+          dataTable.addRows([
+            [tf.attributes.nombre + ' ' + tf.attributes.descripcion, item.attributes.nombre, new Date(item.attributes.fecha_registro), new Date(item.attributes.fecha_fin)]
+          ]);
+        }
+      });
+    });
+
+    chart.draw(dataTable);
+  }
+
   async log() {
     const loading = await this.loadingController.create({
       message: 'Cargando Datos...',
@@ -39,7 +63,6 @@ export class HomePage implements OnInit {
       this.restApiService.getListado('regiones').subscribe((res: any) => {
         if (res) {
           this.regiones = res.data;
-          console.log(this.regiones.length);
           loading.dismiss();
         }
       });
@@ -51,7 +74,6 @@ export class HomePage implements OnInit {
       this.restApiService.getListado('tipo-cafes').subscribe((res: any) => {
         if (res) {
           this.cafe = res.data;
-          console.log(this.cafe.length);
           loading.dismiss();
         }
       });
@@ -63,7 +85,6 @@ export class HomePage implements OnInit {
       this.restApiService.getListado('tipos-fermentacion').subscribe((res: any) => {
         if (res) {
           this.tfermentaciones = res.data;
-          console.log(this.tfermentaciones.length);
           loading.dismiss();
         }
       });
@@ -75,7 +96,6 @@ export class HomePage implements OnInit {
       this.restApiService.getListado('nano-lotes').subscribe((res: any) => {
         if (res) {
           this.nanolotes = res.data;
-          console.log(this.nanolotes.length);
           loading.dismiss();
         }
       });
@@ -83,6 +103,20 @@ export class HomePage implements OnInit {
       console.log(err);
       loading.dismiss();
     })
+    await loading.present().then(() => {
+      this.restApiService.getListado('fermentaciones').subscribe((res: any) => {
+        if (res) {
+          this.fermentaciones = res.data;
+          console.log(this.fermentaciones);
+          this.drawChart();
+          loading.dismiss();
+        }
+      });
+    }).catch((err) => {
+      console.log(err);
+      loading.dismiss();
+    })
+
   }
 
   verimg() {

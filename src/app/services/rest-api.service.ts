@@ -4,6 +4,8 @@ import PouchDB from 'pouchdb';
 import { Injectable } from '@angular/core';
 import { httpConstants } from '../app-constants';
 import { getTestBed } from '@angular/core/testing';
+import { DatetimeOptions } from '@ionic/core';
+import { IonDatetime } from '@ionic/angular';
 export interface Post {
   id?: string;
   nombre: string;
@@ -38,7 +40,9 @@ export interface PostFermentacion {
   descripcion: string;
   id_tipo_fermentacion: number;
   id_nano_lote: number;
-  fecha_registro: Date;
+  fecha_registro: DatetimeOptions;
+  fecha_fin: DatetimeOptions,
+  activa: boolean,
   peso_libras_nanolote: number;
   ph_inicial: number;
   nivel_azucar_inicial: number;

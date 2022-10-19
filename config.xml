@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.AgendaOnlineS" version="0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Clinicas</name>
-    <description>Clinicas</description>
+    <name>fermentkaffa</name>
+    <description>fermentkaffa</description>
     <author email="saraovalle@gmail.com">SOP</author>
     <content src="index.html" />
     <access origin="*" />

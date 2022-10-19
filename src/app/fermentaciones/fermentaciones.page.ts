@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService, PostFermentacion } from '../services/rest-api.service';
 import Swal from 'sweetalert2';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-fermentaciones',
@@ -19,6 +20,8 @@ export class FermentacionesPage implements OnInit {
     id_nano_lote: 0,
     id_tipo_fermentacion: 0,
     fecha_registro: null,
+    fecha_fin: null,
+    activa: true,
     peso_libras_nanolote: 0.00,
     ph_inicial: 0.00,
     nivel_azucar_inicial: 0.00
@@ -30,9 +33,11 @@ export class FermentacionesPage implements OnInit {
   constructor(
     private restApiService: RestApiService,
     public loadingController: LoadingController,
+    private router: Router,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(
+  ) {
     this.log();
   }
 
@@ -43,6 +48,8 @@ export class FermentacionesPage implements OnInit {
       id_nano_lote: 0,
       id_tipo_fermentacion: 0,
       fecha_registro: null,
+      fecha_fin: null,
+      activa: true,
       peso_libras_nanolote: 0.00,
       ph_inicial: 0.00,
       nivel_azucar_inicial: 0.00
@@ -149,6 +156,8 @@ export class FermentacionesPage implements OnInit {
       id_tipo_fermentacion: this.post.id_tipo_fermentacion,
       peso_libras_nanolote: this.post.peso_libras_nanolote,
       fecha_registro: this.post.fecha_registro,
+      fecha_fin: this.post.fecha_fin,
+      activa: this.post.activa,
       ph_inicial: this.post.ph_inicial,
       nivel_azucar_inicial: this.post.nivel_azucar_inicial,
     }
@@ -207,6 +216,8 @@ export class FermentacionesPage implements OnInit {
       id_nano_lote: item.attributes.id_nano_lote,
       id_tipo_fermentacion: item.attributes.id_tipo_fermentacion,
       fecha_registro: item.attributes.fecha_registro,
+      fecha_fin: item.attributes.fecha_fin,
+      activa: item.attributes.activa,
       peso_libras_nanolote: item.attributes.peso_libras_nanolote,
       ph_inicial: item.attributes.ph_inicial,
       nivel_azucar_inicial: item.attributes.nivel_azucar_inicial
@@ -215,4 +226,13 @@ export class FermentacionesPage implements OnInit {
     this.isDisplay = false
   }
 
+  revision(id) {
+    console.log('detalle', id);
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        id: id
+      }
+    };
+    this.router.navigate(['/revision-feremntaciones'], navigationExtras);
+  }
 }
