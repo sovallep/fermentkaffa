@@ -1,5 +1,5 @@
 const medivision = {
-    env: 'test',
+    env: 'development',
 };
 
 export const httpConstants = {
