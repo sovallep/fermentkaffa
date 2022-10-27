@@ -25,11 +25,6 @@ export class AppComponent {
       icon: 'cafe-outline'
     },
     {
-      title: 'Nano-lote',
-      url: '/tipo-nanolote',
-      icon: 'leaf'
-    },
-    {
       title: 'Tipo Fermentación',
       url: '/tipo-ferementacion',
       icon: 'thermometer-outline'
@@ -40,10 +35,11 @@ export class AppComponent {
       icon: 'flask'
     },
     {
-      title: 'Revisión-Fermentación',
-      url: '/revision-feremntaciones',
-      icon: 'stopwatch'
-    }
+      title: 'Nano-lote',
+      url: '/tipo-nanolote',
+      icon: 'leaf'
+    },
+
   ];
   constructor(
     private platform: Platform,

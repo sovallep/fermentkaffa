@@ -24,9 +24,14 @@
     </script>
     <script>
         google.charts.load('current', {
+            packages: ['corechart', 'line']
+        });
+    </script>
+
+    <script>
+        google.charts.load('current', {
             'packages': ['geochart'],
         });
-        google.charts.setOnLoadCallback(drawRegionsMap);
     </script>
 </head>
 

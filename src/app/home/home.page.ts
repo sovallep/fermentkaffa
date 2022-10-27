@@ -19,11 +19,6 @@ export class HomePage implements OnInit {
   fermentaciones = [];
   nanolotes = [];
 
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400
-  };
-
   constructor(
     private restApiService: RestApiService,
     public loadingController: LoadingController,
@@ -31,27 +26,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.log();
-  }
-
-  drawChart() {
-    var container = document.getElementById('histrialFermentaciones');
-    var chart = new google.visualization.Timeline(container);
-    var dataTable = new google.visualization.DataTable();
-    dataTable.addColumn({ type: 'string', id: 'Position' });
-    dataTable.addColumn({ type: 'string', id: 'Name' });
-    dataTable.addColumn({ type: 'date', id: 'Start' });
-    dataTable.addColumn({ type: 'date', id: 'End' });
-    this.fermentaciones.forEach(item => {
-      this.tfermentaciones.forEach(tf => {
-        if (item.attributes.id_tipo_fermentacion === tf.id) {
-          dataTable.addRows([
-            [tf.attributes.nombre + ' ' + tf.attributes.descripcion, item.attributes.nombre, new Date(item.attributes.fecha_registro), new Date(item.attributes.fecha_fin)]
-          ]);
-        }
-      });
-    });
-
-    chart.draw(dataTable);
   }
 
   async log() {
@@ -107,8 +81,7 @@ export class HomePage implements OnInit {
       this.restApiService.getListado('fermentaciones').subscribe((res: any) => {
         if (res) {
           this.fermentaciones = res.data;
-          console.log(this.fermentaciones);
-          this.drawChart();
+          this.drawChart(this.fermentaciones);
           loading.dismiss();
         }
       });
@@ -117,6 +90,26 @@ export class HomePage implements OnInit {
       loading.dismiss();
     })
 
+  }
+
+  drawChart(datos) {
+    var container = document.getElementById('histrialFermentaciones');
+    var chart = new google.visualization.Timeline(container);
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn({ type: 'string', id: 'Position' });
+    dataTable.addColumn({ type: 'string', id: 'Name' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    datos.forEach(item => {
+      this.tfermentaciones.forEach(tf => {
+        if (item.attributes.id_tipo_fermentacion === tf.id) {
+          dataTable.addRows([
+            [tf.attributes.nombre + ' ' + tf.attributes.descripcion, item.attributes.nombre, new Date(item.attributes.fecha_registro), new Date(item.attributes.fecha_fin)]
+          ]);
+        }
+      });
+    });
+    chart.draw(dataTable);
   }
 
   verimg() {

@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { NetworkService } from './network.service';
-import PouchDB from 'pouchdb';
 import { Injectable } from '@angular/core';
 import { httpConstants } from '../app-constants';
-import { getTestBed } from '@angular/core/testing';
 import { DatetimeOptions } from '@ionic/core';
 import { IonDatetime } from '@ionic/angular';
+import { Time } from '@angular/common';
 export interface Post {
   id?: string;
   nombre: string;
@@ -48,6 +47,16 @@ export interface PostFermentacion {
   nivel_azucar_inicial: number;
 }
 
+export interface RevFermentacion {
+  id?: string;
+  notas: string;
+  id_fermentacion: number;
+  horas_transcurridas: number;
+  fecha: DatetimeOptions;
+  hora: Time,
+  ph: number;
+  azucar: number;
+}
 
 @Injectable({
   providedIn: 'root'
