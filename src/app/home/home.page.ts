@@ -82,6 +82,7 @@ export class HomePage implements OnInit {
         if (res) {
           this.fermentaciones = res.data;
           this.drawChart(this.fermentaciones);
+          this.histrialFermentacionesInactivas(this.fermentaciones);
           loading.dismiss();
         }
       });
@@ -102,7 +103,7 @@ export class HomePage implements OnInit {
     dataTable.addColumn({ type: 'date', id: 'End' });
     datos.forEach(item => {
       this.tfermentaciones.forEach(tf => {
-        if (item.attributes.id_tipo_fermentacion === tf.id) {
+        if (item.attributes.id_tipo_fermentacion === tf.id && item.attributes.activa == true) {
           dataTable.addRows([
             [tf.attributes.nombre + ' ' + tf.attributes.descripcion, item.attributes.nombre, new Date(item.attributes.fecha_registro), new Date(item.attributes.fecha_fin)]
           ]);
@@ -111,6 +112,27 @@ export class HomePage implements OnInit {
     });
     chart.draw(dataTable);
   }
+
+  histrialFermentacionesInactivas(datos) {
+    var container = document.getElementById('histrialFermentacionesInactivas');
+    var chart = new google.visualization.Timeline(container);
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn({ type: 'string', id: 'Position' });
+    dataTable.addColumn({ type: 'string', id: 'Name' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    datos.forEach(item => {
+      this.tfermentaciones.forEach(tf => {
+        if (item.attributes.id_tipo_fermentacion === tf.id && item.attributes.activa == false) {
+          dataTable.addRows([
+            [tf.attributes.nombre + ' ' + tf.attributes.descripcion, item.attributes.nombre, new Date(item.attributes.fecha_registro), new Date(item.attributes.fecha_fin)]
+          ]);
+        }
+      });
+    });
+    chart.draw(dataTable);
+  }
+
 
   verimg() {
     Swal.fire({

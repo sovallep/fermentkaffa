@@ -37,6 +37,8 @@ export class RevisionFeremntacionesPage implements OnInit {
   isDisplay = true;
   userItem: [];
   userId: -1;
+  brixMax: number;
+  phMax: number;
 
   constructor(
     private restApiService: RestApiService,
@@ -68,6 +70,7 @@ export class RevisionFeremntacionesPage implements OnInit {
               loading.dismiss();
               this.drawVisualization(this.revisiones);
               this.drawChart(this.revisiones);
+              this.drawChart3(this.revisiones);
             }
           });
         } else {
@@ -80,13 +83,54 @@ export class RevisionFeremntacionesPage implements OnInit {
     })
   }
 
+  drawChart3(datos) {
+    let phMayor = 0;
+    let brixMayor = 0;
+    datos.forEach(element => {
+      if (phMayor < element.attributes.ph) {
+        phMayor = element.attributes.ph;
+        this.phMax = phMayor;
+      }
+      if (brixMayor < element.attributes.azucar) {
+        brixMayor = element.attributes.azucar;
+        this.brixMax = brixMayor;
+      }
+    });
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['Ph', phMayor],
+      ['Brix', brixMayor]
+    ]);
+    var options = {
+      width: 400, height: 120,
+      yellowFrom: 0, yellowTo: 3,
+      // greenFrom: 3, greenTo: 8,
+      redFrom: 8, redTo: 100,
+      minorTicks: 5
+    };
+
+    var chart = new google.visualization.Gauge(document.getElementById('bouge'));
+    chart.draw(data, options);
+    setInterval(function () {
+      datos.forEach(element => {
+        data.setValue(1, 1, 0 + element.attributes.azucar);
+        chart.draw(data, options);
+      });
+    }, 7000);
+    setInterval(function () {
+      datos.forEach(element => {
+        data.setValue(0, 1, 0 + element.attributes.ph);
+        chart.draw(data, options);
+      });
+    }, 5000);
+  }
+
   drawVisualization(datos) {
     var data = new google.visualization.DataTable();
     data.addColumn('number', 'Horas');
     data.addColumn('number', 'Ph');
     data.addColumn('number', 'Grados Brix');
     datos.forEach(element => {
-      console.log(element);
       data.addRows([[element.attributes.horas_transcurridas, element.attributes.ph, element.attributes.azucar]]);
     });
     var options = {
@@ -100,13 +144,11 @@ export class RevisionFeremntacionesPage implements OnInit {
   }
 
   drawChart(datos) {
-    console.log(datos);
     var data = new google.visualization.DataTable();
     data.addColumn('number', 'Horas');
     data.addColumn('number', 'Ph');
     data.addColumn('number', 'Grados Brix');
     datos.forEach(element => {
-      console.log(element);
       data.addRows([[element.attributes.horas_transcurridas, element.attributes.ph, element.attributes.azucar]]);
     });
     var options = {
@@ -151,10 +193,8 @@ export class RevisionFeremntacionesPage implements OnInit {
   onSubmit() {
     // editar uno existente
     if (this.userId != null && this.userId >= 0) {
-      console.log('entro editar');
       this.update();
     } else { // crear un nuevo 
-      console.log('entro nuevo item');
       this.save();
     }
   }
@@ -168,7 +208,6 @@ export class RevisionFeremntacionesPage implements OnInit {
       let idfer = parseInt(this.idFermentacion, 10);
       this.post.id_fermentacion = idfer;
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
-        console.log(res);
         if (res.data.id) {
           this.userItem = [];
           this.user = [];
@@ -206,7 +245,6 @@ export class RevisionFeremntacionesPage implements OnInit {
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.userId).subscribe((res: any) => {
-        console.log(res);
         if (res.data.id) {
           this.userItem = [];
           this.user = [];
@@ -239,7 +277,6 @@ export class RevisionFeremntacionesPage implements OnInit {
         });
         await loading.present().then(() => {
           this.restApiService.deleteListadoItem(this.tabla, id).subscribe((res: any) => {
-            console.log(res);
             if (res) {
               this.user.splice(index, 1);
               loading.dismiss();
