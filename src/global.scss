@@ -28,6 +28,27 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+.alert.alert-danger {
+    border-color: #df5138;
+    background: #e46f61;
+}
+
+.alert.alert-warning {
+    border-color: #ffce55;
+    color: #555555;
+    background: #fff1a8;
+}
+
+.alert.alert-success {
+    border-color: #8cc474;
+    background: #a0d468;
+}
+
+.alert.alert-info {
+    border-color: #11a9cc;
+    background: #57b5e3;
+}
+
 ion-checkbox {
     width: 35px;
     height: 35px;

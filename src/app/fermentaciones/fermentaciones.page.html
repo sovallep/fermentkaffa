@@ -39,13 +39,19 @@
                     <ion-col size="1">
                         #
                     </ion-col>
-                    <ion-col size="4">
+                    <ion-col size="3">
                         Nombre
                     </ion-col>
-                    <ion-col size="4">
-                        Descripción
+                    <ion-col size="2">
+                        Fecha de Inicio
+                    </ion-col>
+                    <ion-col size="1">
+                        Estado
                     </ion-col>
                     <ion-col size="3">
+                        Descripción
+                    </ion-col>
+                    <ion-col size="2">
                         Acciones
                     </ion-col>
                 </ion-item>
@@ -54,13 +60,20 @@
                         <ion-col size="1">
                             {{item.id}}
                         </ion-col>
-                        <ion-col size="4">
+                        <ion-col size="3">
                             {{item.attributes.nombre}}
                         </ion-col>
-                        <ion-col size="4">
-                            {{item.attributes.descripcion}}
+                        <ion-col size="2">
+                            {{item.attributes.fecha_registro}}
+                        </ion-col>
+                        <ion-col size="1">
+                            <p style="margin-top: 1em;" *ngIf="item.attributes.activa==false" class="alert alert-danger">Inactivo</p>
+                            <p style="margin-top: 1em;" *ngIf="item.attributes.activa==true" class="alert alert-success">Activo</p>
                         </ion-col>
                         <ion-col size="3">
+                            {{item.attributes.descripcion}}
+                        </ion-col>
+                        <ion-col size="2">
                             <ion-button color="light" (click)="revision(item.id)">
                                 <ion-icon name="stopwatch"></ion-icon>
                             </ion-button>
