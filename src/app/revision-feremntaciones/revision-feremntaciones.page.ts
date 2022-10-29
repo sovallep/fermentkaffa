@@ -3,6 +3,7 @@ import { RestApiService, RevFermentacion } from '../services/rest-api.service';
 import { LoadingController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
+import { Time } from '@angular/common';
 declare var google;
 
 @Component({
@@ -30,6 +31,7 @@ export class RevisionFeremntacionesPage implements OnInit {
     watchSlidesProgress: true,
   };
 
+  idFermentacion = null;
   user = [];
   revisiones = [];
   isDisplay = true;
@@ -59,10 +61,12 @@ export class RevisionFeremntacionesPage implements OnInit {
               let array = res.data;
               array.forEach(element => {
                 if (element.attributes.id_fermentacion == params.id) {
+                  this.idFermentacion = params.id;
                   this.revisiones.push(element);
                 }
               });
               loading.dismiss();
+              this.drawVisualization(this.revisiones);
               this.drawChart(this.revisiones);
             }
           });
@@ -76,40 +80,46 @@ export class RevisionFeremntacionesPage implements OnInit {
     })
   }
 
+  drawVisualization(datos) {
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', 'Horas');
+    data.addColumn('number', 'Ph');
+    data.addColumn('number', 'Grados Brix');
+    datos.forEach(element => {
+      console.log(element);
+      data.addRows([[element.attributes.horas_transcurridas, element.attributes.ph, element.attributes.azucar]]);
+    });
+    var options = {
+      vAxis: { title: 'Grados' },
+      hAxis: { title: 'Horas' },
+      seriesType: 'bars',
+      series: { 2: { type: 'line' } }
+    };
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+
   drawChart(datos) {
     console.log(datos);
     var data = new google.visualization.DataTable();
-    data.addColumn('number', 'X');
-    data.addColumn('number', 'Dogs');
-    data.addColumn('number', 'Cats');
-
-    data.addRows([
-      [0, 0, 0], [1, 10, 5], [2, 23, 15], [3, 17, 9], [4, 18, 10], [5, 9, 5],
-      [6, 11, 3], [7, 27, 19], [8, 33, 25], [9, 40, 32], [10, 32, 24], [11, 35, 27],
-      [12, 30, 22], [13, 40, 32], [14, 42, 34], [15, 47, 39], [16, 44, 36], [17, 48, 40],
-      [18, 52, 44], [19, 54, 46], [20, 42, 34], [21, 55, 47], [22, 56, 48], [23, 57, 49],
-      [24, 60, 52], [25, 50, 42], [26, 52, 44], [27, 51, 43], [28, 49, 41], [29, 53, 45],
-      [30, 55, 47], [31, 60, 52], [32, 61, 53], [33, 59, 51], [34, 62, 54], [35, 65, 57],
-      [36, 62, 54], [37, 58, 50], [38, 55, 47], [39, 61, 53], [40, 64, 56], [41, 65, 57],
-      [42, 63, 55], [43, 66, 58], [44, 67, 59], [45, 69, 61], [46, 69, 61], [47, 70, 62],
-      [48, 72, 64], [49, 68, 60], [50, 66, 58], [51, 65, 57], [52, 67, 59], [53, 70, 62],
-      [54, 71, 63], [55, 72, 64], [56, 73, 65], [57, 75, 67], [58, 70, 62], [59, 68, 60],
-      [60, 64, 56], [61, 60, 52], [62, 65, 57], [63, 67, 59], [64, 68, 60], [65, 69, 61],
-      [66, 70, 62], [67, 72, 64], [68, 75, 67], [69, 80, 72]
-    ]);
-
+    data.addColumn('number', 'Horas');
+    data.addColumn('number', 'Ph');
+    data.addColumn('number', 'Grados Brix');
+    datos.forEach(element => {
+      console.log(element);
+      data.addRows([[element.attributes.horas_transcurridas, element.attributes.ph, element.attributes.azucar]]);
+    });
     var options = {
-      hAxis: {
-        title: 'Time'
-      },
       vAxis: {
-        title: 'Popularity'
+        title: 'Grados'
+      },
+      hAxis: {
+        title: 'Horas'
       },
       series: {
         1: { curveType: 'function' }
       }
     };
-
     var chart = new google.visualization.LineChart(document.getElementById('lineas'));
     chart.draw(data, options);
   }
@@ -155,13 +165,19 @@ export class RevisionFeremntacionesPage implements OnInit {
       spinner: 'crescent'
     });
     await loading.present().then(() => {
+      let idfer = parseInt(this.idFermentacion, 10);
+      this.post.id_fermentacion = idfer;
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
         console.log(res);
         if (res.data.id) {
           this.userItem = [];
+          this.user = [];
+          this.revisiones = [];
           this.cleanPost();
           this.isDisplay = true
           this.log();
+          loading.dismiss();
+        } else {
           loading.dismiss();
         }
       });
@@ -176,21 +192,25 @@ export class RevisionFeremntacionesPage implements OnInit {
       message: 'Guardando...',
       spinner: 'crescent'
     });
+    let idfer = parseInt(this.idFermentacion, 10);
+    let horaMins = this.post.hora;
     let temp = {
-      id: this.user[this.userId].id,
+      id: this.userId,
       notas: this.post.notas,
-      id_fermentacion: this.post.id_fermentacion,
+      id_fermentacion: idfer,
       horas_transcurridas: this.post.horas_transcurridas,
       fecha: this.post.fecha,
-      hora: this.post.hora,
+      hora: horaMins,
       ph: this.post.ph,
       azucar: this.post.azucar
     }
     await loading.present().then(() => {
-      this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
+      this.restApiService.putEditItem(this.tabla, temp, this.userId).subscribe((res: any) => {
         console.log(res);
         if (res.data.id) {
           this.userItem = [];
+          this.user = [];
+          this.revisiones = [];
           this.userId = -1;
           this.isDisplay = true
           this.cleanPost();
@@ -235,16 +255,17 @@ export class RevisionFeremntacionesPage implements OnInit {
 
   edit(item, id) {
     this.userItem = item;
+    let idfer = parseInt(this.idFermentacion, 10);
     this.post = {
       notas: item.attributes.notas,
-      id_fermentacion: item.attributes.id_fermentacion,
+      id_fermentacion: idfer,
       horas_transcurridas: item.attributes.horas_transcurridas,
       fecha: item.attributes.fecha,
       hora: item.attributes.hora,
       ph: item.attributes.ph,
       azucar: item.attributes.azucar
     }
-    this.userId = id;
+    this.userId = item.id;
     this.isDisplay = false
   }
 

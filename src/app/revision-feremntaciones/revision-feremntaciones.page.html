@@ -22,10 +22,10 @@
 
         <ion-slides *ngIf="isDisplay" pager="true" [options]="slideOpts" #Slides>
             <ion-slide *ngFor="let item of revisiones;let i = index;">
-                <ion-card>
+                <ion-card color="success">
                     <ion-card-header style="text-align:center">
                         <ion-icon size="large" name="stopwatch"></ion-icon>
-                        <h1>Revision # {{item.id}}:</h1>
+                        <ion-card-title>Revision {{item.id}}:</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                         <ion-grid>
@@ -82,7 +82,7 @@
                                 </ion-col>
                                 <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
                                     <ion-col size="4">
-                                        <b> 
+                                        <b>
                                             Horas transcurridas:
                                         </b>
                                     </ion-col>
@@ -145,7 +145,7 @@
                         </ion-col>
                         <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
                             <ion-label position="floating">Hora</ion-label>
-                            <input [(ngModel)]="post.hora" type="time" name="time" />
+                            <input [(ngModel)]="post.hora" type="time" name="time" step="2" />
                         </ion-col>
                         <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
                             <ion-item>
@@ -164,10 +164,22 @@
             <ion-col size="12" size-sm="12" size-lg="12" size-xs="12">
                 <ion-card>
                     <ion-card-header>
-                        <ion-card-title style="text-align: center;">Análisis de revisión de fermentacionesiones</ion-card-title>
+                        <ion-card-title style="text-align: center;">Análisis de revisión de Fermentaciones</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                         <div id="lineas"></div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" size-sm="12" size-lg="12" size-xs="12">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title style="text-align: center;">Gráfica de Barras</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content style="align-items: center;">
+                        <div id="chart_div" style="height: 500px;"></div>
                     </ion-card-content>
                 </ion-card>
             </ion-col>
