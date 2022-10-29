@@ -12,7 +12,7 @@
     <div class="content">
 
         <!-- boton add -->
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="isDisplay">
+        <ion-fab vertical="top" horizontal="end" slot="fixed" *ngIf="isDisplay">
             <ion-row>
                 <ion-fab-button color="primary">
                     <ion-icon name="add-outline" (click)="addProduct()"></ion-icon>
@@ -42,17 +42,16 @@
                     <ion-col size="3">
                         Nombre
                     </ion-col>
-                    <ion-col size="2">
+                    <ion-col size="3">
                         Fecha de Inicio
                     </ion-col>
-                    <ion-col size="1">
+                    <ion-col size="3">
                         Estado
                     </ion-col>
-                    <ion-col size="3">
+                    <!-- <ion-col size="2">
                         Descripción
-                    </ion-col>
+                    </ion-col> -->
                     <ion-col size="2">
-                        Acciones
                     </ion-col>
                 </ion-item>
                 <ion-list>
@@ -63,16 +62,18 @@
                         <ion-col size="3">
                             {{item.attributes.nombre}}
                         </ion-col>
-                        <ion-col size="2">
+                        <ion-col size="3">
                             {{item.attributes.fecha_registro}}
                         </ion-col>
-                        <ion-col size="1">
+                        <ion-col size="3">
+                            <!-- <ion-button color="success" *ngIf="item.attributes.activa==true">Activo</ion-button>
+                            <ion-button color="danger" *ngIf="item.attributes.activa==false">Inactivo</ion-button>     -->
                             <p style="margin-top: 1em;" *ngIf="item.attributes.activa==false" class="alert alert-danger">Inactivo</p>
                             <p style="margin-top: 1em;" *ngIf="item.attributes.activa==true" class="alert alert-success">Activo</p>
                         </ion-col>
-                        <ion-col size="3">
+                        <!-- <ion-col size="2">
                             {{item.attributes.descripcion}}
-                        </ion-col>
+                        </ion-col> -->
                         <ion-col size="2">
                             <ion-button color="light" (click)="revision(item.id)">
                                 <ion-icon name="stopwatch"></ion-icon>
