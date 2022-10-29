@@ -22,7 +22,7 @@
 
         <ion-slides *ngIf="isDisplay" pager="true" [options]="slideOpts" #Slides>
             <ion-slide *ngFor="let item of revisiones;let i = index;">
-                <ion-card color="success">
+                <ion-card color="light">
                     <ion-card-header style="text-align:center">
                         <ion-icon size="large" name="stopwatch"></ion-icon>
                         <ion-card-title>Revision {{item.id}}:</ion-card-title>
@@ -31,64 +31,27 @@
                         <ion-grid>
                             <ion-row>
                                 <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-col size="4">
-                                        <b> 
-                                        Nota:
-                                        </b>
-                                    </ion-col>
-                                    <ion-col size="6">
-                                        {{item.attributes.notas}}
-                                    </ion-col>
+                                    <ion-card-subtitle>Nota: {{item.attributes.notas}}</ion-card-subtitle>
                                 </ion-col>
                                 <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-col size="4">
-                                        <b> 
-                                            Fecha de revisión:
-                                        </b>
-                                    </ion-col>
-                                    <ion-col size="6">
-                                        {{item.attributes.fecha}}
-                                    </ion-col>
+                                    <ion-card-subtitle>Fecha de revisión: {{item.attributes.fecha}}
+                                    </ion-card-subtitle>
                                 </ion-col>
                                 <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-col size="4">
-                                        <b> 
-                                            Ph:
-                                        </b>
-                                    </ion-col>
-                                    <ion-col size="6">
-                                        {{item.attributes.ph}}
-                                    </ion-col>
+                                    <ion-card-subtitle>Ph: {{item.attributes.ph}}
+                                    </ion-card-subtitle>
                                 </ion-col>
                                 <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-col size="4">
-                                        <b> 
-                                            Nivel de Azúcar:
-                                        </b>
-                                    </ion-col>
-                                    <ion-col size="6">
-                                        {{item.attributes.azucar}}
-                                    </ion-col>
+                                    <ion-card-subtitle>Grados Brix: {{item.attributes.azucar}}
+                                    </ion-card-subtitle>
                                 </ion-col>
                                 <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-col size="4">
-                                        <b> 
-                                            Hora de revisión:
-                                        </b>
-                                    </ion-col>
-                                    <ion-col size="6">
-                                        {{item.attributes.hora}}
-                                    </ion-col>
+                                    <ion-card-subtitle>Hora de revisión: {{item.attributes.hora}}
+                                    </ion-card-subtitle>
                                 </ion-col>
                                 <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-col size="4">
-                                        <b>
-                                            Horas transcurridas:
-                                        </b>
-                                    </ion-col>
-                                    <ion-col size="6">
-                                        {{item.attributes.horas_transcurridas}}
-                                    </ion-col>
+                                    <ion-card-subtitle>Hora transcurridas: {{item.attributes.horas_transcurridas}}
+                                    </ion-card-subtitle>
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -139,7 +102,7 @@
                         </ion-col>
                         <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
                             <ion-item>
-                                <ion-label position="floating">Nivel de Azucar Inicial</ion-label>
+                                <ion-label position="floating">Grados Brix</ion-label>
                                 <ion-input [(ngModel)]="post.azucar" type="number" step="0.01"></ion-input>
                             </ion-item>
                         </ion-col>
