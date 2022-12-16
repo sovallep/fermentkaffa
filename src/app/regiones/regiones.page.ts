@@ -54,16 +54,6 @@ export class RegionesPage implements OnInit {
   }
 
   drawChart() {
-    // this.user.forEach(item => {
-    // this.tfermentaciones.forEach(tf => {
-    // if (item.attributes.id_tipo_fermentacion === tf.id) {
-    //   dataTable.addRows([
-    //     [tf.attributes.nombre + ' ' + tf.attributes.descripcion, item.attributes.nombre, new Date(item.attributes.fecha_registro), new Date(item.attributes.fecha_fin)]
-    //   ]);
-    // }
-    // });
-    // });
-
     var data = google.visualization.arrayToDataTable([
       ['Lat', 'Long', 'City', 'ID'],
       [14.5497843,-90.8866591, 'Sacatepequez', 100],
@@ -86,9 +76,7 @@ export class RegionesPage implements OnInit {
     ]);
 
     var options = {
-      // region: '013', // CENTRO AMERICA GT-SA GT-03
       region: 'GT',
-      // displayMode: 'text',
       displayMode: 'markers',
       colorAxis: { colors: ['#00853f', 'black', '#e31b23'] },
       backgroundColor: '#81d4fa',

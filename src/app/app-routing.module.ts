@@ -22,7 +22,8 @@ const routes: Routes = [
   {
     path: 'tipo-ferementacion',
     loadChildren: () => import('./tipo-ferementacion/tipo-ferementacion.module').then( m => m.TipoFerementacionPageModule)
-  },  {
+  },
+  {
     path: 'tipo-cafe',
     loadChildren: () => import('./tipo-cafe/tipo-cafe.module').then( m => m.TipoCafePageModule)
   },
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'revision-feremntaciones',
     loadChildren: () => import('./revision-feremntaciones/revision-feremntaciones.module').then( m => m.RevisionFeremntacionesPageModule)
+  },
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosPageModule)
   }
 
 

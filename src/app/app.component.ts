@@ -15,6 +15,11 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Usuario',
+      url: '/usuarios',
+      icon: 'person'
+    },
+    {
       title: 'Regiones',
       url: '/regiones',
       icon: 'location-outline'
@@ -30,14 +35,14 @@ export class AppComponent {
       icon: 'thermometer-outline'
     },
     {
-      title: 'Fermentaciónes',
-      url: '/fermentaciones',
-      icon: 'flask'
-    },
-    {
       title: 'Nano-lote',
       url: '/tipo-nanolote',
       icon: 'leaf'
+    },
+    {
+      title: 'Fermentaciónes',
+      url: '/fermentaciones',
+      icon: 'flask'
     },
 
   ];
