@@ -48,8 +48,11 @@ export class TipoCafePage implements OnInit {
           this.user = res.data;
           console.log(this.user);
           loading.dismiss();
+        }else {
+          loading.dismiss();    
         }
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();

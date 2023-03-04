@@ -38,28 +38,34 @@ export class HomePage implements OnInit {
         if (res) {
           this.regiones = res.data;
           loading.dismiss();
+        } else {
+          loading.dismiss();    
         }
       });
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
-    })
+    });
     await loading.present().then(() => {
       this.restApiService.getListado('tipo-cafes').subscribe((res: any) => {
         if (res) {
           this.cafe = res.data;
           loading.dismiss();
+        } else {
+          loading.dismiss();    
         }
       });
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
-    })
+    });
     await loading.present().then(() => {
       this.restApiService.getListado('tipos-fermentacion').subscribe((res: any) => {
         if (res) {
           this.tfermentaciones = res.data;
           loading.dismiss();
+        } else {
+          loading.dismiss();    
         }
       });
     }).catch((err) => {
@@ -71,6 +77,8 @@ export class HomePage implements OnInit {
         if (res) {
           this.nanolotes = res.data;
           loading.dismiss();
+        } else {
+          loading.dismiss();    
         }
       });
     }).catch((err) => {
@@ -84,13 +92,15 @@ export class HomePage implements OnInit {
           this.drawChart(this.fermentaciones);
           this.histrialFermentacionesInactivas(this.fermentaciones);
           loading.dismiss();
+        } else {
+          loading.dismiss();    
         }
       });
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
     })
-
+    loading.dismiss();
   }
 
   drawChart(datos) {

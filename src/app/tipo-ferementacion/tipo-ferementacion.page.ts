@@ -46,8 +46,11 @@ export class TipoFerementacionPage implements OnInit {
           this.user = res.data;
           console.log(this.user);
           loading.dismiss();
+        }else {
+          loading.dismiss();    
         }
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();

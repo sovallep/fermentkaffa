@@ -39,14 +39,16 @@ export class RegionesPage implements OnInit {
       spinner: 'crescent'
     });
     await loading.present().then(() => {
-      this.restApiService.getListado(this.tabla).subscribe((res: any) => {
+      this.restApiService.getListado(this.tabla).subscribe((res: any) => { 
         if (res) {
           this.user = res.data;
-          console.log(this.user);
           this.drawChart();
+          loading.dismiss();
+        } else {
           loading.dismiss();
         }
       });
+      loading.dismiss();     
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -56,7 +58,7 @@ export class RegionesPage implements OnInit {
   drawChart() {
     var data = google.visualization.arrayToDataTable([
       ['Lat', 'Long', 'City', 'ID'],
-      [14.5497843,-90.8866591, 'Sacatepequez', 100],
+      [14.5497843, -90.8866591, 'Sacatepequez', 100],
       [14.5591436, -90.7513298, 'Antigua Guatemala 1530 Metros', 1],
       [14.5234357, -90.7733775, 'Ciudad Vieja, 1550 Metros', 1],
       [14.5795747, -90.7610396, 'Jocotenango 1546 Metros', 1],
@@ -72,7 +74,7 @@ export class RegionesPage implements OnInit {
       [14.4932934, -90.7181025, 'Santa María de Jesús 2070 Metros', 1],
       [14.6354334, -90.6838242, 'Santiago Sacatepéquez 2040 Metros', 1],
       [14.681952, -90.7096268, 'Santo Domingo Xenacoj 1832 Metros', 1],
-      [14.647721,-90.7425428, 'Sumpango 1900 Metros', 1],
+      [14.647721, -90.7425428, 'Sumpango 1900 Metros', 1],
     ]);
 
     var options = {
@@ -141,6 +143,8 @@ export class RegionesPage implements OnInit {
           this.isDisplay = true
           this.log();
           loading.dismiss();
+        } else {
+          loading.dismiss();
         }
       });
     }).catch((err) => {
@@ -172,6 +176,8 @@ export class RegionesPage implements OnInit {
           this.cleanPost();
           loading.dismiss();
           this.log();
+        } else {
+          loading.dismiss();
         }
       });
     }).catch((err) => {
@@ -198,6 +204,8 @@ export class RegionesPage implements OnInit {
             console.log(res);
             if (res) {
               this.user.splice(index, 1);
+              loading.dismiss();
+            } else {
               loading.dismiss();
             }
           });

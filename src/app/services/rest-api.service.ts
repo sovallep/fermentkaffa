@@ -3,7 +3,6 @@ import { NetworkService } from './network.service';
 import { Injectable } from '@angular/core';
 import { httpConstants } from '../app-constants';
 import { DatetimeOptions } from '@ionic/core';
-import { IonDatetime } from '@ionic/angular';
 import { Time } from '@angular/common';
 export interface Post {
   id?: string;
