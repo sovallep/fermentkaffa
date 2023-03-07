@@ -10,7 +10,7 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['./fermentaciones.page.scss'],
 })
 export class FermentacionesPage implements OnInit {
-  tabla = "fermentaciones";
+  tabla = "Fermentaciones";
   nanolote = [];
   fermentacion = [];
 
@@ -77,7 +77,7 @@ export class FermentacionesPage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('tipos-fermentacion').subscribe((res: any) => {
+      this.restApiService.getListado('Tipos-fermentacion').subscribe((res: any) => {
         if (res) {
           this.fermentacion = res.data;
           loading.dismiss();
@@ -88,7 +88,7 @@ export class FermentacionesPage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('nano-lotes').subscribe((res: any) => {
+      this.restApiService.getListado('Nano-lotes').subscribe((res: any) => {
         if (res) {
           this.nanolote = res.data;
           loading.dismiss();

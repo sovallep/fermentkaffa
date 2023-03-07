@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./tipo-ferementacion.page.scss'],
 })
 export class TipoFerementacionPage implements OnInit {
-  tabla = "tipos-fermentacion";
+  tabla = "Tipos-fermentacion";
 
   post: Post = {
     nombre: "",

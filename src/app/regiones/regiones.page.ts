@@ -12,7 +12,7 @@ declare var google;
 export class RegionesPage implements OnInit {
   deptos = ['Sacatepéquez'];
   munis = ['Antigua Guatemala', 'Jocotenango', 'Pastores', 'Sumpango', 'Santo Domingo Xenacoj', 'Santiago Sacatepequez', 'San Bartolomé Milpas Altas', 'San Lucas Sacatepequez', 'Santa Lucía Milpas Altas', 'Magdalena Milpas Altas', 'Santa María de Jesús', 'Ciudad Vieja', 'San Miguel Dueñas', 'San Juan Alotenango', 'San Antonio Aguas Calientes', 'Santa Catarina Barahona'];
-  tabla = "regiones";
+  tabla = "Regiones";
   post: PostReg = {
     nombre: "",
     finca: "",

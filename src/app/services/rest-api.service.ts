@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NetworkService } from './network.service';
 import { Injectable } from '@angular/core';
 import { httpConstants } from '../app-constants';
@@ -61,6 +61,7 @@ export interface RevFermentacion {
   providedIn: 'root'
 })
 export class RestApiService {
+  headers: HttpHeaders;
   public pdb;
   // url = httpConstants.test.api;
   url = httpConstants.development.api;
@@ -68,10 +69,17 @@ export class RestApiService {
   constructor(
     private networkService: NetworkService,
     private httpClient: HttpClient,
-  ) { }
+  ) {
+    this.headers = new HttpHeaders();
+    this.headers.append('Accept', 'application/json');
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Access-Control-Allow-Origin', '*');
+   }
 
   getListado(item) {
-    const listado = this.httpClient.get(this.url + item);
+    const url = this.url + 'get' + item + '.php';
+    console.log(url);
+    const listado = this.httpClient.get(url);
     return listado;
   }
 

@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class TipoNanolotePage implements OnInit {
 
-  tabla = "nano-lotes";
+  tabla = "Nano-lotes";
 
   post: PostLotes = {
     nombre: "",
@@ -65,7 +65,7 @@ export class TipoNanolotePage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('regiones').subscribe((res: any) => {
+      this.restApiService.getListado('Regiones').subscribe((res: any) => {
         if (res) {
           this.regiones = res.data;
           loading.dismiss();
@@ -76,7 +76,7 @@ export class TipoNanolotePage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('tipo-cafes').subscribe((res: any) => {
+      this.restApiService.getListado('Tipo-cafes').subscribe((res: any) => {
         if (res) {
           this.cafe = res.data;
           loading.dismiss();

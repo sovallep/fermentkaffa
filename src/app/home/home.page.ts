@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RestApiService } from '../services/rest-api.service';
+import { RestApiService, Post } from '../services/rest-api.service';
 import { LoadingController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 
@@ -34,7 +34,8 @@ export class HomePage implements OnInit {
       spinner: 'crescent'
     });
     await loading.present().then(() => {
-      this.restApiService.getListado('regiones').subscribe((res: any) => {
+      this.restApiService.getListado('Regiones').subscribe((res: any) => {
+        console.log(res);
         if (res) {
           this.regiones = res.data;
           loading.dismiss();
@@ -47,7 +48,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
     });
     await loading.present().then(() => {
-      this.restApiService.getListado('tipo-cafes').subscribe((res: any) => {
+      this.restApiService.getListado('Tipo-cafes').subscribe((res: any) => {
         if (res) {
           this.cafe = res.data;
           loading.dismiss();
@@ -60,7 +61,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
     });
     await loading.present().then(() => {
-      this.restApiService.getListado('tipos-fermentacion').subscribe((res: any) => {
+      this.restApiService.getListado('Tipos-fermentacion').subscribe((res: any) => {
         if (res) {
           this.tfermentaciones = res.data;
           loading.dismiss();
@@ -73,7 +74,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('nano-lotes').subscribe((res: any) => {
+      this.restApiService.getListado('Nano-lotes').subscribe((res: any) => {
         if (res) {
           this.nanolotes = res.data;
           loading.dismiss();
@@ -86,7 +87,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('fermentaciones').subscribe((res: any) => {
+      this.restApiService.getListado('Fermentaciones').subscribe((res: any) => {
         if (res) {
           this.fermentaciones = res.data;
           this.drawChart(this.fermentaciones);

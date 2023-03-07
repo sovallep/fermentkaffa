@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class TipoCafePage implements OnInit {
 
-  tabla = "tipo-cafes";
+  tabla = "Tipo-cafes";
 
   post: PostCaf = {
     especie: "",
