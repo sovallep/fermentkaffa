@@ -60,9 +60,9 @@ export class RevisionFeremntacionesPage implements OnInit {
         if (res) {
           this.route.queryParams.subscribe((params: any) => {
             if (params.id) {
-              let array = res.data;
+              let array = res;
               array.forEach(element => {
-                if (element.attributes.id_fermentacion == params.id) {
+                if (element.id_fermentacion == params.id) {
                   this.idFermentacion = params.id;
                   this.revisiones.push(element);
                 }
@@ -87,12 +87,12 @@ export class RevisionFeremntacionesPage implements OnInit {
     let phMayor = 0;
     let brixMayor = 0;
     datos.forEach(element => {
-      if (phMayor < element.attributes.ph) {
-        phMayor = element.attributes.ph;
+      if (phMayor < element.ph) {
+        phMayor = element.ph;
         this.phMax = phMayor;
       }
-      if (brixMayor < element.attributes.azucar) {
-        brixMayor = element.attributes.azucar;
+      if (brixMayor < element.azucar) {
+        brixMayor = element.azucar;
         this.brixMax = brixMayor;
       }
     });
@@ -113,13 +113,13 @@ export class RevisionFeremntacionesPage implements OnInit {
     chart.draw(data, options);
     setInterval(function () {
       datos.forEach(element => {
-        data.setValue(1, 1, 0 + element.attributes.azucar);
+        data.setValue(1, 1, 0 + element.azucar);
         chart.draw(data, options);
       });
     }, 7000);
     setInterval(function () {
       datos.forEach(element => {
-        data.setValue(0, 1, 0 + element.attributes.ph);
+        data.setValue(0, 1, 0 + element.ph);
         chart.draw(data, options);
       });
     }, 5000);
@@ -131,7 +131,7 @@ export class RevisionFeremntacionesPage implements OnInit {
     data.addColumn('number', 'Ph');
     data.addColumn('number', 'Grados Brix');
     datos.forEach(element => {
-      data.addRows([[element.attributes.horas_transcurridas, element.attributes.ph, element.attributes.azucar]]);
+      data.addRows([[element.horas_transcurridas, element.ph, element.azucar]]);
     });
     var options = {
       vAxis: { title: 'Grados' },
@@ -149,7 +149,7 @@ export class RevisionFeremntacionesPage implements OnInit {
     data.addColumn('number', 'Ph');
     data.addColumn('number', 'Grados Brix');
     datos.forEach(element => {
-      data.addRows([[element.attributes.horas_transcurridas, element.attributes.ph, element.attributes.azucar]]);
+      data.addRows([[element.horas_transcurridas, element.ph, element.azucar]]);
     });
     var options = {
       vAxis: {
@@ -208,7 +208,7 @@ export class RevisionFeremntacionesPage implements OnInit {
       let idfer = parseInt(this.idFermentacion, 10);
       this.post.id_fermentacion = idfer;
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.user = [];
           this.revisiones = [];
@@ -245,7 +245,7 @@ export class RevisionFeremntacionesPage implements OnInit {
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.userId).subscribe((res: any) => {
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.user = [];
           this.revisiones = [];
@@ -294,13 +294,13 @@ export class RevisionFeremntacionesPage implements OnInit {
     this.userItem = item;
     let idfer = parseInt(this.idFermentacion, 10);
     this.post = {
-      notas: item.attributes.notas,
+      notas: item.notas,
       id_fermentacion: idfer,
-      horas_transcurridas: item.attributes.horas_transcurridas,
-      fecha: item.attributes.fecha,
-      hora: item.attributes.hora,
-      ph: item.attributes.ph,
-      azucar: item.attributes.azucar
+      horas_transcurridas: item.horas_transcurridas,
+      fecha: item.fecha,
+      hora: item.hora,
+      ph: item.ph,
+      azucar: item.azucar
     }
     this.userId = item.id;
     this.isDisplay = false

@@ -52,7 +52,7 @@ export class TipoNanolotePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado(this.tabla).subscribe((res: any) => {
         if (res) {
-          this.user = res.data;
+          this.user = res;
           console.log(this.user);
           loading.dismiss();
         }else {
@@ -67,7 +67,7 @@ export class TipoNanolotePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado('Regiones').subscribe((res: any) => {
         if (res) {
-          this.regiones = res.data;
+          this.regiones = res;
           loading.dismiss();
         }
       });
@@ -78,7 +78,7 @@ export class TipoNanolotePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado('Tipo-cafes').subscribe((res: any) => {
         if (res) {
-          this.cafe = res.data;
+          this.cafe = res;
           loading.dismiss();
         }
       });
@@ -121,7 +121,7 @@ export class TipoNanolotePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
         console.log(res);
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.userId = -1;
           this.isDisplay = true
@@ -151,7 +151,7 @@ export class TipoNanolotePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
         console.log(res);
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.userId = -1;
           this.isDisplay = true
@@ -198,10 +198,10 @@ export class TipoNanolotePage implements OnInit {
   edit(item, id) {
     this.userItem = item;
     this.post = {
-      nombre: item.attributes.nombre,
-      descripcion: item.attributes.descripcion,
-      id_region: item.attributes.id_region,
-      id_tipo_cafe: item.attributes.id_tipo_cafe,
+      nombre: item.nombre,
+      descripcion: item.descripcion,
+      id_region: item.id_region,
+      id_tipo_cafe: item.id_tipo_cafe,
     }
     this.userId = id;
     this.isDisplay = false

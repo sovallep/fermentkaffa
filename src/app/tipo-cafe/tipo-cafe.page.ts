@@ -45,7 +45,7 @@ export class TipoCafePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado(this.tabla).subscribe((res: any) => {
         if (res) {
-          this.user = res.data;
+          this.user = res;
           console.log(this.user);
           loading.dismiss();
         }else {
@@ -91,7 +91,7 @@ export class TipoCafePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
         console.log(res);
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.userId = -1;
           this.isDisplay = true
@@ -118,7 +118,7 @@ export class TipoCafePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
         console.log(res);
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.userId = -1;
           this.isDisplay = true
@@ -165,7 +165,7 @@ export class TipoCafePage implements OnInit {
   edit(item, id) {
     this.userItem = item;
     this.post = {
-      especie: item.attributes.especie,
+      especie: item.especie,
     }
     this.userId = id;
     this.isDisplay = false

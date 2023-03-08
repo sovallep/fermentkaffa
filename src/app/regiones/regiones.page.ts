@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 import { RestApiService, PostReg } from '../services/rest-api.service';
+import { httpConstants } from '../app-constants';
+import { HttpClient } from '@angular/common/http';
 
 declare var google;
 @Component({
@@ -25,9 +27,12 @@ export class RegionesPage implements OnInit {
   userItem: [];
   userId: -1;
 
+  url = httpConstants.development.api;
+
   constructor(
     private restApiService: RestApiService,
-    public loadingController: LoadingController,
+    private loadingController: LoadingController,
+    private httpClient: HttpClient,
   ) { }
 
   ngOnInit() {
@@ -39,16 +44,16 @@ export class RegionesPage implements OnInit {
       spinner: 'crescent'
     });
     await loading.present().then(() => {
-      this.restApiService.getListado(this.tabla).subscribe((res: any) => { 
+      this.restApiService.getListado(this.tabla).subscribe((res: any) => {
         if (res) {
-          this.user = res.data;
+          this.user = res;
           this.drawChart();
           loading.dismiss();
         } else {
           loading.dismiss();
         }
       });
-      loading.dismiss();     
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -106,8 +111,8 @@ export class RegionesPage implements OnInit {
     this.post = {
       nombre: "",
       finca: "",
-      departamento: "",
-      municipio: "",
+      departamento: "Sacatepéquez",
+      municipio: "San Juan Alotenango",
       altura: 0
     };
   }
@@ -136,17 +141,16 @@ export class RegionesPage implements OnInit {
     });
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
-        console.log(res);
-        if (res.data.id) {
-          this.userItem = [];
-          this.cleanPost();
-          this.isDisplay = true
-          this.log();
-          loading.dismiss();
-        } else {
-          loading.dismiss();
-        }
-      });
+        loading.dismiss();
+        this.userItem = [];
+        this.cleanPost();
+        this.isDisplay = true;
+        this.log();
+      }), (error: any) => {
+        console.log(error);
+        loading.dismiss();
+      }
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -168,17 +172,12 @@ export class RegionesPage implements OnInit {
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
-        console.log(res);
-        if (res.data.id) {
-          this.userItem = [];
+        loading.dismiss(); 
+        this.userItem = [];
           this.userId = -1;
           this.isDisplay = true
           this.cleanPost();
-          loading.dismiss();
           this.log();
-        } else {
-          loading.dismiss();
-        }
       });
     }).catch((err) => {
       console.log(err);
@@ -201,14 +200,9 @@ export class RegionesPage implements OnInit {
         });
         await loading.present().then(() => {
           this.restApiService.deleteListadoItem(this.tabla, id).subscribe((res: any) => {
-            console.log(res);
-            if (res) {
               this.user.splice(index, 1);
               loading.dismiss();
-            } else {
-              loading.dismiss();
-            }
-          });
+            });
         }).catch((err) => {
           console.log(err);
           loading.dismiss();
@@ -220,11 +214,11 @@ export class RegionesPage implements OnInit {
   edit(item, id) {
     this.userItem = item;
     this.post = {
-      nombre: item.attributes.nombre,
-      finca: item.attributes.finca,
-      departamento: item.attributes.departamento,
-      municipio: item.attributes.municipio,
-      altura: item.attributes.altura
+      nombre: item.nombre,
+      finca: item.finca,
+      departamento: item.departamento,
+      municipio: item.municipio,
+      altura: item.altura
     }
     this.userId = id;
     this.isDisplay = false

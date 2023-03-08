@@ -64,7 +64,7 @@ export class FermentacionesPage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado(this.tabla).subscribe((res: any) => {
         if (res) {
-          this.user = res.data;
+          this.user = res;
           console.log(this.user);
           loading.dismiss();
         }else {
@@ -79,7 +79,7 @@ export class FermentacionesPage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado('Tipos-fermentacion').subscribe((res: any) => {
         if (res) {
-          this.fermentacion = res.data;
+          this.fermentacion = res;
           loading.dismiss();
         }
       });
@@ -90,7 +90,7 @@ export class FermentacionesPage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado('Nano-lotes').subscribe((res: any) => {
         if (res) {
-          this.nanolote = res.data;
+          this.nanolote = res;
           loading.dismiss();
         }
       });
@@ -132,7 +132,7 @@ export class FermentacionesPage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
         console.log(res);
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.isDisplay = true
           this.cleanPost();
@@ -167,7 +167,7 @@ export class FermentacionesPage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
         console.log(res);
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.userId = -1;
           this.isDisplay = true
@@ -214,16 +214,16 @@ export class FermentacionesPage implements OnInit {
   edit(item, id) {
     this.userItem = item;
     this.post = {
-      nombre: item.attributes.nombre,
-      descripcion: item.attributes.descripcion,
-      id_nano_lote: item.attributes.id_nano_lote,
-      id_tipo_fermentacion: item.attributes.id_tipo_fermentacion,
-      fecha_registro: item.attributes.fecha_registro,
-      fecha_fin: item.attributes.fecha_fin,
-      activa: item.attributes.activa,
-      peso_libras_nanolote: item.attributes.peso_libras_nanolote,
-      ph_inicial: item.attributes.ph_inicial,
-      nivel_azucar_inicial: item.attributes.nivel_azucar_inicial
+      nombre: item.nombre,
+      descripcion: item.descripcion,
+      id_nano_lote: item.id_nano_lote,
+      id_tipo_fermentacion: item.id_tipo_fermentacion,
+      fecha_registro: item.fecha_registro,
+      fecha_fin: item.fecha_fin,
+      activa: item.activa,
+      peso_libras_nanolote: item.peso_libras_nanolote,
+      ph_inicial: item.ph_inicial,
+      nivel_azucar_inicial: item.nivel_azucar_inicial
     }
     this.userId = id;
     this.isDisplay = false

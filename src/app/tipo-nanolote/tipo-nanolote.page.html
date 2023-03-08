@@ -57,16 +57,16 @@
                             {{item.id}}
                         </ion-col>
                         <ion-col size="3">
-                            {{item.attributes.nombre}}
+                            {{item.nombre}}
                         </ion-col>
                         <ion-col size="3">
                             <div *ngFor="let s of cafe">
-                                <!-- <ion-button color="success" size="small" *ngIf="item.attributes.id_tipo_cafe == s.id"> {{s.attributes.especie}}</ion-button> -->
-                                <p style="margin-top: 1em;" *ngIf="item.attributes.id_tipo_cafe == s.id" class="alert alert-success">{{s.attributes.especie}}</p>
+                                <!-- <ion-button color="success" size="small" *ngIf="item.id_tipo_cafe == s.id"> {{s.especie}}</ion-button> -->
+                                <p style="margin-top: 1em;" *ngIf="item.id_tipo_cafe == s.id" class="alert alert-success">{{s.especie}}</p>
                             </div>
                         </ion-col>
                         <ion-col size="3">
-                            {{item.attributes.descripcion}}
+                            {{item.descripcion}}
                         </ion-col>
                         <ion-col size="2">
                             <ion-button color="warning" (click)="edit(item, i)">
@@ -103,7 +103,7 @@
                             <ion-item>
                                 <ion-label>Region</ion-label>
                                 <ion-select [(ngModel)]="post.id_region">
-                                    <ion-select-option *ngFor="let item of regiones" [value]="item.id">{{item.attributes.nombre}}</ion-select-option>
+                                    <ion-select-option *ngFor="let item of regiones" [value]="item.id">{{item.nombre}}</ion-select-option>
                                 </ion-select>
                             </ion-item>
                         </ion-col>
@@ -111,7 +111,7 @@
                             <ion-item>
                                 <ion-label>Tipo de café</ion-label>
                                 <ion-select [(ngModel)]="post.id_tipo_cafe">
-                                    <ion-select-option *ngFor="let item of cafe" [value]="item.id">{{item.attributes.especie}}</ion-select-option>
+                                    <ion-select-option *ngFor="let item of cafe" [value]="item.id">{{item.especie}}</ion-select-option>
                                 </ion-select>
                             </ion-item>
                         </ion-col>

@@ -37,7 +37,7 @@ export class HomePage implements OnInit {
       this.restApiService.getListado('Regiones').subscribe((res: any) => {
         console.log(res);
         if (res) {
-          this.regiones = res.data;
+          this.regiones = res;
           loading.dismiss();
         } else {
           loading.dismiss();    
@@ -50,7 +50,7 @@ export class HomePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado('Tipo-cafes').subscribe((res: any) => {
         if (res) {
-          this.cafe = res.data;
+          this.cafe = res;
           loading.dismiss();
         } else {
           loading.dismiss();    
@@ -63,7 +63,7 @@ export class HomePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado('Tipos-fermentacion').subscribe((res: any) => {
         if (res) {
-          this.tfermentaciones = res.data;
+          this.tfermentaciones = res;
           loading.dismiss();
         } else {
           loading.dismiss();    
@@ -76,7 +76,7 @@ export class HomePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado('Nano-lotes').subscribe((res: any) => {
         if (res) {
-          this.nanolotes = res.data;
+          this.nanolotes = res;
           loading.dismiss();
         } else {
           loading.dismiss();    
@@ -89,7 +89,7 @@ export class HomePage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado('Fermentaciones').subscribe((res: any) => {
         if (res) {
-          this.fermentaciones = res.data;
+          this.fermentaciones = res;
           this.drawChart(this.fermentaciones);
           this.histrialFermentacionesInactivas(this.fermentaciones);
           loading.dismiss();
@@ -114,9 +114,9 @@ export class HomePage implements OnInit {
     dataTable.addColumn({ type: 'date', id: 'End' });
     datos.forEach(item => {
       this.tfermentaciones.forEach(tf => {
-        if (item.attributes.id_tipo_fermentacion === tf.id && item.attributes.activa == true) {
+        if (item.id_tipo_fermentacion === tf.id && item.activa == true) {
           dataTable.addRows([
-            [tf.attributes.nombre + ' ' + tf.attributes.descripcion, item.attributes.nombre, new Date(item.attributes.fecha_registro), new Date(item.attributes.fecha_fin)]
+            [tf.nombre + ' ' + tf.descripcion, item.nombre, new Date(item.fecha_registro), new Date(item.fecha_fin)]
           ]);
         }
       });
@@ -134,9 +134,9 @@ export class HomePage implements OnInit {
     dataTable.addColumn({ type: 'date', id: 'End' });
     datos.forEach(item => {
       this.tfermentaciones.forEach(tf => {
-        if (item.attributes.id_tipo_fermentacion === tf.id && item.attributes.activa == false) {
+        if (item.id_tipo_fermentacion === tf.id && item.activa == false) {
           dataTable.addRows([
-            [tf.attributes.nombre + ' ' + tf.attributes.descripcion, item.attributes.nombre, new Date(item.attributes.fecha_registro), new Date(item.attributes.fecha_fin)]
+            [tf.nombre + ' ' + tf.descripcion, item.nombre, new Date(item.fecha_registro), new Date(item.fecha_fin)]
           ]);
         }
       });

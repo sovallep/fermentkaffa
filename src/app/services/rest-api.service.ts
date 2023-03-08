@@ -63,42 +63,34 @@ export interface RevFermentacion {
 export class RestApiService {
   headers: HttpHeaders;
   public pdb;
-  // url = httpConstants.test.api;
   url = httpConstants.development.api;
 
   constructor(
     private networkService: NetworkService,
     private httpClient: HttpClient,
-  ) {
-    this.headers = new HttpHeaders();
-    this.headers.append('Accept', 'application/json');
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Access-Control-Allow-Origin', '*');
-   }
+  ) { }
 
   getListado(item) {
     const url = this.url + 'get' + item + '.php';
-    console.log(url);
     const listado = this.httpClient.get(url);
     return listado;
   }
 
   deleteListadoItem(item, id) {
-    const listado = this.httpClient.delete(this.url + item + '/' + id);
-    return listado;
+    const url = this.url + 'delete' + item + '.php';
+    return this.httpClient.delete(url + '/?id=' + id);
   }
 
-
   postAddItem(item: string, data: object) {
-    return this.httpClient.post<Post[]>(this.url + item, {
-      data
-    });
+    const jsonNew = JSON.stringify(data);
+    const url = this.url + 'post' + item + '.php';
+    return this.httpClient.post<Post[]>(url, jsonNew);
   }
 
   putEditItem(item: string, data: object, id: number) {
-    return this.httpClient.put<Post[]>(this.url + item + '/' + id, {
-      data
-    });
+    const jsonNew = JSON.stringify(data);
+    const url = this.url + 'put' + item + '.php';
+    return this.httpClient.put<Post[]>(url + '/?id=' + id, jsonNew );
   }
 
 }

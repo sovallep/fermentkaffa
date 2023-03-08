@@ -43,7 +43,7 @@ export class TipoFerementacionPage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.getListado(this.tabla).subscribe((res: any) => {
         if (res) {
-          this.user = res.data;
+          this.user = res;
           console.log(this.user);
           loading.dismiss();
         }else {
@@ -89,7 +89,7 @@ export class TipoFerementacionPage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
         console.log(res);
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.isDisplay = true
           this.cleanPost();
@@ -116,7 +116,7 @@ export class TipoFerementacionPage implements OnInit {
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
         console.log(res);
-        if (res.data.id) {
+        if (res.id) {
           this.userItem = [];
           this.userId = -1;
           this.isDisplay = true
@@ -163,8 +163,8 @@ export class TipoFerementacionPage implements OnInit {
   edit(item, id) {
     this.userItem = item;
     this.post = {
-      nombre: item.attributes.nombre,
-      descripcion: item.attributes.descripcion
+      nombre: item.nombre,
+      descripcion: item.descripcion
     }
     this.userId = id;
     this.isDisplay = false

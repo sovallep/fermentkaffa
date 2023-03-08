@@ -60,19 +60,19 @@
                             {{item.id}}
                         </ion-col>
                         <ion-col size="3">
-                            {{item.attributes.nombre}}
+                            {{item.nombre}}
                         </ion-col>
                         <ion-col size="3">
-                            {{item.attributes.fecha_registro}}
+                            {{item.fecha_registro}}
                         </ion-col>
                         <ion-col size="3">
-                            <!-- <ion-button color="success" *ngIf="item.attributes.activa==true">Activo</ion-button>
-                            <ion-button color="danger" *ngIf="item.attributes.activa==false">Inactivo</ion-button>     -->
-                            <p style="margin-top: 1em;" *ngIf="item.attributes.activa==false" class="alert alert-danger">Inactivo</p>
-                            <p style="margin-top: 1em;" *ngIf="item.attributes.activa==true" class="alert alert-success">Activo</p>
+                            <!-- <ion-button color="success" *ngIf="item.activa==true">Activo</ion-button>
+                            <ion-button color="danger" *ngIf="item.activa==false">Inactivo</ion-button>     -->
+                            <p style="margin-top: 1em;" *ngIf="item.activa==false" class="alert alert-danger">Inactivo</p>
+                            <p style="margin-top: 1em;" *ngIf="item.activa==true" class="alert alert-success">Activo</p>
                         </ion-col>
                         <!-- <ion-col size="2">
-                            {{item.attributes.descripcion}}
+                            {{item.descripcion}}
                         </ion-col> -->
                         <ion-col size="2">
                             <ion-button color="light" (click)="revision(item.id)">
@@ -136,7 +136,7 @@
                             <ion-item>
                                 <ion-label>Nano-lote</ion-label>
                                 <ion-select [(ngModel)]="post.id_nano_lote">
-                                    <ion-select-option *ngFor="let item of nanolote" [value]="item.id">{{item.attributes.nombre}}</ion-select-option>
+                                    <ion-select-option *ngFor="let item of nanolote" [value]="item.id">{{item.nombre}}</ion-select-option>
                                 </ion-select>
                             </ion-item>
                         </ion-col>
@@ -144,7 +144,7 @@
                             <ion-item>
                                 <ion-label>Tipo de fermentación</ion-label>
                                 <ion-select [(ngModel)]="post.id_tipo_fermentacion">
-                                    <ion-select-option *ngFor="let item of fermentacion" [value]="item.id">{{item.attributes.nombre}}</ion-select-option>
+                                    <ion-select-option *ngFor="let item of fermentacion" [value]="item.id">{{item.nombre}}</ion-select-option>
                                 </ion-select>
                             </ion-item>
                         </ion-col>
