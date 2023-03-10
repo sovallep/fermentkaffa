@@ -29,10 +29,9 @@
             </ion-row>
         </ion-fab>
 
-        <ion-card *ngIf="isDisplay">
-            <ion-card-header style="text-align:center">
-                <ion-icon size="large" name="cafe-outline"></ion-icon>
-                <h1>Listado de Tipos de Café:</h1>
+        <div class="card" *ngIf="isDisplay">
+            <ion-card-header class="card-header card-header-success">
+                <ion-card-title class="card-title">Listado de Tipos de Cafe:</ion-card-title>
             </ion-card-header>
             <ion-card-content>
                 <ion-item style=" text-align: center;">
@@ -64,15 +63,16 @@
                     </ion-item>
                 </ion-list>
             </ion-card-content>
-        </ion-card>
-        <ion-card *ngIf="!isDisplay">
-            <ion-item>
-                <h1> Guardar Tipo Café:</h1>
-            </ion-item>
+        </div>
+
+        <div class="card" *ngIf="!isDisplay">
+            <ion-card-header class="card-header card-header-success">
+                <ion-card-title class="card-title"> Guardar Tipo Café:</ion-card-title>
+            </ion-card-header>
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                        <ion-col size-md="12" size-sm="12" size-lg="12" size-xs="12">
                             <ion-item>
                                 <ion-label position="floating">Variedad Especie</ion-label>
                                 <ion-input [(ngModel)]="post.especie"></ion-input>
@@ -84,6 +84,6 @@
                     </ion-row>
                 </ion-grid>
             </ion-card-content>
-        </ion-card>
+        </div>
     </div>
 </ion-content>

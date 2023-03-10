@@ -48,7 +48,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
     });
     await loading.present().then(() => {
-      this.restApiService.getListado('Tipo-cafes').subscribe((res: any) => {
+      this.restApiService.getListado('Tipocafes').subscribe((res: any) => {
         if (res) {
           this.cafe = res;
           loading.dismiss();

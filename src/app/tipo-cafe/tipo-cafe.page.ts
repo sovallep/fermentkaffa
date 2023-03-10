@@ -10,17 +10,17 @@ import Swal from 'sweetalert2';
 })
 export class TipoCafePage implements OnInit {
 
-  tabla = "Tipo-cafes";
-
-  post: PostCaf = {
-    especie: "",
-  };
-
+  tabla = "Tipocafes";  
   pdf = '';
   user = [];
   isDisplay = true;
   userItem: [];
   userId: -1;
+
+
+  post: PostCaf = {
+    especie: "",
+  };
 
 
   constructor(
@@ -48,8 +48,8 @@ export class TipoCafePage implements OnInit {
           this.user = res;
           console.log(this.user);
           loading.dismiss();
-        }else {
-          loading.dismiss();    
+        } else {
+          loading.dismiss();
         }
       });
       loading.dismiss();
@@ -73,11 +73,10 @@ export class TipoCafePage implements OnInit {
   }
 
   onSubmit() {
-    // editar uno existente
     if (this.userId != null && this.userId >= 0) {
       console.log('entro editar');
       this.update();
-    } else { // crear un nuevo 
+    } else {
       console.log('entro nuevo item');
       this.save();
     }
@@ -90,16 +89,14 @@ export class TipoCafePage implements OnInit {
     });
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
-        console.log(res);
-        if (res.id) {
-          this.userItem = [];
-          this.userId = -1;
-          this.isDisplay = true
-          this.cleanPost();
-          this.log();
-          loading.dismiss();
-        }
+        loading.dismiss();
+        this.userItem = [];
+        this.userId = -1;
+        this.isDisplay = true
+        this.cleanPost();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -117,16 +114,14 @@ export class TipoCafePage implements OnInit {
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
-        console.log(res);
-        if (res.id) {
-          this.userItem = [];
-          this.userId = -1;
-          this.isDisplay = true
-          this.cleanPost();
-          loading.dismiss();
-          this.log();
-        }
+        loading.dismiss();
+        this.userItem = [];
+        this.userId = -1;
+        this.isDisplay = true
+        this.cleanPost();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -143,17 +138,15 @@ export class TipoCafePage implements OnInit {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const loading = await this.loadingController.create({
-          message: 'Eliminando Tipo de fermeentacion id: ' + id,
+          message: 'Eliminando Tipo de cafe id: ' + id,
           spinner: 'crescent'
         });
         await loading.present().then(() => {
           this.restApiService.deleteListadoItem(this.tabla, id).subscribe((res: any) => {
-            console.log(res);
-            if (res) {
-              this.user.splice(index, 1);
-              loading.dismiss();
-            }
+            this.user.splice(index, 1);
+            loading.dismiss();
           });
+          loading.dismiss();
         }).catch((err) => {
           console.log(err);
           loading.dismiss();

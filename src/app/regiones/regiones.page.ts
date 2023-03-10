@@ -15,6 +15,11 @@ export class RegionesPage implements OnInit {
   deptos = ['Sacatepéquez'];
   munis = ['Antigua Guatemala', 'Jocotenango', 'Pastores', 'Sumpango', 'Santo Domingo Xenacoj', 'Santiago Sacatepequez', 'San Bartolomé Milpas Altas', 'San Lucas Sacatepequez', 'Santa Lucía Milpas Altas', 'Magdalena Milpas Altas', 'Santa María de Jesús', 'Ciudad Vieja', 'San Miguel Dueñas', 'San Juan Alotenango', 'San Antonio Aguas Calientes', 'Santa Catarina Barahona'];
   tabla = "Regiones";
+  user = [];
+  isDisplay = true;
+  userItem: [];
+  userId: -1;
+
   post: PostReg = {
     nombre: "",
     finca: "",
@@ -22,17 +27,10 @@ export class RegionesPage implements OnInit {
     municipio: "",
     altura: 0
   };
-  user = [];
-  isDisplay = true;
-  userItem: [];
-  userId: -1;
-
-  url = httpConstants.development.api;
-
+  
   constructor(
     private restApiService: RestApiService,
     private loadingController: LoadingController,
-    private httpClient: HttpClient,
   ) { }
 
   ngOnInit() {
@@ -179,6 +177,7 @@ export class RegionesPage implements OnInit {
           this.cleanPost();
           this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -195,7 +194,7 @@ export class RegionesPage implements OnInit {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const loading = await this.loadingController.create({
-          message: 'Eliminando Tipo de fermeentacion id: ' + id,
+          message: 'Eliminando region id: ' + id,
           spinner: 'crescent'
         });
         await loading.present().then(() => {
@@ -203,6 +202,7 @@ export class RegionesPage implements OnInit {
               this.user.splice(index, 1);
               loading.dismiss();
             });
+            loading.dismiss();
         }).catch((err) => {
           console.log(err);
           loading.dismiss();

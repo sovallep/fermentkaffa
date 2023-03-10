@@ -73,54 +73,8 @@
             </ion-card-content>
         </div>
 
-
-        <!-- <ion-card *ngIf="isDisplay">
-            <ion-card-header style="text-align:center">
-                <ion-icon size="large" name="location-outline"></ion-icon>
-                <h1>Listado de Regiones:</h1>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-item style=" text-align: center;">
-                    <ion-col size="1">
-                        #
-                    </ion-col>
-                    <ion-col size="4">
-                        Nombre
-                    </ion-col>
-                    <ion-col size="4">
-                        Municipio
-                    </ion-col>
-                    <ion-col size="3">
-                    </ion-col>
-                </ion-item>
-                <ion-list>
-                    <ion-item style=" text-align: center;" *ngFor="let item of user;let i = index;">
-                        <ion-col size="1">
-                            {{item.id}}
-                        </ion-col>
-                        <ion-col size="4">
-                            {{item.nombre}}
-                        </ion-col>
-                        <ion-col size="4">
-                            {{item.municipio}}
-                        </ion-col>
-                        <ion-col size="3">
-                            <ion-button color="warning" (click)="edit(item, i)">
-                                <ion-icon name="create-outline"></ion-icon>
-                            </ion-button>
-                            <ion-button color="danger" (click)="remove(item.id, i)">
-                                <ion-icon name="trash-outline"></ion-icon>
-                            </ion-button>
-                        </ion-col>
-                    </ion-item>
-                </ion-list>
-            </ion-card-content>
-        </ion-card> -->
-
-
         <div class="card" *ngIf="!isDisplay">
             <ion-card-header class="card-header card-header-success">
-                <!-- <ion-icon size="large" name="location-outline"></ion-icon> -->
                 <ion-card-title class="card-title">Guardar Region:</ion-card-title>
             </ion-card-header>
             <ion-card-content>
@@ -154,7 +108,7 @@
                                 </ion-select>
                             </ion-item>
                         </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                        <ion-col size-md="12" size-sm="12" size-lg="12" size-xs="12">
                             <ion-item>
                                 <ion-label position="floating">Altura (Metros Sobre el Nivel del Mar)</ion-label>
                                 <ion-input type="number" [(ngModel)]="post.altura"></ion-input>
