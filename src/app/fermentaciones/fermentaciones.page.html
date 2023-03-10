@@ -12,160 +12,172 @@
     <div class="content">
 
         <!-- boton add -->
-        <ion-fab vertical="top" horizontal="end" slot="fixed" *ngIf="isDisplay">
+        <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="addProduct()" *ngIf="isDisplay">
             <ion-row>
                 <ion-fab-button color="primary">
-                    <ion-icon name="add-outline" (click)="addProduct()"></ion-icon>
+                    <ion-icon name="add-outline"></ion-icon>
                 </ion-fab-button>
             </ion-row>
         </ion-fab>
 
         <!-- boton regresar -->
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isDisplay">
+        <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="back()" *ngIf="!isDisplay">
             <ion-row>
                 <ion-fab-button color="danger">
-                    <ion-icon name="arrow-back" (click)="back()"></ion-icon>
+                    <ion-icon name="arrow-back"></ion-icon>
                 </ion-fab-button>
             </ion-row>
         </ion-fab>
 
-        <div class="card" *ngIf="isDisplay">
-            <ion-card-header class="card-header card-header-success">
-                <ion-card-title class="card-title">Listado de Fermentaciones:</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-item style=" text-align: center;">
-                    <ion-col size="1">
-                        #
-                    </ion-col>
-                    <ion-col size="3">
-                        Nombre
-                    </ion-col>
-                    <ion-col size="3">
-                        Fecha de Inicio
-                    </ion-col>
-                    <ion-col size="3">
-                        Estado
-                    </ion-col>
-                    <!-- <ion-col size="2">
+        <ion-row>
+            <ion-col size="1" size-sm="1" size-lg="1" size-xs="0">
+            </ion-col>
+            <ion-col size="10" size-sm="10" size-lg="10" size-xs="12">
+                <div class="card" *ngIf="isDisplay">
+                    <ion-card-header class="card-header card-header-success">
+                        <ion-card-title class="card-title">Listado de Fermentaciones:</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-item style=" text-align: center;" class="text-success">
+                            <ion-col size="1">
+                                #
+                            </ion-col>
+                            <ion-col size="3">
+                                Nombre
+                            </ion-col>
+                            <ion-col size="3">
+                                Fecha de Inicio
+                            </ion-col>
+                            <ion-col size="3">
+                                Estado
+                            </ion-col>
+                            <!-- <ion-col size="2">
                         Descripción
                     </ion-col> -->
-                    <ion-col size="2">
-                    </ion-col>
-                </ion-item>
-                <ion-list>
-                    <ion-item style=" text-align: center;" *ngFor="let item of user;let i = index;">
-                        <ion-col size="1">
-                            {{item.id}}
-                        </ion-col>
-                        <ion-col size="3">
-                            {{item.nombre}}
-                        </ion-col>
-                        <ion-col size="3">
-                            {{item.fecha_registro}}
-                        </ion-col>
-                        <ion-col size="3">
-                            <!-- <ion-button color="success" *ngIf="item.activa==true">Activo</ion-button>
-                            <ion-button color="danger" *ngIf="item.activa==false">Inactivo</ion-button>     -->
-                            <p style="margin-top: 1em;" *ngIf="item.activa==false" class="alert alert-danger">Inactivo</p>
-                            <p style="margin-top: 1em;" *ngIf="item.activa==true" class="alert alert-success">Activo</p>
-                        </ion-col>
-                        <!-- <ion-col size="2">
-                            {{item.descripcion}}
-                        </ion-col> -->
-                        <ion-col size="2">
-                            <ion-button color="light" (click)="revision(item.id)">
-                                <ion-icon name="stopwatch"></ion-icon>
-                            </ion-button>
-                            <ion-button color="warning" (click)="edit(item, i)">
-                                <ion-icon name="create-outline"></ion-icon>
-                            </ion-button>
-                            <ion-button color="danger" (click)="remove(item.id, i)">
-                                <ion-icon name="trash-outline"></ion-icon>
-                            </ion-button>
-                        </ion-col>
-                    </ion-item>
-                </ion-list>
-            </ion-card-content>
-        </div>
+                            <ion-col size="2">
+                            </ion-col>
+                        </ion-item>
+                        <ion-list>
+                            <ion-item style=" text-align: center;" *ngFor="let item of user;let i = index;">
+                                <ion-col size="1">
+                                    {{item.id}}
+                                </ion-col>
+                                <ion-col size="3">
+                                    {{item.nombre}}
+                                </ion-col>
+                                <ion-col size="3">
+                                    {{item.fecha_registro}}
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-button expand="block" *ngIf="item.activa==false" color="success">
+                                        <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+                                    </ion-button>
+                                    <ion-button expand="block" *ngIf="item.activa==true">
+                                        <ion-icon slot="icon-only" name="beaker"></ion-icon>
+                                        <!-- <ion-icon  name="color-filter"></ion-icon> -->
+                                    </ion-button>
+                                </ion-col>
+                                <ion-col size="2">
+                                    <ion-button color="light" (click)="revision(item.id)">
+                                        <ion-icon name="stopwatch"></ion-icon>
+                                    </ion-button>
+                                    <ion-button color="warning" (click)="edit(item, i)">
+                                        <ion-icon name="create-outline"></ion-icon>
+                                    </ion-button>
+                                    <ion-button color="danger" (click)="remove(item.id, i)">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </ion-button>
+                                </ion-col>
+                            </ion-item>
+                        </ion-list>
+                    </ion-card-content>
+                </div>
+            </ion-col>
+        </ion-row>
 
-        <div class="card" *ngIf="!isDisplay">
-            <ion-card-header class="card-header card-header-success">
-                <ion-card-title class="card-title">Guardar fermentación:</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label position="floating">Nombre</ion-label>
-                                <ion-input [(ngModel)]="post.nombre"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label>Fermentacion Activa</ion-label>
-                                <ion-toggle [(ngModel)]="post.activa" enable-on-off-labels="true"></ion-toggle>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label position="floating">Total en Libras del Lote</ion-label>
-                                <ion-input [(ngModel)]="post.peso_libras_nanolote" type="number" step="0.01"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label position="floating">Descripción</ion-label>
-                                <ion-input [(ngModel)]="post.descripcion"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label position="floating">Fecha Inicio Fermentación</ion-label>
-                                <ion-input [(ngModel)]="post.fecha_registro" type="date"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label position="floating">Fecha Fin Fermentación</ion-label>
-                                <ion-input [(ngModel)]="post.fecha_fin" type="date"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label>Nano-lote</ion-label>
-                                <ion-select [(ngModel)]="post.id_nano_lote">
-                                    <ion-select-option *ngFor="let item of nanolote" [value]="item.id">{{item.nombre}}</ion-select-option>
-                                </ion-select>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label>Tipo de fermentación</ion-label>
-                                <ion-select [(ngModel)]="post.id_tipo_fermentacion">
-                                    <ion-select-option *ngFor="let item of fermentacion" [value]="item.id">{{item.nombre}}</ion-select-option>
-                                </ion-select>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label position="floating">Ph Inicial</ion-label>
-                                <ion-input [(ngModel)]="post.ph_inicial" type="number" step="0.01"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                            <ion-item>
-                                <ion-label position="floating">Grado Brix Inicial</ion-label>
-                                <ion-input [(ngModel)]="post.nivel_azucar_inicial" type="number" step="0.01"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col size="12">
-                            <ion-button expand="block" (click)="onSubmit()">Guardar</ion-button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </div>
+        <ion-row>
+            <ion-col size="1" size-sm="1" size-lg="1" size-xs="0">
+            </ion-col>
+            <ion-col size="10" size-sm="10" size-lg="10" size-xs="12">
+                <div class="card" *ngIf="!isDisplay">
+                    <ion-card-header class="card-header card-header-success">
+                        <ion-card-title class="card-title">Guardar fermentación:</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Nombre</ion-label>
+                                        <ion-input [(ngModel)]="post.nombre"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Fermentacion Activa</ion-label>
+                                        <ion-toggle [(ngModel)]="post.activa" enable-on-off-labels="true"></ion-toggle>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Total en Libras del Lote</ion-label>
+                                        <ion-input [(ngModel)]="post.peso_libras_nanolote" type="number" step="0.01"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Descripción</ion-label>
+                                        <ion-input [(ngModel)]="post.descripcion"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Fecha Inicio Fermentación</ion-label>
+                                        <ion-input [(ngModel)]="post.fecha_registro" type="date"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Fecha Fin Fermentación</ion-label>
+                                        <ion-input [(ngModel)]="post.fecha_fin" type="date"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Nano-lote</ion-label>
+                                        <ion-select [(ngModel)]="post.id_nano_lote">
+                                            <ion-select-option *ngFor="let item of nanolote" [value]="item.id">{{item.nombre}}</ion-select-option>
+                                        </ion-select>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Tipo de fermentación</ion-label>
+                                        <ion-select [(ngModel)]="post.id_tipo_fermentacion">
+                                            <ion-select-option *ngFor="let item of fermentacion" [value]="item.id">{{item.nombre}}</ion-select-option>
+                                        </ion-select>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Ph Inicial</ion-label>
+                                        <ion-input [(ngModel)]="post.ph_inicial" type="number" step="0.01"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
+                                    <ion-item>
+                                        <ion-label position="stacked" color="tertiary">Grado Brix Inicial</ion-label>
+                                        <ion-input [(ngModel)]="post.nivel_azucar_inicial" type="number" step="0.01"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="12">
+                                    <ion-button expand="block" (click)="onSubmit()">Guardar</ion-button>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </div>
+            </ion-col>
+        </ion-row>
     </div>
 </ion-content>

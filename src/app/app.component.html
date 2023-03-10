@@ -1,11 +1,13 @@
 <ion-app class="testing">
     <ion-menu type="overlay" side="start">
+        <img style="align-items: center !important; display: block; margin-left: auto;margin-right: auto;height: 100px;" centered src="/assets/img/logo.png" />
+        <p style="text-align: center;color:gray">Menu Ferment Kaffaa</p>
         <ion-content>
             <ion-list>
                 <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
                     <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
                         <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                        <ion-label>
+                        <ion-label class="ion-text-wrap">
                             {{p.title}}
                         </ion-label>
                     </ion-item>

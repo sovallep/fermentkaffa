@@ -267,6 +267,7 @@ export class RevisionFeremntacionesPage implements OnInit {
   }
 
   async remove(id, index) {
+    console.log(id, index);
     Swal.fire({
       title: '¿Deseas eliminar este registro?',
       backdrop: 'rgba(0,0,0,0.5)',
@@ -281,7 +282,7 @@ export class RevisionFeremntacionesPage implements OnInit {
         });
         await loading.present().then(() => {
           this.restApiService.deleteListadoItem(this.tabla, id).subscribe((res: any) => {
-            this.user.splice(index, 1);
+            this.revisiones.splice(index, 1);
             loading.dismiss();
           });
           loading.dismiss();
@@ -294,6 +295,7 @@ export class RevisionFeremntacionesPage implements OnInit {
   }
 
   edit(item, id) {
+    console.log(item, id);
     this.userItem = item;
     let idfer = parseInt(this.idFermentacion, 10);
     this.post = {
@@ -305,7 +307,7 @@ export class RevisionFeremntacionesPage implements OnInit {
       ph: item.ph,
       azucar: item.azucar
     }
-    this.userId = id;
+    this.userId = item.id;
     this.isDisplay = false
   }
 
