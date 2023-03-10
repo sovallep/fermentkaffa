@@ -28,6 +28,10 @@ export class HomePage implements OnInit {
     this.log();
   }
 
+  ionViewWillEnter() {
+    this.log();
+  }
+
   async log() {
     const loading = await this.loadingController.create({
       message: 'Cargando Datos...',
