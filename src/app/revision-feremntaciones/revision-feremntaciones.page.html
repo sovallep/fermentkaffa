@@ -22,47 +22,50 @@
 
         <ion-slides *ngIf="isDisplay" pager="true" [options]="slideOpts" #Slides>
             <ion-slide *ngFor="let item of revisiones;let i = index;">
-                <ion-card color="light">
-                    <ion-card-header style="text-align:center">
-                        <ion-icon size="large" name="stopwatch"></ion-icon>
-                        <ion-card-title>Revision {{item.id}}:</ion-card-title>
+                <div class="card" color="light">
+                    <ion-card-header class="card-header card-header-success" style="text-align:center">
+                        <ion-card-title class="card-title">Revision {{item.id}}:</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-card-subtitle>Nota: {{item.notas}}</ion-card-subtitle>
-                                </ion-col>
-                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-card-subtitle>Fecha de revisión: {{item.fecha}}
-                                    </ion-card-subtitle>
-                                </ion-col>
-                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-card-subtitle>Ph: {{item.ph}}
-                                    </ion-card-subtitle>
-                                </ion-col>
-                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-card-subtitle>Grados Brix: {{item.azucar}}
-                                    </ion-card-subtitle>
-                                </ion-col>
-                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-card-subtitle>Hora de revisión: {{item.hora}}
-                                    </ion-card-subtitle>
-                                </ion-col>
-                                <ion-col size-md="12" size-sm="12" size-lg="6" size-xs="12">
-                                    <ion-card-subtitle>Hora transcurridas: {{item.horas_transcurridas}}
-                                    </ion-card-subtitle>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
+                        <ion-row>
+                            <ion-col size-md="12" size-sm="12" size-lg="12" size-xs="12">
+                                <ion-card-subtitle>Nota: {{item.notas}}</ion-card-subtitle>
+                            </ion-col>
+                            <ion-col size-md="12" size-sm="12" size-lg="12" size-xs="12">
+                                <ion-card-subtitle>Fecha de revisión: {{item.fecha}}
+                                </ion-card-subtitle>
+                            </ion-col>
+                            <ion-col size-md="12" size-sm="12" size-lg="12" size-xs="12">
+                                <ion-card-subtitle>Ph: {{item.ph}}
+                                </ion-card-subtitle>
+                            </ion-col>
+                            <ion-col size-md="12" size-sm="12" size-lg="12" size-xs="12">
+                                <ion-card-subtitle>Grados Brix: {{item.azucar}}
+                                </ion-card-subtitle>
+                            </ion-col>
+                            <ion-col size-md="12" size-sm="12" size-lg="12" size-xs="12">
+                                <ion-card-subtitle>Hora de revisión: {{item.hora}}
+                                </ion-card-subtitle>
+                            </ion-col>
+                            <ion-col size-md="12" size-sm="12" size-lg="12" size-xs="12">
+                                <ion-card-subtitle>Hora transcurridas: {{item.horas_transcurridas}}
+                                </ion-card-subtitle>
+                            </ion-col>
+                        </ion-row>
                     </ion-card-content>
-                    <ion-button color="warning" (click)="edit(item, i)">
-                        <ion-icon name="create-outline"></ion-icon>
-                    </ion-button>
-                    <ion-button color="danger" (click)="remove(item.id, i)">
-                        <ion-icon name="trash-outline"></ion-icon>
-                    </ion-button>
-                </ion-card>
+                    <ion-row>
+                        <ion-col size="6">
+                            <ion-button expand="block" color="warning" (click)="edit(item, i)">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                        <ion-col size="6">
+                            <ion-button expand="block" color="danger" (click)="remove(item.id, i)">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </div>
             </ion-slide>
         </ion-slides>
 
@@ -75,10 +78,10 @@
             </ion-row>
         </ion-fab>
 
-        <ion-card *ngIf="!isDisplay">
-            <ion-item>
-                <h1>Nueva Revisión de Fermentacion:</h1>
-            </ion-item>
+        <div class="card" *ngIf="!isDisplay">
+            <ion-card-header class="card-header card-header-success">
+                <ion-card-title class="card-title">Guardar Revisión de Fermentacion:</ion-card-title>
+            </ion-card-header>
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
@@ -122,45 +125,46 @@
                     </ion-row>
                 </ion-grid>
             </ion-card-content>
-        </ion-card>
+        </div>
+
         <ion-row>
             <ion-col size="12" size-sm="12" size-lg="12" size-xs="12">
-                <ion-card>
-                    <ion-card-header>
-                        <ion-card-title style="text-align: center;">Análisis de revisión de Fermentaciones</ion-card-title>
+                <div class="card">
+                    <ion-card-header class="card-header card-header-success" style="text-align:center">
+                        <ion-card-title class="card-title">Análisis de revisión de Fermentaciones</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                         <div id="lineas"></div>
                     </ion-card-content>
-                </ion-card>
+                </div>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col size="12" size-sm="12" size-lg="12" size-xs="12">
-                <ion-card>
-                    <ion-card-header>
-                        <ion-card-title style="text-align: center;">Cambios de Ph Y Brix Actuales</ion-card-title>
+                <div class="card">
+                    <ion-card-header class="card-header card-header-success" style="text-align:center">
+                        <ion-card-title class="card-title">Cambios de Ph Y Brix Actuales</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
-                        <!-- <center> -->
-                        <div id="bouge" style="width: 400px; height: 100px;"></div>
-                        <!-- </center> -->
+                        <center>
+                            <div id="bouge" style="width: 400px; height: 100px;"></div>
+                        </center>
                     </ion-card-content>
                     <ion-card-subtitle style="text-align: center;">Dato de Ph Mas alto: {{phMax}}</ion-card-subtitle>
                     <ion-card-subtitle style="text-align: center;">Dato de Brix Mas alto: {{brixMax}}</ion-card-subtitle>
-                </ion-card>
+                </div>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col size="12" size-sm="12" size-lg="12" size-xs="12">
-                <ion-card>
-                    <ion-card-header>
-                        <ion-card-title style="text-align: center;">Gráfica de Barras</ion-card-title>
+                <div class="card">
+                    <ion-card-header class="card-header card-header-success" style="text-align:center">
+                        <ion-card-title class="card-title">Gráfica de Barras</ion-card-title>
                     </ion-card-header>
                     <ion-card-content style="align-items: center;">
                         <div id="chart_div" style="height: 500px;"></div>
                     </ion-card-content>
-                </ion-card>
+                </div>
             </ion-col>
         </ion-row>
     </div>

@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RestApiService, RevFermentacion } from '../services/rest-api.service';
 import { LoadingController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
-import { Time } from '@angular/common';
 declare var google;
 
 @Component({
@@ -57,26 +56,24 @@ export class RevisionFeremntacionesPage implements OnInit {
     });
     await loading.present().then(() => {
       this.restApiService.getListado(this.tabla).subscribe((res: any) => {
-        if (res) {
-          this.route.queryParams.subscribe((params: any) => {
-            if (params.id) {
-              let array = res;
-              array.forEach(element => {
-                if (element.id_fermentacion == params.id) {
-                  this.idFermentacion = params.id;
-                  this.revisiones.push(element);
-                }
-              });
-              loading.dismiss();
-              this.drawVisualization(this.revisiones);
-              this.drawChart(this.revisiones);
-              this.drawChart3(this.revisiones);
-            }
-          });
-        } else {
-          loading.dismiss();
-        }
+        this.route.queryParams.subscribe((params: any) => {
+          if (params.id) {
+            this.idFermentacion = params.id;
+            let array = res;
+            array.forEach(element => {
+              if (element.id_fermentacion === params.id) {
+                this.revisiones.push(element);
+              }
+            });
+            loading.dismiss();
+            console.log(this.revisiones);
+            this.drawVisualization(this.revisiones);
+            this.drawChart(this.revisiones);
+            this.drawChart3(this.revisiones);
+          }
+        });
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -87,12 +84,14 @@ export class RevisionFeremntacionesPage implements OnInit {
     let phMayor = 0;
     let brixMayor = 0;
     datos.forEach(element => {
-      if (phMayor < element.ph) {
-        phMayor = element.ph;
+      const ph = parseFloat(element.ph);
+      if (phMayor < ph) {
+        phMayor = ph;
         this.phMax = phMayor;
       }
-      if (brixMayor < element.azucar) {
-        brixMayor = element.azucar;
+      const azucar = parseFloat(element.azucar);
+      if (brixMayor < azucar) {
+        brixMayor = azucar;
         this.brixMax = brixMayor;
       }
     });
@@ -113,25 +112,31 @@ export class RevisionFeremntacionesPage implements OnInit {
     chart.draw(data, options);
     setInterval(function () {
       datos.forEach(element => {
-        data.setValue(1, 1, 0 + element.azucar);
+        const azucar = parseFloat(element.azucar);
+        data.setValue(1, 1, 0 + azucar);
         chart.draw(data, options);
       });
     }, 7000);
     setInterval(function () {
       datos.forEach(element => {
-        data.setValue(0, 1, 0 + element.ph);
+        const ph = parseFloat(element.ph);
+        data.setValue(0, 1, 0 + ph);
         chart.draw(data, options);
       });
     }, 5000);
   }
 
   drawVisualization(datos) {
+
     var data = new google.visualization.DataTable();
     data.addColumn('number', 'Horas');
     data.addColumn('number', 'Ph');
     data.addColumn('number', 'Grados Brix');
     datos.forEach(element => {
-      data.addRows([[element.horas_transcurridas, element.ph, element.azucar]]);
+      const horas = parseInt(element.horas_transcurridas);
+      const ph = parseFloat(element.ph);
+      const azucar = parseFloat(element.azucar);
+      data.addRows([[horas, ph, azucar]]);
     });
     var options = {
       vAxis: { title: 'Grados' },
@@ -149,7 +154,10 @@ export class RevisionFeremntacionesPage implements OnInit {
     data.addColumn('number', 'Ph');
     data.addColumn('number', 'Grados Brix');
     datos.forEach(element => {
-      data.addRows([[element.horas_transcurridas, element.ph, element.azucar]]);
+      const horas = parseInt(element.horas_transcurridas);
+      const ph = parseFloat(element.ph);
+      const azucar = parseFloat(element.azucar);
+      data.addRows([[horas, ph, azucar]]);
     });
     var options = {
       vAxis: {
@@ -208,18 +216,15 @@ export class RevisionFeremntacionesPage implements OnInit {
       let idfer = parseInt(this.idFermentacion, 10);
       this.post.id_fermentacion = idfer;
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
-        if (res.id) {
-          this.userItem = [];
-          this.user = [];
-          this.revisiones = [];
-          this.cleanPost();
-          this.isDisplay = true
-          this.log();
-          loading.dismiss();
-        } else {
-          loading.dismiss();
-        }
+        this.userItem = [];
+        this.user = [];
+        this.revisiones = [];
+        this.cleanPost();
+        this.isDisplay = true
+        this.log();
+        loading.dismiss();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -245,17 +250,16 @@ export class RevisionFeremntacionesPage implements OnInit {
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.userId).subscribe((res: any) => {
-        if (res.id) {
-          this.userItem = [];
-          this.user = [];
-          this.revisiones = [];
-          this.userId = -1;
-          this.isDisplay = true
-          this.cleanPost();
-          loading.dismiss();
-          this.log();
-        }
+        this.userItem = [];
+        this.user = [];
+        this.revisiones = [];
+        this.userId = -1;
+        this.isDisplay = true
+        this.cleanPost();
+        loading.dismiss();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -272,16 +276,15 @@ export class RevisionFeremntacionesPage implements OnInit {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const loading = await this.loadingController.create({
-          message: 'Eliminando Tipo de fermeentacion id: ' + id,
+          message: 'Eliminando revision id: ' + id,
           spinner: 'crescent'
         });
         await loading.present().then(() => {
           this.restApiService.deleteListadoItem(this.tabla, id).subscribe((res: any) => {
-            if (res) {
-              this.user.splice(index, 1);
-              loading.dismiss();
-            }
+            this.user.splice(index, 1);
+            loading.dismiss();
           });
+          loading.dismiss();
         }).catch((err) => {
           console.log(err);
           loading.dismiss();
@@ -302,7 +305,7 @@ export class RevisionFeremntacionesPage implements OnInit {
       ph: item.ph,
       azucar: item.azucar
     }
-    this.userId = item.id;
+    this.userId = id;
     this.isDisplay = false
   }
 
