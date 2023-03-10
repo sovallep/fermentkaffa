@@ -29,10 +29,9 @@
             </ion-row>
         </ion-fab>
 
-        <ion-card *ngIf="isDisplay">
-            <ion-card-header style="text-align:center">
-                <ion-icon size="large" name="thermometer-outline"></ion-icon>
-                <h1>Listado de Tipos de Fermentaciones:</h1>
+        <div class="card" *ngIf="isDisplay">
+            <ion-card-header class="card-header card-header-success">
+                <ion-card-title class="card-title">Listado de Tipos de Fermentaciones:</ion-card-title>
             </ion-card-header>
             <ion-card-content>
                 <ion-item style=" text-align: center;">
@@ -70,11 +69,12 @@
                     </ion-item>
                 </ion-list>
             </ion-card-content>
-        </ion-card>
-        <ion-card *ngIf="!isDisplay">
-            <ion-item>
-                <h1> Guardar Tipo Fermentación:</h1>
-            </ion-item>
+        </div>
+
+        <div class="card" *ngIf="!isDisplay">
+            <ion-card-header class="card-header card-header-success">
+                <ion-card-title class="card-title">Guardar Tipo Fermentación:</ion-card-title>
+            </ion-card-header>
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
@@ -96,6 +96,6 @@
                     </ion-row>
                 </ion-grid>
             </ion-card-content>
-        </ion-card>
+        </div>
     </div>
 </ion-content>

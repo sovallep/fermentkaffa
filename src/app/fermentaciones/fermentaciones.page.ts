@@ -67,8 +67,8 @@ export class FermentacionesPage implements OnInit {
           this.user = res;
           console.log(this.user);
           loading.dismiss();
-        }else {
-          loading.dismiss();    
+        } else {
+          loading.dismiss();
         }
       });
       loading.dismiss();
@@ -77,7 +77,7 @@ export class FermentacionesPage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('Tipos-fermentacion').subscribe((res: any) => {
+      this.restApiService.getListado('Tiposfermentacion').subscribe((res: any) => {
         if (res) {
           this.fermentacion = res;
           loading.dismiss();
@@ -88,7 +88,7 @@ export class FermentacionesPage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('Nano-lotes').subscribe((res: any) => {
+      this.restApiService.getListado('Nanolotes').subscribe((res: any) => {
         if (res) {
           this.nanolote = res;
           loading.dismiss();
@@ -131,15 +131,13 @@ export class FermentacionesPage implements OnInit {
     });
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
-        console.log(res);
-        if (res.id) {
-          this.userItem = [];
-          this.isDisplay = true
-          this.cleanPost();
-          this.log();
-          loading.dismiss();
-        }
+        loading.dismiss();
+        this.userItem = [];
+        this.isDisplay = true
+        this.cleanPost();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -166,16 +164,14 @@ export class FermentacionesPage implements OnInit {
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
-        console.log(res);
-        if (res.id) {
-          this.userItem = [];
-          this.userId = -1;
-          this.isDisplay = true
-          this.cleanPost();
-          loading.dismiss();
-          this.log();
-        }
+        loading.dismiss();
+        this.userItem = [];
+        this.userId = -1;
+        this.isDisplay = true
+        this.cleanPost();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -197,12 +193,10 @@ export class FermentacionesPage implements OnInit {
         });
         await loading.present().then(() => {
           this.restApiService.deleteListadoItem(this.tabla, id).subscribe((res: any) => {
-            console.log(res);
-            if (res) {
               this.user.splice(index, 1);
               loading.dismiss();
-            }
           });
+          loading.dismiss();
         }).catch((err) => {
           console.log(err);
           loading.dismiss();
@@ -230,7 +224,6 @@ export class FermentacionesPage implements OnInit {
   }
 
   revision(id) {
-    console.log('detalle', id);
     const navigationExtras: NavigationExtras = {
       queryParams: {
         id: id

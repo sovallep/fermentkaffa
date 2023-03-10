@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { RestApiService, Post } from '../services/rest-api.service';
+import { Component, OnInit } from '@angular/core';
+import { RestApiService } from '../services/rest-api.service';
 import { LoadingController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 
@@ -61,7 +61,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
     });
     await loading.present().then(() => {
-      this.restApiService.getListado('Tipos-fermentacion').subscribe((res: any) => {
+      this.restApiService.getListado('Tiposfermentacion').subscribe((res: any) => {
         if (res) {
           this.tfermentaciones = res;
           loading.dismiss();
@@ -74,7 +74,7 @@ export class HomePage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('Nano-lotes').subscribe((res: any) => {
+      this.restApiService.getListado('Nanolotes').subscribe((res: any) => {
         if (res) {
           this.nanolotes = res;
           loading.dismiss();

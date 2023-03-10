@@ -13,7 +13,7 @@ declare var google;
 })
 export class RevisionFeremntacionesPage implements OnInit {
 
-  tabla = "Revision-ferementaciones";
+  tabla = "Revisionferementaciones";
 
   post: RevFermentacion = {
     notas: "",

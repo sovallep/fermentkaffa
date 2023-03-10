@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class TipoNanolotePage implements OnInit {
 
-  tabla = "Nano-lotes";
+  tabla = "Nanolotes";
 
   post: PostLotes = {
     nombre: "",
@@ -51,13 +51,8 @@ export class TipoNanolotePage implements OnInit {
     });
     await loading.present().then(() => {
       this.restApiService.getListado(this.tabla).subscribe((res: any) => {
-        if (res) {
-          this.user = res;
-          console.log(this.user);
-          loading.dismiss();
-        }else {
-          loading.dismiss();    
-        }
+        loading.dismiss();
+        this.user = res;
       });
       loading.dismiss();
     }).catch((err) => {
@@ -66,22 +61,20 @@ export class TipoNanolotePage implements OnInit {
     })
     await loading.present().then(() => {
       this.restApiService.getListado('Regiones').subscribe((res: any) => {
-        if (res) {
-          this.regiones = res;
-          loading.dismiss();
-        }
+        this.regiones = res;
+        loading.dismiss();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
     })
     await loading.present().then(() => {
       this.restApiService.getListado('Tipocafes').subscribe((res: any) => {
-        if (res) {
-          this.cafe = res;
-          loading.dismiss();
-        }
+        this.cafe = res;
+        loading.dismiss();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -120,16 +113,14 @@ export class TipoNanolotePage implements OnInit {
     });
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
-        console.log(res);
-        if (res.id) {
-          this.userItem = [];
-          this.userId = -1;
-          this.isDisplay = true
-          this.cleanPost();
-          this.log();
-          loading.dismiss();
-        }
+        loading.dismiss();
+        this.userItem = [];
+        this.userId = -1;
+        this.isDisplay = true
+        this.cleanPost();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -150,16 +141,14 @@ export class TipoNanolotePage implements OnInit {
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
-        console.log(res);
-        if (res.id) {
-          this.userItem = [];
-          this.userId = -1;
-          this.isDisplay = true
-          this.cleanPost();
-          loading.dismiss();
-          this.log();
-        }
+        loading.dismiss();
+        this.userItem = [];
+        this.userId = -1;
+        this.isDisplay = true
+        this.cleanPost();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -176,17 +165,15 @@ export class TipoNanolotePage implements OnInit {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const loading = await this.loadingController.create({
-          message: 'Eliminando Tipo de fermeentacion id: ' + id,
+          message: 'Eliminando nano-lote id: ' + id,
           spinner: 'crescent'
         });
         await loading.present().then(() => {
           this.restApiService.deleteListadoItem(this.tabla, id).subscribe((res: any) => {
-            console.log(res);
-            if (res) {
               this.user.splice(index, 1);
               loading.dismiss();
-            }
           });
+          loading.dismiss();
         }).catch((err) => {
           console.log(err);
           loading.dismiss();

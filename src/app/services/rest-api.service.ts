@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { httpConstants } from '../app-constants';
 import { DatetimeOptions } from '@ionic/core';
 import { Time } from '@angular/common';
-export interface Post {
+export interface PostF {
   id?: string;
   nombre: string;
   descripcion: string;
@@ -84,13 +84,13 @@ export class RestApiService {
   postAddItem(item: string, data: object) {
     const jsonNew = JSON.stringify(data);
     const url = this.url + 'post' + item + '.php';
-    return this.httpClient.post<Post[]>(url, jsonNew);
+    return this.httpClient.post(url, jsonNew);
   }
 
   putEditItem(item: string, data: object, id: number) {
     const jsonNew = JSON.stringify(data);
     const url = this.url + 'put' + item + '.php';
-    return this.httpClient.put<Post[]>(url + '/?id=' + id, jsonNew );
+    return this.httpClient.put(url + '/?id=' + id, jsonNew );
   }
 
 }

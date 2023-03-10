@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { Post, RestApiService } from '../services/rest-api.service';
+import { PostF, RestApiService } from '../services/rest-api.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,9 +9,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./tipo-ferementacion.page.scss'],
 })
 export class TipoFerementacionPage implements OnInit {
-  tabla = "Tipos-fermentacion";
+  tabla = "Tiposfermentacion";
 
-  post: Post = {
+  post: PostF = {
     nombre: "",
     descripcion: "",
   };
@@ -19,6 +19,7 @@ export class TipoFerementacionPage implements OnInit {
   isDisplay = true;
   userItem: [];
   userId: -1;
+
   constructor(
     private restApiService: RestApiService,
     public loadingController: LoadingController,
@@ -42,13 +43,9 @@ export class TipoFerementacionPage implements OnInit {
     });
     await loading.present().then(() => {
       this.restApiService.getListado(this.tabla).subscribe((res: any) => {
-        if (res) {
-          this.user = res;
-          console.log(this.user);
-          loading.dismiss();
-        }else {
-          loading.dismiss();    
-        }
+        this.user = res;
+        console.log(this.user);
+        loading.dismiss();
       });
       loading.dismiss();
     }).catch((err) => {
@@ -88,15 +85,13 @@ export class TipoFerementacionPage implements OnInit {
     });
     await loading.present().then(() => {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
-        console.log(res);
-        if (res.id) {
-          this.userItem = [];
-          this.isDisplay = true
-          this.cleanPost();
-          this.log();
-          loading.dismiss();
-        }
+        loading.dismiss();
+        this.userItem = [];
+        this.isDisplay = true
+        this.cleanPost();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -115,16 +110,14 @@ export class TipoFerementacionPage implements OnInit {
     }
     await loading.present().then(() => {
       this.restApiService.putEditItem(this.tabla, temp, this.user[this.userId].id).subscribe((res: any) => {
-        console.log(res);
-        if (res.id) {
-          this.userItem = [];
-          this.userId = -1;
-          this.isDisplay = true
-          this.cleanPost();
-          loading.dismiss();
-          this.log();
-        }
+        loading.dismiss();
+        this.userItem = [];
+        this.userId = -1;
+        this.isDisplay = true
+        this.cleanPost();
+        this.log();
       });
+      loading.dismiss();
     }).catch((err) => {
       console.log(err);
       loading.dismiss();
@@ -141,17 +134,15 @@ export class TipoFerementacionPage implements OnInit {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const loading = await this.loadingController.create({
-          message: 'Eliminando Tipo de fermeentacion id: ' + id,
+          message: 'Eliminando Tipo de fermentacion id: ' + id,
           spinner: 'crescent'
         });
         await loading.present().then(() => {
           this.restApiService.deleteListadoItem(this.tabla, id).subscribe((res: any) => {
-            console.log(res);
-            if (res) {
-              this.user.splice(index, 1);
-              loading.dismiss();
-            }
+            this.user.splice(index, 1);
+            loading.dismiss();
           });
+          loading.dismiss();
         }).catch((err) => {
           console.log(err);
           loading.dismiss();
