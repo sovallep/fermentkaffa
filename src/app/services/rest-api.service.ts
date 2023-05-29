@@ -57,6 +57,25 @@ export interface RevFermentacion {
   azucar: number;
 }
 
+export interface PostCatacionSensorial {
+  id?: string;
+  totalTazaScoree: number;
+  id_lote: string;
+  muesta: string;
+  fragancia: number;
+  aroma: number;
+  sabor: number;
+  saborResidual: number;
+  acidez: number;
+  dulzor: number;
+  boca: number;
+  global: number;
+  defectos: string;
+  tazaDefectousas: number;
+  tazaNoUniformes: number;
+  fecha_registro: Date;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -90,7 +109,7 @@ export class RestApiService {
   putEditItem(item: string, data: object, id: number) {
     const jsonNew = JSON.stringify(data);
     const url = this.url + 'put' + item + '.php';
-    return this.httpClient.put(url + '/?id=' + id, jsonNew );
+    return this.httpClient.put(url + '/?id=' + id, jsonNew);
   }
 
 }

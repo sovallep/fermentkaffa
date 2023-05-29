@@ -69,13 +69,8 @@
                                     {{item.fecha_registro}}
                                 </ion-col>
                                 <ion-col size="3">
-                                    <ion-button expand="block" *ngIf="item.activa==false" color="success">
-                                        <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
-                                    </ion-button>
-                                    <ion-button expand="block" *ngIf="item.activa==true">
-                                        <ion-icon slot="icon-only" name="beaker"></ion-icon>
-                                        <!-- <ion-icon  name="color-filter"></ion-icon> -->
-                                    </ion-button>
+                                    <ion-icon *ngIf="item.activa==false" color="success" size="large" name="checkmark-circle-outline"></ion-icon>
+                                    <ion-icon *ngIf="item.activa==true" color="primary" size="large" name="beaker"></ion-icon>
                                 </ion-col>
                                 <ion-col size="2">
                                     <ion-button color="light" (click)="revision(item.id)">

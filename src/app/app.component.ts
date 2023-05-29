@@ -44,6 +44,11 @@ export class AppComponent {
       url: '/fermentaciones',
       icon: 'flask'
     },
+    {
+      title: 'Cataciónes',
+      url: '/cataciones',
+      icon: 'clipboard'
+    }
 
   ];
   constructor(

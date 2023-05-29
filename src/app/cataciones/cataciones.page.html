@@ -1,0 +1,296 @@
+<ion-fab slot="fixed" horizontal="end" vertical="top" title="back">
+    <ion-fab-button color="primary" (click)="addProduct()" *ngIf="isDisplay" style="margin-bottom: 10px;">
+        <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button size="small" color="danger" (click)="back()" *ngIf="!isDisplay" style="margin-bottom: 10px;">
+        <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button size="small" color="secondary" (click)="printDiv()" *ngIf="!isDisplay" style="margin-bottom: 10px;">
+        <ion-icon name="print-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button size="small" color="success" (click)="onSubmit()" *ngIf="!isDisplay" style="margin-bottom: 10px;">
+        <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
+
+<ion-content *ngIf="isDisplay" style="--background: #fff url(https://ilfavorito.mx/wp-content/uploads/2020/04/cafetales_oaxaca-e1587663753965.jpg) no-repeat center center / cover;">
+    <ion-header *ngIf="isDisplay" style="--ion-background-color: rgba(255, 255, 255, 0.13); border: 2px solid rgba(255, 255, 255, 0.1);box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+        <ion-toolbar style="color:white;">
+            <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title>
+                cataciones
+            </ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <div class="content" style="font-weight: 300;">
+        <ion-row>
+            <ion-col size="1" size-sm="1" size-lg="1" size-xs="0">
+            </ion-col>
+            <ion-col size="10" size-sm="10" size-lg="10" size-xs="12">
+                <div class="card" *ngIf="isDisplay">
+                    <ion-card-header class="card-header card-header-success">
+                        <ion-card-title class="card-title">Listado de cataciones:</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-item style=" text-align: center;" class="text-success">
+                            <ion-col size="1">
+                                #
+                            </ion-col>
+                            <ion-col size="4">
+                                Nombre
+                            </ion-col>
+                            <ion-col size="3">
+                                Fecha de Ingreso
+                            </ion-col>
+                            <ion-col size="4">
+                            </ion-col>
+                        </ion-item>
+                        <ion-list>
+                            <ion-item style=" text-align: center;" *ngFor="let item of user;let i = index;">
+                                <ion-col size="1">
+                                    {{item.id}}
+                                </ion-col>
+                                <ion-col size="3">
+                                    {{item.nombre}}
+                                </ion-col>
+                                <ion-col size="3">
+                                    {{item.fecha_registro}}
+                                </ion-col>
+                                <ion-col size="2">
+                                    <ion-button color="warning" (click)="edit(item, i)">
+                                        <ion-icon name="create-outline"></ion-icon>
+                                    </ion-button>
+                                    <ion-button color="danger" (click)="remove(item.id, i)">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </ion-button>
+                                </ion-col>
+                            </ion-item>
+                        </ion-list>
+                    </ion-card-content>
+                </div>
+            </ion-col>
+        </ion-row>
+
+    </div>
+</ion-content>
+
+<ion-content *ngIf="!isDisplay" style="--background: white !important;">
+    <ion-row>
+        <ion-col size="12" size-sm="12" size-lg="12" size-xs="12">
+            <div class="card" *ngIf="!isDisplay">
+                <ion-card-header class="card-header card-header-success">
+                    <ion-card-title class="card-title">Formato Afectivo:</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-item>
+                            <ion-label color="tertiary">Muestra no.</ion-label>
+                            <ion-input [(ngModel)]="post.muesta" type="text"></ion-input>
+                        </ion-item>
+                        <ion-label color="tertiary">Fragancia</ion-label>
+                        <ion-item lines="none">
+                            <ion-col size="8">
+                                <ion-item lines="none" style="color: none;">
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.fragancia" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-item fill="outline">
+                                    <ion-label position="stacked" color="tertiary">Final</ion-label>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.fragancia" type="number" [min]="1" [max]="9"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-item>
+                        <ion-label color="tertiary">Aroma</ion-label>
+                        <ion-item lines="none">
+                            <ion-col size="8">
+                                <ion-item lines="none">
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.aroma" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-item fill="outline">
+                                    <ion-label position="stacked" color="tertiary">Final</ion-label>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.aroma" type="number" [min]="1" [max]="9"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-item>
+                        <ion-label color="tertiary">Sabor</ion-label>
+                        <ion-item lines="none">
+                            <ion-col size="8">
+                                <ion-item lines="none">
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.sabor" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-item fill="outline">
+                                    <ion-label position="stacked" color="tertiary">Final</ion-label>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.sabor" type="number" [min]="1" [max]="9"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-item>
+                        <ion-label color="tertiary">Sabor Residual</ion-label>
+                        <ion-item lines="none">
+                            <ion-col size="8">
+                                <ion-item lines="none">
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.saborResidual" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-item fill="outline">
+                                    <ion-label position="stacked" color="tertiary">Final</ion-label>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.saborResidual" type="number" [min]="1" [max]="9"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-item>
+                        <ion-label color="tertiary">Acidez</ion-label>
+                        <ion-item lines="none">
+                            <ion-col size="8">
+                                <ion-item lines="none">
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.acidez" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-item fill="outline">
+                                    <ion-label position="stacked" color="tertiary">Final</ion-label>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.acidez" type="number" [min]="1" [max]="9"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-item>
+                        <ion-label color="tertiary">Dulzor</ion-label>
+                        <ion-item lines="none">
+                            <ion-col size="8">
+                                <ion-item lines="none">
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.dulzor" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-item fill="outline">
+                                    <ion-label position="stacked" color="tertiary">Final</ion-label>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.dulzor" type="number" [min]="1" [max]="9"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-item>
+                        <ion-label color="tertiary">Sensación en Boca</ion-label>
+                        <ion-item lines="none">
+                            <ion-col size="8">
+                                <ion-item lines="none">
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.boca" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-item fill="outline">
+                                    <ion-label position="stacked" color="tertiary">Final</ion-label>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.boca" type="number" [min]="1" [max]="9"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-item>
+                        <ion-label color="tertiary">Impresión Global</ion-label>
+                        <ion-item lines="none">
+                            <ion-col size="8">
+                                <ion-item lines="none">
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.global" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-item fill="outline">
+                                    <ion-label position="stacked" color="tertiary">Final</ion-label>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.global" type="number" [min]="1" [max]="9"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-item>
+                        <ion-label color="tertiary">Tazas no Uniformes</ion-label>
+                        <ion-item lines="none">
+                            <ion-radio-group (ionChange)="calcularTotal()" [(ngModel)]="post.tazaNoUniformes">
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-label position="stacked" color="tertiary">0</ion-label>
+                                        <ion-radio [value]="0"></ion-radio>
+                                    </ion-col>
+                                    <ion-col>
+                                        <ion-label position="stacked" color="tertiary">1</ion-label>
+                                        <ion-radio [value]="1"></ion-radio>
+                                    </ion-col>
+                                    <ion-col lines="none">
+                                        <ion-label position="stacked" color="tertiary">2</ion-label>
+                                        <ion-radio [value]="2"></ion-radio>
+                                    </ion-col>
+                                    <ion-col lines="none">
+                                        <ion-label position="stacked" color="tertiary">3</ion-label>
+                                        <ion-radio [value]="3"></ion-radio>
+                                    </ion-col>
+                                    <ion-col lines="none">
+                                        <ion-label position="stacked" color="tertiary">4</ion-label>
+                                        <ion-radio [value]="4"></ion-radio>
+                                    </ion-col>
+                                    <ion-col lines="none">
+                                        <ion-label position="stacked" color="tertiary">5</ion-label>
+                                        <ion-radio [value]="5"></ion-radio>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-item>
+                        <ion-label color="tertiary">Tazas Defectousas</ion-label>
+                        <ion-item lines="none">
+                            <ion-radio-group (ionChange)="calcularTotal()" [(ngModel)]="post.tazaDefectousas">
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-label position="stacked" color="tertiary">0</ion-label>
+                                        <ion-radio [value]="0"></ion-radio>
+                                    </ion-col>
+                                    <ion-col>
+                                        <ion-label position="stacked" color="tertiary">1</ion-label>
+                                        <ion-radio [value]="1"></ion-radio>
+                                    </ion-col>
+                                    <ion-col lines="none">
+                                        <ion-label position="stacked" color="tertiary">2</ion-label>
+                                        <ion-radio [value]="2"></ion-radio>
+                                    </ion-col>
+                                    <ion-col lines="none">
+                                        <ion-label position="stacked" color="tertiary">3</ion-label>
+                                        <ion-radio [value]="3"></ion-radio>
+                                    </ion-col>
+                                    <ion-col lines="none">
+                                        <ion-label position="stacked" color="tertiary">4</ion-label>
+                                        <ion-radio [value]="4"></ion-radio>
+                                    </ion-col>
+                                    <ion-col lines="none">
+                                        <ion-label position="stacked" color="tertiary">5</ion-label>
+                                        <ion-radio [value]="5"></ion-radio>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-item>
+                        <ion-label color="tertiary">Defectos (De Haberlo)</ion-label>
+                        <ion-item lines="none">
+                            <ion-item lines="none">
+                                <ion-label position="stacked" color="tertiary">Mohoso</ion-label>
+                                <ion-checkbox value="Mohoso"></ion-checkbox>
+                            </ion-item>
+                            <ion-item lines="none">
+                                <ion-label position="stacked" color="tertiary">Fenólico</ion-label>
+                                <ion-checkbox value="Fenolico"></ion-checkbox>
+                            </ion-item>
+                            <ion-item lines="none">
+                                <ion-label position="stacked" color="tertiary">Papa</ion-label>
+                                <ion-checkbox value="Papa"></ion-checkbox>
+                            </ion-item>
+                        </ion-item>
+                        <ion-item lines="none">
+                            <ion-label color="success">
+                                <h1>Puntaje Afectivo Total de la taza :</h1>
+                                <h1><b>{{post.totalTazaScoree}}</b></h1>
+                            </ion-label>
+                        </ion-item>
+                        <br>
+                        <div id="lineas" style="margin-left: 10px;"></div>
+                    </ion-grid>
+                </ion-card-content>
+            </div>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

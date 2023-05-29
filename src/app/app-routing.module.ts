@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'usuarios',
     loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosPageModule)
+  },
+  {
+    path: 'cataciones',
+    loadChildren: () => import('./cataciones/cataciones.module').then( m => m.CatacionesPageModule)
   }
 
 

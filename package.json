@@ -41,7 +41,6 @@
         "@swimlane/ngx-datatable": "^16.1.1",
         "@types/pouchdb": "^6.4.0",
         "br-mask": "0.0.8",
-        "chart.js": "^3.9.1",
         "cordova-plugin-calendar": "^5.1.5",
         "cordova-plugin-network-information": "^3.0.0",
         "cordova-plugin-splashscreen": "^5.0.2",
@@ -125,7 +124,6 @@
             "cordova-plugin-file": {}
         },
         "platforms": [
-            "android",
             "browser"
         ]
     }
