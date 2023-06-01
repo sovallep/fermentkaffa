@@ -59,21 +59,20 @@ export interface RevFermentacion {
 
 export interface PostCatacionSensorial {
   id?: string;
-  totalTazaScoree: number;
-  id_lote: string;
+  total_scoree: number;
+  id_lote: number;
   muesta: string;
   fragancia: number;
   aroma: number;
   sabor: number;
-  saborResidual: number;
+  sabor_residual: number;
   acidez: number;
   dulzor: number;
   boca: number;
   global: number;
   defectos: string;
-  tazaDefectousas: number;
-  tazaNoUniformes: number;
-  fecha_registro: Date;
+  tazas_defectousas: number;
+  taza_no_uniformes: number;
 }
 
 @Injectable({

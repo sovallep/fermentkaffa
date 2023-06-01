@@ -41,20 +41,20 @@
             <ion-col size="10" size-sm="10" size-lg="10" size-xs="12">
                 <div class="card" *ngIf="isDisplay">
                     <ion-card-header class="card-header card-header-success">
-                        <ion-card-title class="card-title">Listado de cataciones:</ion-card-title>
+                        <ion-card-title class="card-title">Listado Cataciones:</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
                         <ion-item style=" text-align: center;" class="text-success">
                             <ion-col size="1">
                                 #
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 Numero Muesta
                             </ion-col>
-                            <ion-col size="3">
+                            <ion-col size="4">
                                 Fecha de Ingreso
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="3">
                             </ion-col>
                         </ion-item>
                         <ion-list>
@@ -62,13 +62,13 @@
                                 <ion-col size="1">
                                     {{item.id}}
                                 </ion-col>
-                                <ion-col size="3">
+                                <ion-col size="4">
                                     {{item.muesta}}
                                 </ion-col>
-                                <ion-col size="3">
+                                <ion-col size="4">
                                     {{item.fecha_registro}}
                                 </ion-col>
-                                <ion-col size="2">
+                                <ion-col size="3">
                                     <ion-button color="warning" (click)="edit(item, i)">
                                         <ion-icon name="create-outline"></ion-icon>
                                     </ion-button>
@@ -93,9 +93,9 @@
                 <ion-card-header class="card-header card-header" style="border: solid 1px #4caf50 !important;">
                     <ion-card-title class="card-title text-success"><b>Formato Afectivo :</b></ion-card-title>
                     <ion-card-subtitle class="card-title" style=" font-size: 10px !important;">① EXTREMADAMENTE BAJA ② MUY BAJA ③ MODERADAMENTE BAJA ④ LIGERAMENTE BAJA ⑤ NI ALTA NI BAJA ⑥ LIGERAMENTE ALTA ⑦ MODERADAMENTE ALTA ⑧ MUY ALTA ⑨ EXTREMADAMENTE ALTA </ion-card-subtitle>
-                    <ion-card-subtitle class="card-title">Nombre: _____________________________ </ion-card-subtitle>
-                    <ion-card-subtitle class="card-title">Fecha: ______________________________ </ion-card-subtitle>
-                    <ion-card-subtitle class="card-title">Objetivo: ____________________________ </ion-card-subtitle>
+                    <ion-card-subtitle class="card-title">Nombre: _____________________________________ </ion-card-subtitle>
+                    <ion-card-subtitle class="card-title">Fecha: ______________________________________ </ion-card-subtitle>
+                    <ion-card-subtitle class="card-title">Objetivo: ____________________________________ </ion-card-subtitle>
                 </ion-card-header>
                 <ion-card-content style="border: solid 1px #4caf50 !important;">
                     <!-- <ion-item lines="none"> -->
@@ -109,12 +109,12 @@
                         </ion-item>
                         <ion-label color="tertiary">Fragancia</ion-label>
                         <ion-item lines="none">
-                            <ion-col size="10">
+                            <ion-col size="8">
                                 <ion-item lines="none" style="color: none;">
                                     <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.fragancia" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
                                 </ion-item>
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 <ion-item fill="outline">
                                     <ion-label position="stacked" color="tertiary">Final</ion-label>
                                     <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.fragancia" type="number" [min]="1" [max]="9"></ion-input>
@@ -123,12 +123,12 @@
                         </ion-item>
                         <ion-label color="tertiary">Aroma</ion-label>
                         <ion-item lines="none">
-                            <ion-col size="10">
+                            <ion-col size="8">
                                 <ion-item lines="none">
                                     <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.aroma" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
                                 </ion-item>
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 <ion-item fill="outline">
                                     <ion-label position="stacked" color="tertiary">Final</ion-label>
                                     <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.aroma" type="number" [min]="1" [max]="9"></ion-input>
@@ -137,12 +137,12 @@
                         </ion-item>
                         <ion-label color="tertiary">Sabor</ion-label>
                         <ion-item lines="none">
-                            <ion-col size="10">
+                            <ion-col size="8">
                                 <ion-item lines="none">
                                     <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.sabor" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
                                 </ion-item>
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 <ion-item fill="outline">
                                     <ion-label position="stacked" color="tertiary">Final</ion-label>
                                     <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.sabor" type="number" [min]="1" [max]="9"></ion-input>
@@ -151,26 +151,26 @@
                         </ion-item>
                         <ion-label color="tertiary">Sabor Residual</ion-label>
                         <ion-item lines="none">
-                            <ion-col size="10">
+                            <ion-col size="8">
                                 <ion-item lines="none">
-                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.saborResidual" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
+                                    <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.sabor_residual" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
                                 </ion-item>
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 <ion-item fill="outline">
                                     <ion-label position="stacked" color="tertiary">Final</ion-label>
-                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.saborResidual" type="number" [min]="1" [max]="9"></ion-input>
+                                    <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.sabor_residual" type="number" [min]="1" [max]="9"></ion-input>
                                 </ion-item>
                             </ion-col>
                         </ion-item>
                         <ion-label color="tertiary">Acidez</ion-label>
                         <ion-item lines="none">
-                            <ion-col size="10">
+                            <ion-col size="8">
                                 <ion-item lines="none">
                                     <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.acidez" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
                                 </ion-item>
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 <ion-item fill="outline">
                                     <ion-label position="stacked" color="tertiary">Final</ion-label>
                                     <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.acidez" type="number" [min]="1" [max]="9"></ion-input>
@@ -179,12 +179,12 @@
                         </ion-item>
                         <ion-label color="tertiary">Dulzor</ion-label>
                         <ion-item lines="none">
-                            <ion-col size="10">
+                            <ion-col size="8">
                                 <ion-item lines="none">
                                     <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.dulzor" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
                                 </ion-item>
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 <ion-item fill="outline">
                                     <ion-label position="stacked" color="tertiary">Final</ion-label>
                                     <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.dulzor" type="number" [min]="1" [max]="9"></ion-input>
@@ -193,12 +193,12 @@
                         </ion-item>
                         <ion-label color="tertiary">Sensación en Boca</ion-label>
                         <ion-item lines="none">
-                            <ion-col size="10">
+                            <ion-col size="8">
                                 <ion-item lines="none">
                                     <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.boca" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
                                 </ion-item>
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 <ion-item fill="outline">
                                     <ion-label position="stacked" color="tertiary">Final</ion-label>
                                     <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.boca" type="number" [min]="1" [max]="9"></ion-input>
@@ -207,12 +207,12 @@
                         </ion-item>
                         <ion-label color="tertiary">Impresión Global</ion-label>
                         <ion-item lines="none">
-                            <ion-col size="10">
+                            <ion-col size="8">
                                 <ion-item lines="none">
                                     <ion-range (ionChange)="calcularTotal()" [(ngModel)]="post.global" aria-label="Custom range" [min]="1" [max]="9" [value]="0" [pin]="true" [ticks]="true" [snaps]="true"></ion-range>
                                 </ion-item>
                             </ion-col>
-                            <ion-col size="2">
+                            <ion-col size="4">
                                 <ion-item fill="outline">
                                     <ion-label position="stacked" color="tertiary">Final</ion-label>
                                     <ion-input (ionChange)="calcularTotal()" [(ngModel)]="post.global" type="number" [min]="1" [max]="9"></ion-input>
@@ -221,7 +221,7 @@
                         </ion-item>
                         <ion-label color="tertiary">Tazas no Uniformes</ion-label>
                         <ion-item lines="none">
-                            <ion-radio-group (ionChange)="calcularTotal()" [(ngModel)]="post.tazaNoUniformes">
+                            <ion-radio-group (ionChange)="calcularTotal()" [(ngModel)]="post.taza_no_uniformes">
                                 <ion-row>
                                     <ion-col>
                                         <ion-label position="stacked" color="tertiary">0</ion-label>
@@ -252,7 +252,7 @@
                         </ion-item>
                         <ion-label color="tertiary">Tazas Defectousas</ion-label>
                         <ion-item lines="none">
-                            <ion-radio-group (ionChange)="calcularTotal()" [(ngModel)]="post.tazaDefectousas">
+                            <ion-radio-group (ionChange)="calcularTotal()" [(ngModel)]="post.tazas_defectousas">
                                 <ion-row>
                                     <ion-col>
                                         <ion-label position="stacked" color="tertiary">0</ion-label>
@@ -281,8 +281,14 @@
                                 </ion-row>
                             </ion-radio-group>
                         </ion-item>
-                        <ion-label color="tertiary">Defectos (De Haberlo)</ion-label>
-                        <ion-item lines="none">
+                        <ion-item lines="inset">
+                            <ion-label position="stacked" color="tertiary">Defectos De Haberlo (Mohoso, Fenólico, Papa):</ion-label>
+                            <ion-input [(ngModel)]="post.defectos" type="text" maxlength="255"></ion-input>
+                        </ion-item>
+                        <!-- <ion-item>
+                            <ion-label color="tertiary">Defectos De Haberlo (Mohoso, Fenólico, Papa)</ion-label> 
+                        </ion-item> -->
+                        <!-- <ion-item lines="none">
                             <ion-item lines="none">
                                 <ion-label position="stacked" color="tertiary">Mohoso</ion-label>
                                 <ion-checkbox value="Mohoso"></ion-checkbox>
@@ -295,14 +301,14 @@
                                 <ion-label position="stacked" color="tertiary">Papa</ion-label>
                                 <ion-checkbox value="Papa"></ion-checkbox>
                             </ion-item>
-                        </ion-item>
-                        <ion-item lines="none">
-                            <ion-label slot="start" color="success">
-                                <h1>Puntaje Afectivo Total de la taza : <b>{{post.totalTazaScoree}}</b></h1>
-                                <!-- <h1><b>{{entero}}</b></h1> -->
-                            </ion-label>
-                        </ion-item>
-                        <div id="lineas" style="margin-left: 10px;"></div>
+                        </ion-item> -->
+                        <br>
+                        <ion-label color="success">
+
+                            <h1 position="stacked">Puntaje Total: <b>{{post.total_scoree}}</b></h1>
+                            <!-- <h1><b>{{entero}}</b></h1> -->
+                        </ion-label>
+                        <div id="lineas"></div>
                         <br>
                     </ion-grid>
                 </ion-card-content>

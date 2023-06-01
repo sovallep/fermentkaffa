@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService, PostCatacionSensorial } from '../services/rest-api.service';
 import Swal from 'sweetalert2';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 declare var google;
 
 @Component({
@@ -12,7 +12,7 @@ declare var google;
 })
 export class CatacionesPage implements OnInit {
 
-  tabla = "cataciones";
+  tabla = "Catacion";
   nanolote = [];
   fermentacion = [];
 
@@ -21,17 +21,16 @@ export class CatacionesPage implements OnInit {
     fragancia: 1,
     aroma: 1,
     sabor: 1,
-    saborResidual: 1,
+    sabor_residual: 1,
     acidez: 1,
     dulzor: 1,
     boca: 1,
     global: 1,
     defectos: '',
-    tazaDefectousas: 0,
-    tazaNoUniformes: 0,
-    fecha_registro: new Date(),
-    totalTazaScoree: 0,
-    id_lote: ''
+    tazas_defectousas: 0,
+    taza_no_uniformes: 0,
+    total_scoree: 0,
+    id_lote: 0
   };
   user = [];
   ocultar = true;
@@ -68,17 +67,16 @@ export class CatacionesPage implements OnInit {
       fragancia: 1,
       aroma: 1,
       sabor: 1,
-      saborResidual: 1,
+      sabor_residual: 1,
       acidez: 1,
       dulzor: 1,
       boca: 1,
       global: 1,
       defectos: '',
-      tazaDefectousas: 0,
-      tazaNoUniformes: 0,
-      fecha_registro: undefined,
-      totalTazaScoree: 0,
-      id_lote: ''
+      tazas_defectousas: 0,
+      taza_no_uniformes: 0,
+      total_scoree: 0,
+      id_lote: 0
     };
   }
 
@@ -174,16 +172,15 @@ export class CatacionesPage implements OnInit {
       fragancia: this.post.fragancia,
       aroma: this.post.aroma,
       sabor: this.post.sabor,
-      saborResidual: this.post.saborResidual,
+      sabor_residual: this.post.sabor_residual,
       acidez: this.post.acidez,
       dulzor: this.post.dulzor,
       boca: this.post.boca,
       global: this.post.global,
       defectos: this.post.defectos,
-      tazaDefectousas: this.post.tazaDefectousas,
-      tazaNoUniformes: this.post.tazaNoUniformes,
-      fecha_registro: new Date(),
-      totalTazaScoree: this.post.totalTazaScoree,
+      tazas_defectousas: this.post.tazas_defectousas,
+      taza_no_uniformes: this.post.taza_no_uniformes,
+      total_scoree: this.post.total_scoree,
       id_lote: this.post.id_lote
     }
     await loading.present().then(() => {
@@ -234,31 +231,31 @@ export class CatacionesPage implements OnInit {
     this.userItem = item;
     this.post = {
       muesta: item.muesta,
-      fragancia: item.fragancia,
-      aroma: item.aroma,
-      sabor: item.sabor,
-      saborResidual: item.saborResidual,
-      acidez: item.acidez,
-      dulzor: item.dulzor,
-      boca: item.boca,
-      global: item.global,
+      fragancia: parseInt(item.fragancia),
+      aroma: parseInt(item.aroma),
+      sabor: parseInt(item.sabor),
+      sabor_residual: parseInt(item.sabor_residual),
+      acidez: parseInt(item.acidez),
+      dulzor: parseInt(item.dulzor),
+      boca: parseInt(item.boca),
+      global: parseInt(item.global),
       defectos: item.defectos,
-      tazaDefectousas: item.tazaDefectousas,
-      tazaNoUniformes: item.tazaNoUniformes,
-      fecha_registro: new Date(),
-      totalTazaScoree: item.totalTazaScoree,
-      id_lote: item.id_lote
+      tazas_defectousas: parseInt(item.tazas_defectousas),
+      taza_no_uniformes: parseInt(item.taza_no_uniformes),
+      total_scoree: parseFloat(item.total_scoree),
+      id_lote: parseInt(item.id_lote)
     }
     this.userId = id;
     this.isDisplay = false
     this.ocultar = false
+    this.calcularTotal();
   }
 
   calcularTotal() {
     //Math.round
-    this.post.totalTazaScoree = ((52.75 + ((this.post.fragancia + this.post.aroma + this.post.sabor + this.post.saborResidual + this.post.acidez + this.post.dulzor + this.post.boca + this.post.global) * 0.65625)) - (2 * this.post.tazaNoUniformes) - (4 * this.post.tazaDefectousas));
+    this.post.total_scoree = ((52.75 + ((this.post.fragancia + this.post.aroma + this.post.sabor + this.post.sabor_residual + this.post.acidez + this.post.dulzor + this.post.boca + this.post.global) * 0.65625)) - (2 * this.post.taza_no_uniformes) - (4 * this.post.tazas_defectousas));
     let numero = 0;
-    numero = parseFloat(this.post.totalTazaScoree.toFixed(2));
+    numero = parseFloat(this.post.total_scoree.toFixed(2));
     let decimales = parseFloat((numero - (Math.trunc(numero))).toFixed(2));
     numero = (numero - decimales);
     this.entero = numero;
@@ -281,7 +278,7 @@ export class CatacionesPage implements OnInit {
       decimales = 0.75;
     }
     this.entero = numero + decimales;
-    this.post.totalTazaScoree = this.entero;
+    this.post.total_scoree = this.entero;
     this.drawChart();
   }
 
@@ -297,8 +294,8 @@ export class CatacionesPage implements OnInit {
     aroma = ((this.post.fragancia) + (this.post.aroma)) / 2;
     let sabor = 0
     sabor = (this.post.sabor);
-    let saborResidual = 0
-    saborResidual = (this.post.saborResidual);
+    let sabor_residual = 0
+    sabor_residual = (this.post.sabor_residual);
     let acidez = 0
     acidez = (this.post.acidez);
     let dulzor = 0
@@ -312,7 +309,7 @@ export class CatacionesPage implements OnInit {
     data.addRows([
       ["Fragancia/Aroma", aroma, 0],
       ["Sabor", sabor, 0],
-      ["Sabor Residual", saborResidual, 0],
+      ["Sabor Residual", sabor_residual, 0],
       ["Acidez", acidez, 0],
       ["Dulzor", dulzor, 0],
       ["Sensación en Boca", boca, 0],
@@ -321,11 +318,11 @@ export class CatacionesPage implements OnInit {
 
     const options = {
       vega: {
-        width: 500,
+        width: 350,
         height: 300,
         autosize: "none",
         title: {
-          text: 'Gráfica de la taza:',
+          // text: 'Gráfica de la taza:',
         },
         signals: [
           { name: "radius", "update": "90" }
