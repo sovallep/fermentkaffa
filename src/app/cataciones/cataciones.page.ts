@@ -11,7 +11,8 @@ declare var google;
   styleUrls: ['./cataciones.page.scss'],
 })
 export class CatacionesPage implements OnInit {
-  tabla = "Cataciones";
+
+  tabla = "cataciones";
   nanolote = [];
   fermentacion = [];
 
@@ -33,9 +34,12 @@ export class CatacionesPage implements OnInit {
     id_lote: ''
   };
   user = [];
+  ocultar = true;
   isDisplay = true;
   userItem: [];
   userId: -1;
+  entero;
+  decimal;
   constructor(
     private restApiService: RestApiService,
     public loadingController: LoadingController,
@@ -47,9 +51,15 @@ export class CatacionesPage implements OnInit {
     this.log();
   }
 
-  printDiv() {
-    window.print();
-    print();
+  async printDiv() {
+    this.ocultar = true;
+    if (this.ocultar == true) {
+      setTimeout(function cb1() {
+        window.print()
+        // print()
+      }, 500);
+      this.ocultar = false;
+    }
   }
 
   cleanPost() {
@@ -93,17 +103,6 @@ export class CatacionesPage implements OnInit {
       loading.dismiss();
     })
     await loading.present().then(() => {
-      this.restApiService.getListado('Tiposfermentacion').subscribe((res: any) => {
-        if (res) {
-          this.fermentacion = res;
-          loading.dismiss();
-        }
-      });
-    }).catch((err) => {
-      console.log(err);
-      loading.dismiss();
-    })
-    await loading.present().then(() => {
       this.restApiService.getListado('Nanolotes').subscribe((res: any) => {
         if (res) {
           this.nanolote = res;
@@ -121,6 +120,7 @@ export class CatacionesPage implements OnInit {
     this.userItem = [];
     this.cleanPost();
     this.isDisplay = false;
+    this.ocultar = false;
     this.drawChart();
     this.calcularTotal();
   }
@@ -128,7 +128,8 @@ export class CatacionesPage implements OnInit {
   back() {
     this.userItem = [];
     this.cleanPost();
-    this.isDisplay = true
+    this.isDisplay = true;
+    this.ocultar = true;
   }
 
   onSubmit() {
@@ -151,7 +152,8 @@ export class CatacionesPage implements OnInit {
       this.restApiService.postAddItem(this.tabla, this.post).subscribe((res: any) => {
         loading.dismiss();
         this.userItem = [];
-        this.isDisplay = true
+        this.isDisplay = true;
+        this.ocultar = true;
         this.cleanPost();
         this.log();
       });
@@ -189,7 +191,8 @@ export class CatacionesPage implements OnInit {
         loading.dismiss();
         this.userItem = [];
         this.userId = -1;
-        this.isDisplay = true
+        this.isDisplay = true;
+        this.ocultar = true;
         this.cleanPost();
         this.log();
       });
@@ -248,10 +251,37 @@ export class CatacionesPage implements OnInit {
     }
     this.userId = id;
     this.isDisplay = false
+    this.ocultar = false
   }
 
   calcularTotal() {
-    this.post.totalTazaScoree = Math.trunc((52.75 + ((this.post.fragancia + this.post.aroma + this.post.sabor + this.post.saborResidual + this.post.acidez + this.post.dulzor + this.post.boca + this.post.global) * 0.65625)) - (2 * this.post.tazaNoUniformes) - (4 * this.post.tazaDefectousas));
+    //Math.round
+    this.post.totalTazaScoree = ((52.75 + ((this.post.fragancia + this.post.aroma + this.post.sabor + this.post.saborResidual + this.post.acidez + this.post.dulzor + this.post.boca + this.post.global) * 0.65625)) - (2 * this.post.tazaNoUniformes) - (4 * this.post.tazaDefectousas));
+    let numero = 0;
+    numero = parseFloat(this.post.totalTazaScoree.toFixed(2));
+    let decimales = parseFloat((numero - (Math.trunc(numero))).toFixed(2));
+    numero = (numero - decimales);
+    this.entero = numero;
+    if (decimales > 0.0 && decimales < 0.10) {
+      decimales = 0.0;
+    }
+    if (decimales > 0.09 && decimales < 0.38) {
+      decimales = 0.25;
+    }
+    if (decimales > 0.85) {
+      decimales = 0;
+      let x = numero;
+      x = x + 1;
+      numero = x;
+    }
+    if (decimales >= 0.38 && decimales < 0.60) {
+      decimales = 0.50;
+    }
+    if (decimales >= 0.60 && decimales < 0.90) {
+      decimales = 0.75;
+    }
+    this.entero = numero + decimales;
+    this.post.totalTazaScoree = this.entero;
     this.drawChart();
   }
 
@@ -523,15 +553,5 @@ export class CatacionesPage implements OnInit {
     var chart = new google.visualization.VegaChart(document.getElementById('lineas'));
     chart.draw(data, options);
 
-  }
-
-
-  revision(id) {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        id: id
-      }
-    };
-    this.router.navigate(['/revision-feremntaciones'], navigationExtras);
   }
 }
